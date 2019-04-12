@@ -1,7 +1,7 @@
 nav {
     background: #ffffff;
     position: absolute;
-    border-bottom: 4px solid #ccf7bd;
+    border-bottom: 4px solid #cccccc;
 }
 
 .fa-google {
@@ -9,12 +9,12 @@ nav {
 }
 
 .navbar-brand {
-    color: #6b80c2 !important;
+    color: #828282 !important;
     font-size: 30px;
 }
 
 .navbar-brand:hover {
-    color: #485da0;
+    color: #cccccc;
 }
 
 .nav-link {
