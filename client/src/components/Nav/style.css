@@ -1,0 +1,30 @@
+nav {
+    background: #ffffff;
+    position: absolute;
+    border-bottom: 4px solid #ccf7bd;
+}
+
+.fa-google {
+    font-size: 36px;
+}
+
+.navbar-brand {
+    color: #6b80c2 !important;
+    font-size: 30px;
+}
+
+.navbar-brand:hover {
+    color: #485da0;
+}
+
+.nav-link {
+    color: #828282 !important;
+}
+
+nav .nav-link:hover {
+    color: #3e3e3e !important;
+}
+
+.navbar-toggler-icon {
+    color: #4769d7;
+}
