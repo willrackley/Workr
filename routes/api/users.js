@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const usersController = require("../../controllers/jobsController");
+const usersController = require("../../controllers/usersController");
 
 // Matches with "/api/users"
 router.route("/")
@@ -10,5 +10,8 @@ router.route("/")
 router
   .route("/:id")
   .delete(usersController.remove);
+
+  router.route("/sign-up")
+  .post(usersController.create);
 
 module.exports = router;

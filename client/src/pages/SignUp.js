@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Input, FormBtn } from "../components/Form";
+import API from "../utils/API";
 //import API from "../utils/API";
 
 class SignUp extends Component {
@@ -20,10 +21,17 @@ class SignUp extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        console.log(`${this.state.firstname}
-        ${this.state.email}
-        ${this.state.password}
-        ${this.state.confirmPassword}`)
+        const newUser = {
+            firstname: this.state.firstname,
+            email: this.state.email,
+            password: this.state.password,
+            password2: this.state.confirmPassword
+        }
+        API.saveUser(newUser)
+        .then(res => {
+            console.log(res.data);
+        })
+        .catch(err => console.log(err)); 
     };
 
     render() {
