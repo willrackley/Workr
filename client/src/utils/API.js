@@ -11,6 +11,10 @@ export default {
         return axios.post("/api/jobs", jobData);
     },
 
+    saveUser: function(userData) {
+        return axios.post("/api/users/sign-up", userData);
+    },
+
     getBooks: function() {
         return axios.get("/api/books");
     },
