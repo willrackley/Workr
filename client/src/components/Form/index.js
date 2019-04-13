@@ -28,3 +28,12 @@ export function RadioBtn(props) {
       </div>
     );
 }
+
+export function TextArea(props){
+  return(
+    <div className="form-group">
+    <label for="exampleFormControlTextarea1"{...props}/>
+    <textarea className="form-control" rows="4">{props.children}</textarea>
+  </div>
+  );
+}
