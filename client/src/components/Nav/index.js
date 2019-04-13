@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
-function Nav() {
+
+function Nav({children}) {
   return (
     
     <nav className="navbar navbar-expand-lg navbar-light">
@@ -14,12 +15,7 @@ function Nav() {
 
         <div className="collapse navbar-collapse m-0" id="navbarSupportedContent">
             <div className="navbar-nav ml-auto">
-              {/* <a className="nav-link" href="#">
-              Log in
-              </a> */}
-              <a className="nav-link" href="/sign-up">
-              Sign up
-              </a>
+              {children}
             </div>
         </div>
       </div>
