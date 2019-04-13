@@ -11,25 +11,12 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Job.find({
-      apiId: req.body.apiId
-    },function(err, data) {
-      // Log any errors if the server encounters one
-      if (err) {
-        console.log(err);
-      }
-      //checks to see if book is already in the database
-      //if it isnt then we add it
-      if (data.length === 0) {
-        db.Job
+    console.log(req.body)
+    db.Job
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-      }
-      if (data.length !== 0) {
-        res.end();
-      }
-    });
+      
   },
   remove: function(req, res) {
     db.Job

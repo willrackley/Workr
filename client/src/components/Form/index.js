@@ -18,6 +18,20 @@ export function FormBtn(props) {
   );
 }
 
+export function CategoryDropdown(props) {
+  return (
+    <div className="form-group">
+    <label htmlFor="exampleFormControlSelect1" className="text-muted">Category</label>
+    <select className="form-control" {...props}>
+      <option>Landscaping</option>
+      <option>House Work</option>
+      <option>Car Cleaning</option>
+      <option>Miscellaneous</option>
+    </select>
+  </div>
+  );
+}
+
 export function RadioBtn(props) {
     return (
       <div className="form-check form-check-inline ml-1">
@@ -32,8 +46,8 @@ export function RadioBtn(props) {
 export function TextArea(props){
   return(
     <div className="form-group">
-    <label for="exampleFormControlTextarea1"{...props}/>
-    <textarea className="form-control" rows="4">{props.children}</textarea>
+    {/* <label for="exampleFormControlTextarea1"{...props}/> */}
+    <textarea className="form-control text-center" rows="4" {...props}/>
   </div>
   );
 }

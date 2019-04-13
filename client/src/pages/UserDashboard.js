@@ -7,6 +7,7 @@ class userDashboard extends Component {
     state = {
         loggedIn: true
     }
+    
     logOut = () => {
         API.logOut();
     }
