@@ -46,7 +46,6 @@ module.exports = function(passport) {
 				id: user.id,
 				firstname: user.firstname,
 				email: user.email,
-				comments: user.comments
 			}
 				done(null, loggedIn);
 		});		

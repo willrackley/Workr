@@ -1,5 +1,6 @@
 const db = require("../models");
 var bcrypt = require('bcryptjs');
+var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 
 //methods for usersController
 module.exports = {
@@ -91,5 +92,15 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+  }, 
+  // authenticateUser: function(req, res) {
+  //   console.log(req.body)
+  //   passport.authenticate('local',
+    
+  //    function(req, res) {
+  //     // If this function gets called, authentication was successful.
+  //     // `req.user` contains the authenticated user.
+  //     res.redirect('/dashboard');
+  //   });
+  // }
 };
