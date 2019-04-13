@@ -4,6 +4,7 @@ import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import userDashboard from './pages/UserDashboard';
+import PostingJob from './pages/PostingJob';
 
 function App() {
  
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={SignUp} />
           <Route exact path="/dashboard" component={userDashboard} />
+          <Route exact path="/postjob" component={PostingJob}/>
         </Switch>
     </Router>
   );
