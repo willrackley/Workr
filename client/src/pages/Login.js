@@ -31,7 +31,6 @@ class Login extends Component {
         .then(res => {
             if(res.data === "logged in!"){
                 this.setState({ loggedIn: true });
-                console.log(this.state.loggedIn)
             }
         })
         .catch(err => console.log(err)); 
