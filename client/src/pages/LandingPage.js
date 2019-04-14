@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 class LandingPage extends Component {
 
     render() {
-        return (
+        return (//
             <div>
                 <Nav>
                     <a className="nav-link" href="/login">

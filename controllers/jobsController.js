@@ -6,14 +6,35 @@ module.exports = {
   findAll: function(req, res) {
     db.Job
       .find(req.query)
-      .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    console.log(req.body)
+    let {
+        //posterId,
+        title,
+        description,
+        city,
+        jobImage,
+        category,
+        status,
+        seekerId,
+        postedDate,
+        completionDate
+      } = req.body;
     db.Job
-      .create(req.body)
+      .create({
+        posterId: "will",
+        title: title,
+        description: description,
+        city: city,
+        jobImage: jobImage,
+        category: category,
+        status: status,
+        seekerId: seekerId,
+        postedDate: postedDate,
+        completionDate: completionDate
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
       
