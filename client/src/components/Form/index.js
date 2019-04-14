@@ -21,14 +21,14 @@ export function FormBtn(props) {
 export function CategoryDropdown(props) {
   return (
     <div className="form-group">
-    <label htmlFor="exampleFormControlSelect1" className="text-muted">Category</label>
-    <select className="form-control" {...props}>
-      <option>Landscaping</option>
-      <option>House Work</option>
-      <option>Car Cleaning</option>
-      <option>Miscellaneous</option>
-    </select>
-  </div>
+      <label htmlFor="exampleFormControlSelect1" className="text-muted">Category</label>
+      <select className="form-control" {...props}>
+        <option>Landscaping</option>
+        <option>House Work</option>
+        <option>Car Cleaning</option>
+        <option>Miscellaneous</option>
+      </select>
+    </div>
   );
 }
 

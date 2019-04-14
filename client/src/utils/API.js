@@ -2,9 +2,9 @@ import axios from "axios";
 
 
 export default {
-    // searchBook: function(bookData) {
-    //     return axios.get(GOOGLEURL + bookData + resultslimit);
-    // },
+    getJobs: function() {
+        return axios.get("/api/jobs");
+    },
 
     saveJob: function(jobData) {
         return axios.post("/api/jobs", jobData);
