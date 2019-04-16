@@ -20,5 +20,8 @@ export default {
     },
     logOut: function() {
         return axios.get("/api/users/logout");
+    },
+    getUser: function(tokenInfo) {
+        return axios.get("/api/users/find", tokenInfo);
     }
   };

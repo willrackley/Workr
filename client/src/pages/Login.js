@@ -26,12 +26,17 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         }
+
         
         API.authenticateUser(user)
         .then(res => {
-            if(res.data === "logged in!"){
-                this.setState({ loggedIn: true });
+            if(res.data) {
+            localStorage.setItem('jwt', res.data.token)
+            this.props.history.push('/dashboard')
+            } else {
+                //show an error
             }
+            
         })
         .catch(err => console.log(err)); 
     }
@@ -65,6 +70,7 @@ class Login extends Component {
                                 value={this.state.password}
                                 onChange={this.handleInputChange}
                                 name="password"
+                                type="password"
                                 placeholder="password"
                             />
 
