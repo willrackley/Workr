@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import List from "../components/List";
 import { Redirect, Link } from 'react-router-dom';
 import API from "../utils/API";
+import { MapContainer } from "../components/MapContainer";
 
 class userDashboard extends Component {
     state = {
@@ -58,6 +59,7 @@ class userDashboard extends Component {
                                 <Link to={"/postJob"} className="text-dark">
                                     Post a job
                                 </Link>
+                                <MapContainer/>
                                 </h1>                          
                             </div>
                         </div>
