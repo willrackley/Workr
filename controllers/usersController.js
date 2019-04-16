@@ -81,7 +81,7 @@ module.exports = {
                     type: 'success'
                 });
                 return res.json(messages);
-            }) ; 
+            }); 
         }
       });
     }
@@ -93,14 +93,4 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }, 
-  // authenticateUser: function(req, res) {
-  //   console.log(req.body)
-  //   passport.authenticate('local',
-    
-  //    function(req, res) {
-  //     // If this function gets called, authentication was successful.
-  //     // `req.user` contains the authenticated user.
-  //     res.redirect('/dashboard');
-  //   });
-  // }
 };

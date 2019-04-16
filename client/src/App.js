@@ -4,18 +4,23 @@ import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import userDashboard from './pages/UserDashboard';
+import EmailPostr from './pages/EmailPostr';
 import PostingJob from './pages/PostingJob';
-
+import Authorize from './components/Authorize'
 function App() {
  
   return (
     <Router>
         <Switch>
+          
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={SignUp} />
+          <Authorize>
           <Route exact path="/dashboard" component={userDashboard} />
+          </Authorize>
           <Route exact path="/postJob" component={PostingJob}/>
+          <Route exact path="/email-postr" component={EmailPostr}/>
         </Switch>
     </Router>
   );

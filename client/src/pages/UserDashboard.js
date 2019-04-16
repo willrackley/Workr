@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import Nav from "../components/Nav";
 import Card from "../components/Card";
 import List from "../components/List";
-
 import { Redirect, Link } from 'react-router-dom';
 import API from "../utils/API";
 
 class userDashboard extends Component {
     state = {
         jobResults: "",
-        loggedIn: true
+        loggedIn: true,
     }
 
     componentDidMount() {
@@ -27,6 +26,9 @@ class userDashboard extends Component {
     logOut = () => {
         API.logOut();
     }
+
+    
+     
 
     render() {
         return (
@@ -61,7 +63,7 @@ class userDashboard extends Component {
                         </div>
                     </div>
                 </div>
-                
+                        
            </div>
         )
     }

@@ -3,6 +3,10 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const db = require("../models");
+const JWTstrategy = require("passport-jwt").Strategy;
+const ExtractJWT = require("passport-jwt").ExtractJwt;
+const jwtSecret = require("./jwtConfig");
+const jwt = require("jsonwebtoken");
 
 
 module.exports = function(passport) {
@@ -24,6 +28,7 @@ module.exports = function(passport) {
 					if (err) throw err;
 					// Check does users password match with record in database
 					if (isMatch) {
+					
 						return done(null, user);
 					} else {
 						return done(null, false, {
@@ -36,19 +41,29 @@ module.exports = function(passport) {
 		});
 	}));
 	
-	passport.serializeUser(function(user, done) {
-		done(null, user._id);
-	});
-	
-	passport.deserializeUser(function(_id, done) {
-		db.User.findById(_id, function(err, user) {
-			loggedIn = {
-				id: user._id,
-				firstname: user.firstname,
-				email: user.email,
+	const opts = {
+		jwtFromRequest: ExtractJWT.fromAuthHeaderWithScheme('JWT'),
+		secretOrKey: jwtSecret.secret
+	};
+
+	passport.use('jwt',
+		new JWTstrategy(opts, (jwt_payload, done) => {
+			console.log(jwt_payload.id)
+			try {
+				db.User.findById({
+					_id: jwt_payload.id,
+				}).then(user => {
+					if(user) {
+						console.log('user has been found');
+						done(null, user);
+					} else {
+						console.log('no user found');
+						done(null, false);
+					}
+				});
+			} catch (err) {
+				done(err);
 			}
-				done(null, loggedIn);
-		});		
-	});
+	}))
 
 };
