@@ -10,8 +10,6 @@ class Authorize extends Component {
         }
     }
     
-    
-
     componentDidMount() {
         const jwt = this.getToken();
         if(!jwt) {
@@ -20,10 +18,9 @@ class Authorize extends Component {
         API.getUser({ headers: {Authorization: `JWT ${jwt}` } })
         .then(res => {
             this.setState({user: res.data})
-            console.log(this.state.user)
         })
         .catch( err => {
-            localStorage.removeItem('jwts')
+            localStorage.removeItem('jwt')
             this.props.history.push('/login');
         })
 

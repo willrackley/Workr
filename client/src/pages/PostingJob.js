@@ -38,7 +38,7 @@ class PostingJob extends Component {
     };
 
     logOut = () => {
-        API.logOut();
+        //API.logOut();
     }
 
     render() {
