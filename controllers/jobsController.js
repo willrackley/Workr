@@ -10,6 +10,12 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findById: function(req, res) {
+    db.Job
+      .find({ posterId: req.params.posterId })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     let {
         posterId,
@@ -47,6 +53,7 @@ module.exports = {
       
   },
   remove: function(req, res) {
+    console.log(req.params)
     db.Job
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())

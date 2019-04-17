@@ -4,6 +4,7 @@ import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import userDashboard from './pages/UserDashboard';
+import MyJobs from './pages/MyJobs';
 import PostingJob from './pages/PostingJob';
 import Authorize from './components/Authorize'
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Authorize>
             <Route exact path="/dashboard" component={userDashboard} />
             <Route exact path="/postJob" component={PostingJob}/>
+            <Route exact path="/myJobs" component={MyJobs}/>
           </Authorize>
           
         </Switch>

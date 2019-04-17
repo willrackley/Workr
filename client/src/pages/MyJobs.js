@@ -1,48 +1,57 @@
 import React, { Component } from "react";
 import Nav from "../components/Nav";
-import Card from "../components/Card";
+import MyJobsCard from "../components/MyJobsCard";
 import List from "../components/List";
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
-import { MapContainer } from "../components/MapContainer";
 
 
 
-class userDashboard extends Component {
+class MyJobs extends Component {
     state = {
-        jobResults: "",
-        loggedIn: true,
+        myJobs: "",
         user: {}
     }
 
     componentDidMount() {
-        this.loadJobs();
+        
         const token = localStorage.getItem('jwt')
         API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
             this.setState({user: res.data})
+            this.loadMyJobs(this.state.user.id);
             console.log(this.state.user)
         })
     }
 
-    loadJobs = () => {
-        API.getJobs()
+    loadMyJobs = (id) => {
+        API.getMyJobs(id)
         .then(res => {
-            this.setState({ jobResults: res.data })
+            this.setState({ myJobs: res.data })
+            console.log(res.data)
+        })
+        .catch(err => console.log(err));
+    }
+
+    deleteJob = (id) => {
+        console.log('cllll')
+        API.deleteMyJob(id)
+        .then(res => {
+            this.loadMyJobs(this.state.user.id);
         })
         .catch(err => console.log(err));
     }
     
-    contactEmployer = (email) => {
-        window.location.href = `mailto:${email}`
-    }
 
     render() {
         return (
             <div>
                 
                 <Nav>
+                    <a className="nav-link" href="/dashboard" >
+                        Dashboard
+                    </a>
                     <NavItemLogout/>
                 </Nav>
 
@@ -51,10 +60,10 @@ class userDashboard extends Component {
                         <div className="col-md-8">
                             
                             <div>
-                                <h1 className="text-dark mt-5">User Dashboard</h1>
+                                <h1 className="text-dark mt-5">My Posted Jobs</h1>
                                 <List>
-                                {this.state.jobResults.length ? (<Card key={this.state.jobResults._id} results={this.state.jobResults} title={this.state.jobResults.title} description={this.state.jobResults.description} contactEmployer={this.contactEmployer}/>
-                                    ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
+                                {this.state.myJobs.length ? (<MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob}/>
+                                    ) : (<h3 className="mt-5 text-center text-secondary">You haven't posted any Jobs yet</h3>)} 
                                 </List>
                             </div>
                         </div>
@@ -62,16 +71,9 @@ class userDashboard extends Component {
                             <div>
                                 <h4 className="mt-5"> Welcome, {this.state.user.firstname}</h4>
                                 <h3 className="">
-                                <Link to={"/postJob"} className="text-dark">
-                                    Post a job
-                                </Link>
-                                </h3>  
-                                <h3 className="">
-                                <Link to={"/MyJobs"} className="text-dark">
-                                    My Jobs
-                                </Link>
-                                </h3>       
-                                <MapContainer/>                    
+                            
+                                </h3>      
+                                                    
                             </div>
                         </div>
                     </div>
@@ -82,4 +84,4 @@ class userDashboard extends Component {
     }
 }
 
-export default userDashboard;
+export default MyJobs;

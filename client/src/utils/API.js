@@ -23,5 +23,11 @@ export default {
     },
     getUser: function(tokenInfo) {
         return axios.get("/api/users/find", tokenInfo);
-    }
+    }, 
+    getMyJobs: function(id) {
+        return axios.get(`/api/jobs/${id}`);
+    },
+    deleteMyJob: function(id) {
+        return axios.delete(`/api/jobs/${id}`);
+    },
   };
