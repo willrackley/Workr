@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API"
 import { withRouter } from 'react-router-dom'
 
+
 class Authorize extends Component {
     constructor(props) {
         super(props);
@@ -37,11 +38,14 @@ class Authorize extends Component {
             )
         }
         return (
-        <div>
-            {this.props.children}
-        </div>
+           
+            <div>
+                {this.props.children}
+            </div>
+            
         );
     }
 }
+
 
 export default withRouter(Authorize);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, FormBtn, TextArea, CategoryDropdown } from "../components/Form";
+import { Input, FormBtn, TextArea, CategoryDropdown, OfferInput } from "../components/Form";
 import NavItemLogout from '../components/NavItemLogout';
 import Nav from "../components/Nav";
 import API from "../utils/API";
@@ -8,34 +8,23 @@ import API from "../utils/API";
 class PostingJob extends Component {
 
     state = {
-        user: {},
         title: "",
         description: "",
         city: "",
         category: "",
-
+        offer: "",
+        user: {}
     }
 
     componentDidMount() {
-        const jwt = this.getToken();
-        if(!jwt) {
-           this.props.history.push('/login');
-        }
-        API.getUser({ headers: {Authorization: `JWT ${jwt}` } })
+        const token = localStorage.getItem('jwt')
+        API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
             this.setState({user: res.data})
             console.log(this.state.user)
         })
-        .catch( err => {
-            localStorage.removeItem('jwt')
-            this.props.history.push('/login');
-        })
-
     }
 
-    getToken(){
-        return localStorage.getItem('jwt')
-    }
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -45,9 +34,11 @@ class PostingJob extends Component {
     };
 
     handleFormSubmit = event => {
-        console.log('clicked')
+       
         const newJob = {
             posterId: this.state.user.id,
+            posterName: this.state.user.firstname,
+            offer: this.state.offer,
             title: this.state.title,
             description: this.state.description,
             city: this.state.city,
@@ -98,11 +89,19 @@ class PostingJob extends Component {
                                 placeholder="city"
                             />
 
+                            
+                            <OfferInput
+                                value={this.state.offer}
+                                onChange={this.handleInputChange}
+                                name="offer"
+                                placeholder="20.00"
+                                type="number"
+                            />
+
                             <CategoryDropdown
                                 value={this.state.category}
                                 onChange={this.handleInputChange}
                                 name="category"
-                                placeholder="category"
                             />
 
                             <FormBtn
