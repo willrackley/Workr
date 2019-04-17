@@ -7,14 +7,22 @@ import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
 import { MapContainer } from "../components/MapContainer";
 
+
 class userDashboard extends Component {
     state = {
         jobResults: "",
         loggedIn: true,
+        user: {}
     }
 
     componentDidMount() {
         this.loadJobs();
+        const token = localStorage.getItem('jwt')
+        API.getUser({ headers: {Authorization: `JWT ${token}` } })
+        .then(res => {
+            this.setState({user: res.data})
+            console.log(this.state.user)
+        })
     }
 
     loadJobs = () => {
@@ -51,12 +59,13 @@ class userDashboard extends Component {
                         </div>
                         <div className="col-md-4 text-right">
                             <div>
-                                <h1 className="mt-5">
+                                <h4 className="mt-5"> Welcome, {this.state.user.firstname}</h4>
+                                <h3 className="">
                                 <Link to={"/postJob"} className="text-dark">
                                     Post a job
                                 </Link>
-                                <MapContainer/>
-                                </h1>                          
+                                </h3>      
+                                <MapContainer/>                    
                             </div>
                         </div>
                     </div>

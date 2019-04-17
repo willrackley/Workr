@@ -5,11 +5,20 @@ import "./style.css";
 export function Input(props) {
   return (
     <div className="form-group">
+      <label className="text-muted">{props.children}</label>
       <input className="form-control text-center" {...props} />
     </div>
   );
 }
 
+export function OfferInput(props) {
+  return (
+    <div className="form-group">
+      <label className="text-muted">Cash Offer</label>
+      <input className="form-control text-center" {...props} />
+    </div>
+  );
+}
 export function FormBtn(props) {
   return (
     <button {...props} className="btn formBtn mt-2 btn-secondary text-white">

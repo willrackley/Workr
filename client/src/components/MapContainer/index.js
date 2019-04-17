@@ -2,7 +2,7 @@ import React from 'react';
 import {GoogleApiWrapper, Map, Marker} from "google-maps-react";
 require('dotenv').config();
 export class MapContainer extends React.Component {
-    state={
+    state = {
         userLocation:{
             lat: 32, 
             lng: 32
