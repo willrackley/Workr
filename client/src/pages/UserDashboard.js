@@ -5,6 +5,7 @@ import List from "../components/List";
 import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
+import { MapContainer } from "../components/MapContainer";
 
 class userDashboard extends Component {
     state = {
@@ -54,6 +55,7 @@ class userDashboard extends Component {
                                 <Link to={"/postJob"} className="text-dark">
                                     Post a job
                                 </Link>
+                                <MapContainer/>
                                 </h1>                          
                             </div>
                         </div>
