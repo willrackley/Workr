@@ -1,6 +1,11 @@
 import React from 'react';
 import {GoogleApiWrapper, Map, Marker} from "google-maps-react";
-require('dotenv').config();
+import  React_App_API_KEY_G from './config_keys'
+const API_KEY =React_App_API_KEY_G
+console.log(API_KEY);
+
+
+
 export class MapContainer extends React.Component {
     state = {
         userLocation:{
@@ -11,7 +16,7 @@ export class MapContainer extends React.Component {
         };
 
 
-    componentDidMount(){
+    componentDidMount(props){
         navigator.geolocation.getCurrentPosition(
             position => {
                 const {latitude, longitude} = position.coords;
@@ -41,7 +46,7 @@ export class MapContainer extends React.Component {
         }
 
         return(
-            <div className="mt-5 ml-5">
+            // <div className="mt-5 ml-5">
             <Map
             google={google}
             //can be pushed into css file
@@ -51,12 +56,13 @@ export class MapContainer extends React.Component {
           >
             <Marker name={"Your position"} position={this.state.userLocation} />
           </Map>
-          </div>
+        //   </div>
         );
     }
     }
 
-
+    
     export default GoogleApiWrapper({
-        apiKey:process.env.apikey
+        apiKey: API_KEY
+        
     })(MapContainer);
