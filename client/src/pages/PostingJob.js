@@ -38,6 +38,7 @@ class PostingJob extends Component {
         const newJob = {
             posterId: this.state.user.id,
             posterName: this.state.user.firstname,
+            posterEmail: this.state.user.email,
             offer: this.state.offer,
             title: this.state.title,
             description: this.state.description,

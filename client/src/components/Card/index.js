@@ -1,7 +1,9 @@
 import React from "react";
+import { FormBtn } from "../Form";
 import "./style.css";
 
 export default function Card(props) {
+   
   return (
     <div>
         {props.results.map(result => (
@@ -21,10 +23,17 @@ export default function Card(props) {
                     <div className="card-body">
                         <p>{result.description}</p>
                     </div>
+                    <div className="card-footer text-muted text-center">
+                         <FormBtn onClick={() =>props.contactEmployer(result.posterEmail)} >
+                             Contact EMPLOYr
+                         </FormBtn>
+                    </div>
                 </div>
             </li>
         ))}
     </div>
   );
 }
+
+
 

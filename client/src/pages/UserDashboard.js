@@ -8,6 +8,7 @@ import API from "../utils/API";
 import { MapContainer } from "../components/MapContainer";
 
 
+
 class userDashboard extends Component {
     state = {
         jobResults: "",
@@ -33,9 +34,9 @@ class userDashboard extends Component {
         .catch(err => console.log(err));
     }
     
-
-    
-     
+    contactEmployer = (email) => {
+        window.location.href = `mailto:${email}`
+    }
 
     render() {
         return (
@@ -52,7 +53,7 @@ class userDashboard extends Component {
                             <div>
                                 <h1 className="text-dark mt-5">User Dashboard</h1>
                                 <List>
-                                {this.state.jobResults.length ? (<Card key={this.state.jobResults._id} results={this.state.jobResults} title={this.state.jobResults.title} description={this.state.jobResults.description}/>
+                                {this.state.jobResults.length ? (<Card key={this.state.jobResults._id} results={this.state.jobResults} title={this.state.jobResults.title} description={this.state.jobResults.description} contactEmployer={this.contactEmployer}/>
                                     ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
                                 </List>
                             </div>
@@ -74,7 +75,6 @@ class userDashboard extends Component {
            </div>
         )
     }
-
 }
 
 export default userDashboard;

@@ -14,6 +14,7 @@ module.exports = {
     let {
         posterId,
         posterName,
+        posterEmail,
         title,
         description,
         city,
@@ -29,6 +30,7 @@ module.exports = {
       .create({
         posterId: posterId,
         posterName: posterName,
+        posterEmail: posterEmail,
         title: title,
         description: description,
         city: city,
