@@ -49,7 +49,6 @@ app.use(routes);
 //routes
 app.use("/api/jobs", require("./routes/api/jobs"));
 app.use("/api/users", require("./routes/api/users"));
-app.use("/api/email", require("./routes/api/email"));
 
 
 // Start the API server

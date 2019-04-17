@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Input, FormBtn, TextArea, CategoryDropdown } from "../components/Form";
-//import { Redirect } from 'react-router-dom';
+import NavItemLogout from '../components/NavItemLogout';
 import Nav from "../components/Nav";
 import API from "../utils/API";
 
@@ -8,11 +8,33 @@ import API from "../utils/API";
 class PostingJob extends Component {
 
     state = {
+        user: {},
         title: "",
         description: "",
         city: "",
         category: "",
 
+    }
+
+    componentDidMount() {
+        const jwt = this.getToken();
+        if(!jwt) {
+           this.props.history.push('/login');
+        }
+        API.getUser({ headers: {Authorization: `JWT ${jwt}` } })
+        .then(res => {
+            this.setState({user: res.data})
+            console.log(this.state.user)
+        })
+        .catch( err => {
+            localStorage.removeItem('jwt')
+            this.props.history.push('/login');
+        })
+
+    }
+
+    getToken(){
+        return localStorage.getItem('jwt')
     }
 
     handleInputChange = event => {
@@ -25,6 +47,7 @@ class PostingJob extends Component {
     handleFormSubmit = event => {
         console.log('clicked')
         const newJob = {
+            posterId: this.state.user.id,
             title: this.state.title,
             description: this.state.description,
             city: this.state.city,
@@ -37,16 +60,14 @@ class PostingJob extends Component {
         .catch(err => console.log(err)); 
     };
 
-    logOut = () => {
-        //API.logOut();
-    }
 
     render() {
         return (
             <div>
                 <Nav>
-                    <a className="nav-link" href="/login" onClick={this.logOut}>
-                        Log out
+                    <NavItemLogout />
+                    <a className="nav-link" href="/dashboard" >
+                        Dashboard
                     </a>
                 </Nav>
                 <div className="container text-center">

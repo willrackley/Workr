@@ -25,7 +25,7 @@ module.exports = {
       } = req.body;
     db.Job
       .create({
-        posterId: "will",
+        posterId: posterId,
         title: title,
         description: description,
         city: city,
