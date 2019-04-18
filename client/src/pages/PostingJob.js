@@ -38,6 +38,7 @@ class PostingJob extends Component {
         const newJob = {
             posterId: this.state.user.id,
             posterName: this.state.user.firstname,
+            posterEmail: this.state.user.email,
             offer: this.state.offer,
             title: this.state.title,
             description: this.state.description,
@@ -56,10 +57,10 @@ class PostingJob extends Component {
         return (
             <div>
                 <Nav>
-                    <NavItemLogout />
                     <a className="nav-link" href="/dashboard" >
                         Dashboard
                     </a>
+                    <NavItemLogout />
                 </Nav>
                 <div className="container text-center">
                     <h1 className="text-dark text- center mt-5 mb-5">Post a New Job</h1>

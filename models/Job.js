@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const jobSchema = new Schema({
   posterId: { type: String, required: true },
   posterName: { type: String, required: true },
+  posterEmail: { type: String, required: true },
   title: { type: String, required: true },
   description: { type: String, required: true },
   city: { type: String, required: true },

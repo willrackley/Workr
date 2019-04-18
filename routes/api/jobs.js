@@ -7,8 +7,10 @@ router.route("/")
   .post(jobsController.create);
 
 // Matches with "/api/jobs/:id"
-router
-  .route("/:id")
+router.route("/:posterId")
+  .get(jobsController.findById)
+
+router.route("/:id")
   .delete(jobsController.remove);
 
 module.exports = router;

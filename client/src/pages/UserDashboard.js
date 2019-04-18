@@ -8,6 +8,7 @@ import API from "../utils/API";
 import MapContainer  from "../components/MapContainer";
 
 
+
 class userDashboard extends Component {
     state = {
         jobResults: "",
@@ -21,7 +22,6 @@ class userDashboard extends Component {
         API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
             this.setState({user: res.data})
-            console.log(this.state.user)
         })
     }
 
@@ -29,15 +29,20 @@ class userDashboard extends Component {
         API.getJobs()
         .then(res => {
             this.setState({ jobResults: res.data })
+            
         })
         .catch(err => console.log(err));
     }
     
-
-    
-     
+    contactEmployer = (email) => {
+        window.location.href = `mailto:${email}`
+    }
 
     render() {
+        //only show job postings that arent ours
+        const results = Array.from(this.state.jobResults)
+        const filteredResults = results.filter(jobs => jobs.posterId !== this.state.user.id);
+       
         return (
             <div>
                 
@@ -52,7 +57,7 @@ class userDashboard extends Component {
                             <div>
                                 <h1 className="text-dark mt-5">User Dashboard</h1>
                                 <List>
-                                {this.state.jobResults.length ? (<Card key={this.state.jobResults._id} results={this.state.jobResults} title={this.state.jobResults.title} description={this.state.jobResults.description}/>
+                                {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} contactEmployer={this.contactEmployer}/>
                                     ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
                                 </List>
                             </div>
@@ -64,9 +69,14 @@ class userDashboard extends Component {
                                 <Link to={"/postJob"} className="text-dark">
                                     Post a job
                                 </Link>
-                                <MapContainer/>
-                                </h3>      
-                                                    
+                                </h3>  
+                                <h3 className="">
+                                <Link to={"/MyJobs"} className="text-dark">
+                                    My Jobs
+                                </Link>
+                                </h3>       
+                                <MapContainer/>                    
+
                             </div>
                         </div>
                     </div>
@@ -75,7 +85,6 @@ class userDashboard extends Component {
            </div>
         )
     }
-
 }
 
 export default userDashboard;

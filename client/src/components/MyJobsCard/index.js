@@ -1,8 +1,8 @@
 import React from "react";
 import { FormBtn } from "../Form";
-import "./style.css";
 
-export default function Card(props) {
+
+export default function MyJobsCard(props) {
    
   return (
     <div>
@@ -11,10 +11,20 @@ export default function Card(props) {
                 <div className="card mb-3">
                     <div className="card-header">
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-12 mb-2">
+                                <FormBtn onClick={() => props.deleteJob(result._id)}>
+                                    X
+                                </FormBtn>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-4">
                                 <p>{result.posterName}</p>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-4 text-center">
+                                <p>{result.status}</p>
+                            </div>
+                            <div className="col-md-4">
                                 <p className="text-right"> ${result.offer}</p>
                             </div>
                         </div>
@@ -24,9 +34,7 @@ export default function Card(props) {
                         <p>{result.description}</p>
                     </div>
                     <div className="card-footer text-muted text-center">
-                         <FormBtn onClick={() =>props.contactEmployer(result.posterEmail)} >
-                             Contact EMPLOYr
-                         </FormBtn>
+                
                     </div>
                 </div>
             </li>
