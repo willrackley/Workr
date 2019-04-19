@@ -77,7 +77,7 @@ module.exports = {
             })
             .then(function(dbUser) {
                 messages.push({
-                    msg: 'Account successfully created, you can login.',
+                    msg: 'Account successfully created, you may login.',
                     type: 'success'
                 });
                 return res.json(messages);

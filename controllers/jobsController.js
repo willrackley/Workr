@@ -13,6 +13,7 @@ module.exports = {
   findById: function(req, res) {
     db.Job
       .find({ posterId: req.params.posterId })
+      .sort({ postedDate: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Nav from "../components/Nav";
+import Jumbotron from "../components/Jumbotron"
 
 class LandingPage extends Component {
 
@@ -15,7 +16,9 @@ class LandingPage extends Component {
                 </a> 
                 </Nav>
                 <div className="container">
-                    <h1 className="text-dark mt-5">Landing Page</h1>
+                    <Jumbotron>
+                      
+                    </Jumbotron>
                 </div>
            </div>
         )
