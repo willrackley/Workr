@@ -5,7 +5,7 @@ import List from "../components/List";
 import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
-import MapContainer  from "../components/MapContainer";
+//import MapContainer  from "../components/MapContainer";
 
 
 
@@ -75,7 +75,7 @@ class userDashboard extends Component {
                                     My Jobs
                                 </Link>
                                 </h3>       
-                                <MapContainer/>                    
+                                {/* <MapContainer/>                     */}
 
                             </div>
                         </div>

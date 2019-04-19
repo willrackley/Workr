@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Input, FormBtn } from "../components/Form";
 import Nav from "../components/Nav";
 import API from "../utils/API";
+import Popup from "reactjs-popup";
+
 
 
 class SignUp extends Component {
@@ -11,6 +13,7 @@ class SignUp extends Component {
         email: "",
         password: "",
         confirmPassword: "",
+        submitMessage: ""
     }
 
     handleInputChange = event => {
@@ -21,7 +24,7 @@ class SignUp extends Component {
     };
 
     handleFormSubmit = event => {
-        event.preventDefault();
+        //event.preventDefault();
         const newUser = {
             firstname: this.state.firstname,
             email: this.state.email,
@@ -30,10 +33,20 @@ class SignUp extends Component {
         }
         API.saveUser(newUser)
         .then(res => {
-            console.log(res.data);
+            console.log(res.data)
+            if(res.data[0].type === "warning"){
+                this.setState({submitMessage: res.data[0].msg})
+              
+            } else {
+                this.setState({submitMessage: res.data[0].msg})
+            }
         })
         .catch(err => console.log(err)); 
     };
+
+    loginRedirect = () => {
+        this.props.history.push('/login')
+    }
 
     render() {
         return (
@@ -69,25 +82,45 @@ class SignUp extends Component {
                                 onChange={this.handleInputChange}
                                 name="password"
                                 placeholder="password"
+                                type="password"
                             />
                             <Input
                                 value={this.state.confirmPassword}
                                 onChange={this.handleInputChange}
                                 name="confirmPassword"
                                 placeholder="confirm password"
+                                type="password"
                             />
 
-                            <FormBtn 
+                            {/* this section uses a tooltip to let user know of error messages or lets them redirect to login */}
+                            {this.state.submitMessage === "Account successfully created, you may login." ? ( <Popup trigger={<FormBtn 
                             disabled={
                                 !(this.state.firstname) ||
                                 !(this.state.email) ||
                                 !(this.state.password) ||
                                 !(this.state.confirmPassword) 
                             }
-                            onClick={this.handleFormSubmit}
                             >
                             Submit
-                            </FormBtn>
+                            </FormBtn>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick>
+                            <div>
+                            {this.state.submitMessage}
+                            <FormBtn onClick={this.loginRedirect}>Login</FormBtn>
+                            </div>
+                            </Popup>) : (<Popup trigger={<FormBtn 
+                            disabled={
+                                !(this.state.firstname) ||
+                                !(this.state.email) ||
+                                !(this.state.password) ||
+                                !(this.state.confirmPassword) 
+                            }
+                            >
+                            Submit
+                            </FormBtn>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick>
+                            {this.state.submitMessage}
+                            </Popup>)
+                            }
+                            
                         </div>
                         <div className="col-md-4">
                         </div>
