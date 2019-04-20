@@ -1,5 +1,35 @@
 .jumbotron {
-  background-image: url("../../images/hustle.png");
+  background-image: url("../../images/vacuum (3).png");
   background-size: cover;
   min-height: 500px;
+  }
+
+  .jumbotronInfo {
+    position: relative;
+    top: 50px;
+    
+  }
+
+  .jumbotron h1 {
+    font-weight: bolder;
+    font-family: 'Righteous', cursive;
+    font-size: 60px;
+  }
+
+  .jumbotron p {
+    font-size: 24px;
+    position: relative;
+    top:50px;
+  }
+
+  .jumbotron span {
+    border-bottom: 4px solid #28a6af;
+    
+  }
+
+  .registerButton {
+    background: #28a6af;
+    position: relative;
+    top:50px;
+    padding: 20px 60px;
   }

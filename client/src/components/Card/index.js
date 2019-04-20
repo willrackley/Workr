@@ -5,10 +5,9 @@ import "./style.css";
 export default function Card(props) {
    
   return (
-    <div>
+    <div className="card-columns py-3">
         {props.results.map(result => (
-            <li className="list-group-item mb-3 pt-4 rounded" key={result._id}>
-                <div className="card mb-3">
+                <div className="card mb-3" key={result._id}>
                     <div className="card-header">
                         <div className="row">
                             <div className="col-md-6">
@@ -24,12 +23,12 @@ export default function Card(props) {
                         <p>{result.description}</p>
                     </div>
                     <div className="card-footer text-muted text-center">
-                         <FormBtn onClick={() =>props.contactEmployer(result.posterEmail)} >
+                         <FormBtn id="contactBtn" onClick={() =>props.contactEmployer(result.posterEmail)} >
                              Contact EMPLOYr
                          </FormBtn>
                     </div>
                 </div>
-            </li>
+           
         ))}
     </div>
   );
