@@ -69,7 +69,7 @@ class MyJobs extends Component {
                         </div>
                         <div className="col-md-4 text-right">
                             <div>
-                                <h4 className="mt-5"> Welcome, {this.state.user.firstname}</h4>
+                            
                                 <h3 className="">
                             
                                 </h3>      

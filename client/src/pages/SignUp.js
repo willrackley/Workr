@@ -33,12 +33,17 @@ class SignUp extends Component {
         }
         API.saveUser(newUser)
         .then(res => {
-            console.log(res.data)
+            
+
             if(res.data[0].type === "warning"){
                 this.setState({submitMessage: res.data[0].msg})
               
             } else {
                 this.setState({submitMessage: res.data[0].msg})
+                this.setState({firstname: ""});
+                this.setState({email: ""});
+                this.setState({password: ""});
+                this.setState({password2: ""});
             }
         })
         .catch(err => console.log(err)); 

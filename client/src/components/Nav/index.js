@@ -4,7 +4,7 @@ import "./style.css";
 function Nav({children}) {
   return (
     
-    <nav className="navbar navbar-expand-lg navbar-light">
+    <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container">
         <a className="navbar-brand" href="/">
           WORKr

@@ -71,7 +71,7 @@ class PostingJob extends Component {
                     </a>
                     <NavItemLogout />
                 </Nav>
-                <div className="container text-center">
+                <div className="container text-center mb-5">
                     <h1 className="text-dark text- center mt-5 mb-5">Post a New Job</h1>
                     
                     <div className="row">
