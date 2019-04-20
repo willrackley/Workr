@@ -52,6 +52,7 @@ class userDashboard extends Component {
                 </Nav>
 
                 <div className="container">
+                    <h4 className="mt-3"> Welcome, {this.state.user.firstname}</h4>
                     <div className="row">
 
                         <nav className="col-md-2 d-none d-md-block bg-light sidebar" style={{ marginTop: 5 }}>
@@ -61,7 +62,7 @@ class userDashboard extends Component {
                         <div className="col-md-6">
                             
                             <div>
-                                <h1 className="text-dark mt-5">User Dashboard</h1>
+                                <h1 className="text-dark mt-2">Jobs <small className="text-muted">Nationwide</small></h1>
                                 <List>
                                 {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} contactEmployer={this.contactEmployer}/>
                                     ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
@@ -70,7 +71,6 @@ class userDashboard extends Component {
                         </div>
                         <div className="col-md-4 text-right">
                             <div>
-                                <h4 className="mt-5"> Welcome, {this.state.user.firstname}</h4>
                                 <h3 className="">
                                 <Link to={"/postJob"} className="text-dark">
                                     Post a job

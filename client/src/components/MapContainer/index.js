@@ -65,7 +65,7 @@ export class MapContainer extends React.Component {
             <Map
             google={google}
             //can be pushed into css file
-            style={{ width: "auto", height: "5%"}}
+            style={{ width: "auto", height: "50%"}}
             initialCenter={userLocation}
             zoom={10}
           >
@@ -78,7 +78,7 @@ export class MapContainer extends React.Component {
 
     
     export default GoogleApiWrapper({
-        apiKey: API_KEY
+        apiKey: "AIzaSyB51AI9jcTzVBa-THgUie9uT87HiyvtDmE"
         
     })(MapContainer);
 

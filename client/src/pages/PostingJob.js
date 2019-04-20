@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Input, FormBtn, TextArea, CategoryDropdown, OfferInput } from "../components/Form";
 import NavItemLogout from '../components/NavItemLogout';
 import Nav from "../components/Nav";
+import Popup from "reactjs-popup";
 import API from "../utils/API";
 
 
@@ -48,9 +49,17 @@ class PostingJob extends Component {
         API.saveJob(newJob)
         .then(res => {
             console.log(res.data);
+            this.setState({offer: ""});
+            this.setState({title: ""});
+            this.setState({description: ""});
+            this.setState({city: ""});
         })
         .catch(err => console.log(err)); 
     };
+
+    formRedirect = () => {
+        this.props.history.push('/dashboard')
+    }
 
 
     render() {
@@ -62,7 +71,7 @@ class PostingJob extends Component {
                     </a>
                     <NavItemLogout />
                 </Nav>
-                <div className="container text-center">
+                <div className="container text-center mb-5">
                     <h1 className="text-dark text- center mt-5 mb-5">Post a New Job</h1>
                     
                     <div className="row">
@@ -105,17 +114,24 @@ class PostingJob extends Component {
                                 name="category"
                             />
 
-                            <FormBtn
+                            <Popup trigger={<FormBtn
                             disabled={
                                 !(this.state.title) ||
                                 !(this.state.description) ||
                                 !(this.state.city) ||
                                 !(this.state.category) 
                             }
-                            onClick= {this.handleFormSubmit}
                             >
                             Submit
-                            </FormBtn>
+                            </FormBtn>} onOpen={this.handleFormSubmit} position="top center" closeOnDocumentClick>
+                            <div>
+                                <div>
+                                Your Job has been posted!
+                                </div>
+                                <FormBtn onClick={this.formRedirect}> Home </FormBtn>
+                            </div>
+                            </Popup>
+                            
                         </div>
                         <div className="col-md-4">
                         </div>

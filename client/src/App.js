@@ -7,7 +7,9 @@ import userDashboard from './pages/UserDashboard';
 import MyJobs from './pages/MyJobs';
 import PostingJob from './pages/PostingJob';
 import JobsByCategory from './pages/JobsByCategory';
-import Authorize from './components/Authorize';
+import Authorize from './components/Authorize'
+import "./App.css"
+
 function App() {
  
   return (
