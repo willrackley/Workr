@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
 import MapContainer  from "../components/MapContainer";
+import CategoriesContainer from "../components/Categories";
 
 
 
@@ -52,7 +53,12 @@ class userDashboard extends Component {
 
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-8">
+
+                        <nav className="col-md-2 d-none d-md-block bg-light sidebar" style={{ marginTop: 5 }}>
+                            <CategoriesContainer />
+                        </nav>
+
+                        <div className="col-md-6">
                             
                             <div>
                                 <h1 className="text-dark mt-5">User Dashboard</h1>

@@ -59,5 +59,15 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+  }, 
+  // ----------------------------
+  // Search Categories section
+  // -----------------------------
+  // Search by category
+  findByCategory: function(req, res) {
+    db.Job
+      .find({ category: req.params.category })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 };

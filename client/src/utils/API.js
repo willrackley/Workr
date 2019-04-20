@@ -30,4 +30,13 @@ export default {
     deleteMyJob: function(id) {
         return axios.delete(`/api/jobs/${id}`);
     },
+    // Category - functions
+    // this one works to get all jobs
+    /*getJobsByCategory: function(id) {
+        return axios.get(`/api/jobs/${id}`);
+    },*/
+
+    getJobsByCategory: function(category) {
+        return axios.get("/api/jobs/", category);
+    },
   };

@@ -13,4 +13,9 @@ router.route("/:posterId")
 router.route("/:id")
   .delete(jobsController.remove);
 
+// Categories routes
+// Get jobs by category. Matches with "/api/jobs/:category"
+router.route("/:category")
+  .get(jobsController.findByCategory)
+
 module.exports = router;

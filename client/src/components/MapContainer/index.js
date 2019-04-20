@@ -1,11 +1,26 @@
 import React from 'react';
+
+/*
 import {GoogleApiWrapper, Map, Marker} from "google-maps-react";
 import  React_App_API_KEY_G from './config_keys'
 const API_KEY =React_App_API_KEY_G
 console.log(API_KEY);
+*/
 
+// Temp export class to make it work without calling Googlemaps react 
+export class MapContainer extends React.Component {
+    render() {
+        return (
+            <div className="container">
+                <h1>Maps stuff.. </h1>
+            </div>
+        );
+    };
+}
 
+export default MapContainer;
 
+/*
 export class MapContainer extends React.Component {
     state = {
         userLocation:{
@@ -66,3 +81,5 @@ export class MapContainer extends React.Component {
         apiKey: API_KEY
         
     })(MapContainer);
+
+*/

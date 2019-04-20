@@ -6,7 +6,8 @@ import Login from "./pages/Login";
 import userDashboard from './pages/UserDashboard';
 import MyJobs from './pages/MyJobs';
 import PostingJob from './pages/PostingJob';
-import Authorize from './components/Authorize'
+import JobsByCategory from './pages/JobsByCategory';
+import Authorize from './components/Authorize';
 function App() {
  
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route exact path="/dashboard" component={userDashboard} />
             <Route exact path="/postJob" component={PostingJob}/>
             <Route exact path="/myJobs" component={MyJobs}/>
+            <Route exact path="/jobsByCategory" component={JobsByCategory}/>
           </Authorize>
           
         </Switch>

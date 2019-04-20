@@ -9,9 +9,9 @@ import API from "../utils/API";
 
 
 
-class MyJobs extends Component {
+class JobsByCategory extends Component {
     state = {
-        myJobs: "",
+        jobsByCategory: "",
         user: {}
     }
 
@@ -21,29 +21,19 @@ class MyJobs extends Component {
         API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
             this.setState({user: res.data})
-            this.loadMyJobs(this.state.user.id);
+            this.loadJobsByCategory(this.state.user.id);
             console.log(this.state.user)
         })
     }
 
-    loadMyJobs = (id) => {
-        API.getMyJobs(id)
+    loadJobsByCategory = (id) => {
+        API.getJobsByCategory(id)
         .then(res => {
-            this.setState({ myJobs: res.data })
+            this.setState({ jobsByCategory: res.data })
             console.log(res.data)
         })
         .catch(err => console.log(err));
     }
-
-    deleteJob = (id) => {
-        console.log('cllll')
-        API.deleteMyJob(id)
-        .then(res => {
-            this.loadMyJobs(this.state.user.id);
-        })
-        .catch(err => console.log(err));
-    }
-    
 
     render() {
         return (
@@ -64,10 +54,10 @@ class MyJobs extends Component {
                         <div className="col-md-6">
                             
                         <div>
-                            <h1 className="text-dark mt-5">My Posted Jobs</h1>
+                            <h1 className="text-dark mt-5">Jobs by Category </h1>
                             <List>
-                            {this.state.myJobs.length ? (<MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob}/>
-                                ) : (<h3 className="mt-5 text-center text-secondary">You haven't posted any Jobs yet</h3>)} 
+                            {this.state.jobsByCategory.length ? (<MyJobsCard key={this.state.jobsByCategory._id} results={this.state.jobsByCategory} title={this.state.jobsByCategory.title} description={this.state.jobsByCategory.description} deleteJob={this.deleteJob}/>
+                                ) : (<h3 className="mt-5 text-center text-secondary">Job by category - No jobs</h3>)} 
                             </List>
                         </div>
                         
@@ -89,4 +79,4 @@ class MyJobs extends Component {
     }
 }
 
-export default MyJobs;
+export default JobsByCategory;
