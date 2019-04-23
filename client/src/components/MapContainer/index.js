@@ -1,3 +1,4 @@
+
 import React from "react";
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 import axios from "axios";
@@ -25,14 +26,15 @@ export class MapContainer extends React.Component {
       position => {
         const { latitude, longitude } = position.coords;
 
+
         this.setState({
           lat: latitude,
           lng: longitude,
-
           loading: false
         });
         const updatedLatitude = this.state.lat;
         const updatedLongitude = this.state.lng;
+
 
         console.log("State: ", this.state.lat);
         console.log("State: ", this.state.lng);

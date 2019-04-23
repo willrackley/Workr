@@ -4,6 +4,8 @@ import NavItemLogout from '../components/NavItemLogout';
 import Nav from "../components/Nav";
 import Popup from "reactjs-popup";
 import API from "../utils/API";
+import Firebase from "../utils/Firebase-config";
+import storage from "../utils/Firebase-config";
 
 
 class PostingJob extends Component {
@@ -14,7 +16,9 @@ class PostingJob extends Component {
         city: "",
         category: "",
         offer: "",
-        user: {}
+        user: {},
+        selectedFile: null,
+        imageUrl: "image"
     }
 
     componentDidMount() {
@@ -40,6 +44,7 @@ class PostingJob extends Component {
             posterId: this.state.user.id,
             posterName: this.state.user.firstname,
             posterEmail: this.state.user.email,
+            jobImage: this.state.imageUrl,
             offer: this.state.offer,
             title: this.state.title,
             description: this.state.description,
@@ -61,6 +66,31 @@ class PostingJob extends Component {
         this.props.history.push('/dashboard')
     }
 
+    selectImgFile = event => {
+        this.setState({selectedFile: event.target.files[0]})
+        //console.log(event.target.files[0])
+    }
+
+    uploadImgFile = () => {
+        console.log(this.state.selectedFile)
+        let storageRef = Firebase.storage.ref(`images/${this.state.selectedFile.name}`);
+        let addingImg = storageRef.put(this.state.selectedFile);
+        addingImg.on('state_changed',
+            function progress(snapshot) {
+                let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                //uploader.value = percentage;
+            },
+            function error(err) {
+                
+            },() => {
+                storageRef.getDownloadURL()
+                .then(res => {
+                    this.setState({ imageUrl: res })
+                    console.log(this.state.imageUrl)
+                })
+            })
+    }
+
 
     render() {
         return (
@@ -71,13 +101,19 @@ class PostingJob extends Component {
                     </a>
                     <NavItemLogout />
                 </Nav>
-                <div className="container text-center">
+                <div className="container text-center mb-5">
                     <h1 className="text-dark text- center mt-5 mb-5">Post a New Job</h1>
                     
                     <div className="row">
                         <div className="col-md-4">
                         </div>
                         <div className="col-md-4">
+                            <Input 
+                            type="file"
+                            onChange={this.selectImgFile}
+                            />
+                            <FormBtn disabled={!this.state.selectedFile} onClick={this.uploadImgFile}>upload</FormBtn>
+
                             <Input
                             value={this.state.title}
                             onChange={this.handleInputChange}
