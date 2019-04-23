@@ -1,5 +1,6 @@
 module.exports = {
     Job: require("./Job"),
-    User: require("./User")
+    User: require("./User"),
+    Image: require("./Image")
   };
   
