@@ -2,6 +2,7 @@ import React from 'react';
 import {GoogleApiWrapper, Map, Marker, InfoWindow} from "google-maps-react";
 import axios from 'axios';
 import  React_App_API_KEY_G from './config_keys'
+import zipcodes from "zipcodes";
 const API_KEY = React_App_API_KEY_G
 
 
@@ -74,6 +75,7 @@ export class MapContainer extends React.Component {
             console.log(this.state.county);
             console.log(this.state.zip);
             console.log(this.state.state);
+            this.raduisLookUp();
             },
            
             
@@ -105,6 +107,12 @@ export class MapContainer extends React.Component {
     }
     
 }
+raduisLookUp=()=>{
+    // const miles = zipcodes.toMiles(zipcodes.toKilometers(dist));
+    const rad = zipcodes.radius(this.state.zip, 50);
+    console.log(rad);
+
+   }
 
     onMarkerClick =(props, marker, e) =>
     this.setState({
@@ -120,9 +128,7 @@ export class MapContainer extends React.Component {
           });
         }
       };
-     
-
-
+      
     
     render(){
         const{loading ,lat,lng} =this.state;
