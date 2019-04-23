@@ -13,4 +13,6 @@ router.route("/:posterId")
 router.route("/:id")
   .delete(jobsController.remove);
 
+router.route("/uploadImg")
+  .post(jobsController.uploadImg)
 module.exports = router;

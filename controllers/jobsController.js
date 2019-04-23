@@ -60,5 +60,15 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  uploadImg: function(req, res, next) {
+    let newImage = {
+      imageName: req.body.imageName,
+      imageData: req.body.imageData
+    }
+
+    db.Image.create(newImage)
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   }
 };
