@@ -58,7 +58,6 @@ class MyJobs extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8">
-                            
                             <div>
                                 <h1 className="text-dark mt-5">My Posted Jobs</h1>
                                 <List>
