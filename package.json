@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/willrackley/Workr#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "ejs": "^2.6.1",
