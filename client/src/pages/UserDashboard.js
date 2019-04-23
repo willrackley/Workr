@@ -75,7 +75,7 @@ class userDashboard extends Component {
                                     My Jobs
                                 </Link>
                                 </h3>       
-                                <MapContainer/>                    
+                                {/* <MapContainer/>                     */}
 
                             </div>
                         </div>
