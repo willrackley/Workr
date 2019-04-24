@@ -32,7 +32,7 @@ export function CategoryDropdown(props) {
     <div className="form-group">
       <label htmlFor="exampleFormControlSelect1" className="text-muted">Category</label>
       <select className="form-control" {...props}>
-        <option value="" selected disabled>Select a Category</option>
+        <option  value="" disabled>Select a Category</option>
         <option>Landscaping</option>
         <option>House Work</option>
         <option>Car Cleaning</option>

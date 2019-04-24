@@ -6,7 +6,7 @@ import Popup from "reactjs-popup";
 import API from "../utils/API";
 import Firebase from "../utils/Firebase-config";
 //import storage from "../utils/Firebase-config";
-
+let uploadTextColor = ""
 
 class PostingJob extends Component {
 
@@ -18,7 +18,8 @@ class PostingJob extends Component {
         offer: "",
         user: {},
         selectedFile: null,
-        imageUrl: "image"
+        imageUrl: "image",
+        loading: null
     }
 
     componentDidMount() {
@@ -72,18 +73,18 @@ class PostingJob extends Component {
     }
 
     uploadImgFile = () => {
+        this.setState({ loading: true })
         let storageRef = Firebase.storage.ref(`images/${this.state.selectedFile.name}`);
         let addingImg = storageRef.put(this.state.selectedFile);
         addingImg.on('state_changed',
             function progress(snapshot) {
-                //let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                //uploader.value = percentage;
             },
-            function error(err) {
-                
+            function error(err) { 
             },() => {
                 storageRef.getDownloadURL()
                 .then(res => {
+                    this.setState({ loading: false })
+                    uploadTextColor = "border border-success"
                     this.setState({ imageUrl: res })
                     console.log(this.state.imageUrl)
                 })
@@ -109,6 +110,7 @@ class PostingJob extends Component {
                         <div className="col-md-4">
                             <h3>Upload an image</h3>
                             <Input 
+                            className={`form-control ${uploadTextColor}`}
                             type="file"
                             onChange={this.selectImgFile}
                             accept="image/png, image/jpeg, image/jpg"
@@ -117,7 +119,10 @@ class PostingJob extends Component {
                             <FormBtn 
                             disabled={!this.state.selectedFile}
                             onClick={this.uploadImgFile}>
-                            upload
+                            {this.state.loading ? (<div className="spinner-border text-info" role="status">
+                            <span className="sr-only">Loading...</span>
+                            </div>): ("upload")}
+                            
                             </FormBtn>
 
                             <Input
