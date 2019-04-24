@@ -43,7 +43,7 @@ class userDashboard extends Component {
     }
 
     render() {
-        //conditionals to handle filtering the job postings by category
+        //conditional to handle filtering the job postings by category
         if(this.state.category === "All"){
             results = Array.from(this.state.jobResults)
         } else {
