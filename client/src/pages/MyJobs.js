@@ -15,7 +15,6 @@ class MyJobs extends Component {
     }
 
     componentDidMount() {
-        
         const token = localStorage.getItem('jwt')
         API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
@@ -35,7 +34,6 @@ class MyJobs extends Component {
     }
 
     deleteJob = (id) => {
-        console.log('cllll')
         API.deleteMyJob(id)
         .then(res => {
             this.loadMyJobs(this.state.user.id);
