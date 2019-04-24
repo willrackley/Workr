@@ -66,9 +66,13 @@ module.exports = {
   // -----------------------------
   // Search by category
   findByCategory: function(req, res) {
+    console.log(req.params);
     db.Job
       .find({ category: req.params.category })
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        res.json(dbModel)
+        console.log(req.params)
+      })
       .catch(err => res.status(422).json(err));
   },
 };

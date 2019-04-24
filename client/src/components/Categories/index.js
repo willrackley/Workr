@@ -4,14 +4,16 @@ import "./style.css";
 // Temp export class to make it work without calling Googlemaps react 
  //    
 export class CategoriesContainer extends React.Component {
+        
     render() {
         return (
             <div className="sidebar-sticky">
                 <ul className="nav flex-column">
                     <li className="nav-item">
-                        <a className="nav-link active" href= "/dashboard">
+                        <button as="input" type="submit" value="Dashboard" className='fas fa-clipboard-list fa-2x' />
+                        {/* <a className="nav-link active" href= "/dashboard"> 
                             <i className='fas fa-clipboard-list fa-3x'> Dashboard</i>                            
-                        </a>
+                        </a> */}
                     </li>
                     <li className="nav-item">
                         <a className="nav-link active" href="/jobsByCategory">

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Nav from "../components/Nav";
 import MyJobsCard from "../components/MyJobsCard";
+import CategoryCard from "../components/Categories"
 import List from "../components/List";
 //import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
@@ -12,24 +13,28 @@ import API from "../utils/API";
 class JobsByCategory extends Component {
     state = {
         jobsByCategory: "",
-        user: {}
+        user: {},
+        category: ""
     }
 
     componentDidMount() {
-        
-        const token = localStorage.getItem('jwt')
+        let cat = "Landscaping";
+        this.loadJobsByCategory(cat);
+        const token = localStorage.getItem('jwt');
         API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
-            this.setState({user: res.data})
-            this.loadJobsByCategory(this.state.user.id);
-            console.log(this.state.user)
+            // this.setState({category: res.data})
+            this.setState({category: "Landscaping"})
+            //this.loadJobsByCategory(this.state.jobs.category);
+            
+            console.log(this.state.category);
         })
     }
 
-    loadJobsByCategory = (id) => {
-        API.getJobsByCategory(id)
+    loadJobsByCategory = (category) => {
+        API.getJobsByCategory(category)
         .then(res => {
-            this.setState({ jobsByCategory: res.data })
+            this.setState({ jobsByCategory: category })
             console.log(res.data)
         })
         .catch(err => console.log(err));
@@ -48,15 +53,13 @@ class JobsByCategory extends Component {
 
                 <div className="container">
                     <div className="row">
-                         <nav className="col-md-2 d-none d-md-block bg-light sidebar" style={{ marginTop: 5 }}>
-                            <CategoriesContainer />
-                        </nav>
+                         
                         <div className="col-md-6">
                             
                         <div>
                             <h1 className="text-dark mt-5">Jobs by Category </h1>
                             <List>
-                            {this.state.jobsByCategory.length ? (<MyJobsCard key={this.state.jobsByCategory._id} results={this.state.jobsByCategory} title={this.state.jobsByCategory.title} description={this.state.jobsByCategory.description} deleteJob={this.deleteJob}/>
+                            {this.state.jobsByCategory.length ? (<CategoryCard key={this.state.jobsByCategory._id} results={this.state.jobsByCategory} title={this.state.jobsByCategory.title} description={this.state.jobsByCategory.description} deleteJob={this.deleteJob}/>
                                 ) : (<h3 className="mt-5 text-center text-secondary">Job by category - No jobs</h3>)} 
                             </List>
                         </div>

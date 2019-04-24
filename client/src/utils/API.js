@@ -37,6 +37,6 @@ export default {
     },*/
 
     getJobsByCategory: function(category) {
-        return axios.get("/api/jobs/", category);
+        return axios.get(`/api/jobs/${category}`);
     },
   };
