@@ -72,7 +72,6 @@ class PostingJob extends Component {
     }
 
     uploadImgFile = () => {
-        console.log(this.state.selectedFile)
         let storageRef = Firebase.storage.ref(`images/${this.state.selectedFile.name}`);
         let addingImg = storageRef.put(this.state.selectedFile);
         addingImg.on('state_changed',
@@ -108,11 +107,18 @@ class PostingJob extends Component {
                         <div className="col-md-4">
                         </div>
                         <div className="col-md-4">
+                            <h3>Upload an image</h3>
                             <Input 
                             type="file"
                             onChange={this.selectImgFile}
+                            accept="image/png, image/jpeg, image/jpg"
                             />
-                            <FormBtn disabled={!this.state.selectedFile} onClick={this.uploadImgFile}>upload</FormBtn>
+
+                            <FormBtn 
+                            disabled={!this.state.selectedFile}
+                            onClick={this.uploadImgFile}>
+                            upload
+                            </FormBtn>
 
                             <Input
                             value={this.state.title}
