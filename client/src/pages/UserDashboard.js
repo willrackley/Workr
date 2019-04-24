@@ -49,14 +49,7 @@ class userDashboard extends Component {
         } else {
             results = Array.from(this.state.jobResults).filter(jobs => jobs.category === this.state.category);
         }
-        // if(this.state.category === "Landscaping"){
-        //     results = Array.from(this.state.jobResults).filter(jobs => jobs.category === "Landscaping");
-        // }
-        // if(this.state.category === "House Work"){
-        //     results = Array.from(this.state.jobResults).filter(jobs => jobs.category === "House Work");
-        // }  
-        
-       
+
         //only show job postings that arent ours
         filteredResults = results.filter(jobs => jobs.posterId !== this.state.user.id);
         
