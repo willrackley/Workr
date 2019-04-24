@@ -54,14 +54,14 @@ module.exports = {
       
   },
   remove: function(req, res) {
-    console.log(req.params)
     db.Job
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
+      // .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   uploadImg: function(req, res, next) {
+    
     let newImage = {
       imageName: req.body.imageName,
       imageData: req.body.imageData
@@ -70,5 +70,12 @@ module.exports = {
     db.Image.create(newImage)
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
+  },
+  findByCategory: function(req, res) {
+    console.log(req)
+    db.Job
+      .find({ category: req.params.category })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };

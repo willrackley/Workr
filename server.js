@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const passport = require('passport');
-//const flash = require('connect-flash');
 
 
 const PORT = process.env.PORT || 4000;
@@ -24,17 +23,6 @@ if (process.env.NODE_ENV === "production") {
 
 // Passport
 app.use(passport.initialize());
-
-// Setting up flash messages
-//app.use(flash());
-
-// Global variables
-// app.use(function(req, res, next) {
-// 	res.locals.success_msg = req.flash('success_msg');
-// 	res.locals.error_msg = req.flash('error_msg');
-// 	res.locals.error = req.flash('error');
-// 	next();
-// });
 
 
 // Setting up templates 

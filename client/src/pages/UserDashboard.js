@@ -5,15 +5,16 @@ import List from "../components/List";
 import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
-import MapContainer  from "../components/MapContainer";
-
-
+//import MapContainer  from "../components/MapContainer";
+let results = "";
+let filteredResults = "";
 
 class userDashboard extends Component {
     state = {
         jobResults: "",
         loggedIn: true,
-        user: {}
+        user: {},
+        category: "All"
     }
 
     componentDidMount() {
@@ -29,9 +30,12 @@ class userDashboard extends Component {
         API.getJobs()
         .then(res => {
             this.setState({ jobResults: res.data })
-            
         })
         .catch(err => console.log(err));
+    }
+
+    loadJobsByCategory = (categoryChange) => {
+        this.setState({ category: categoryChange})
     }
     
     contactEmployer = (email) => {
@@ -39,10 +43,22 @@ class userDashboard extends Component {
     }
 
     render() {
-        //only show job postings that arent ours
-        const results = Array.from(this.state.jobResults)
-        const filteredResults = results.filter(jobs => jobs.posterId !== this.state.user.id);
+        //conditionals to handle filtering the job postings by category
+        if(this.state.category === "All"){
+            results = Array.from(this.state.jobResults)
+        }
+        if(this.state.category === "Landscaping"){
+            results = Array.from(this.state.jobResults).filter(jobs => jobs.category === "Landscaping");
+        }
+        if(this.state.category === "House Work"){
+            results = Array.from(this.state.jobResults).filter(jobs => jobs.category === "House Work");
+        }  
+        
        
+        //only show job postings that arent ours
+        filteredResults = results.filter(jobs => jobs.posterId !== this.state.user.id);
+        
+
         return (
             <div>
                 
@@ -53,8 +69,30 @@ class userDashboard extends Component {
                 <div className="container">
                     <h4 className="mt-3"> Welcome, {this.state.user.firstname}</h4>
                     <div className="row">
-                        <div className="col-md-8">
+                        {/* category section of page */}
+                        <div className="col-md-3">
+                            <h4 className="mt-3">Categories</h4>
+
+                            <button
+                            className="btn d-block"
+                            onClick={()=>this.loadJobsByCategory("All")}>
+                            All Jobs
+                            </button>
                             
+                            <button
+                            className="btn d-block mt-1"
+                            onClick={()=>this.loadJobsByCategory("Landscaping")}>Landscaping
+                            </button>
+
+                            <button
+                            className="btn d-block mt-1"
+                            onClick={()=>this.loadJobsByCategory("House Work")}
+                            >House Work
+                            </button>
+                           
+                        </div>
+                        {/* Job posts section of page */}
+                        <div className="col-md-7"> 
                             <div>
                                 <h1 className="text-dark mt-2">Jobs <small className="text-muted">Nationwide</small></h1>
                                 <List>
@@ -63,7 +101,8 @@ class userDashboard extends Component {
                                 </List>
                             </div>
                         </div>
-                        <div className="col-md-4 text-right">
+                        {/* setting options */}
+                        <div className="col-md-2 text-right">
                             <div>
                                 <h3 className="">
                                 <Link to={"/postJob"} className="text-dark">
