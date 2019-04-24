@@ -20,7 +20,7 @@ class MyJobs extends Component {
         .then(res => {
             this.setState({user: res.data})
             this.loadMyJobs(this.state.user.id);
-            console.log(this.state.user)
+            //console.log(this.state.user)
         })
     }
 
@@ -28,7 +28,7 @@ class MyJobs extends Component {
         API.getMyJobs(id)
         .then(res => {
             this.setState({ myJobs: res.data })
-            console.log(res.data)
+            console.log(res)
         })
         .catch(err => console.log(err));
     }

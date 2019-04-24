@@ -5,7 +5,7 @@ import Nav from "../components/Nav";
 import Popup from "reactjs-popup";
 import API from "../utils/API";
 import Firebase from "../utils/Firebase-config";
-import storage from "../utils/Firebase-config";
+//import storage from "../utils/Firebase-config";
 
 
 class PostingJob extends Component {
@@ -76,7 +76,7 @@ class PostingJob extends Component {
         let addingImg = storageRef.put(this.state.selectedFile);
         addingImg.on('state_changed',
             function progress(snapshot) {
-                let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                //let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 //uploader.value = percentage;
             },
             function error(err) {
