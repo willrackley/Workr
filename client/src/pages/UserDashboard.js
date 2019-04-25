@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
 //import MapContainer  from "../components/MapContainer";
+import 'react-notifications/lib/notifications.css';
+import MessageModal from "../components/MessageModal";
+import {FormBtn} from "../components/Form";
+
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 let results = "";
 let filteredResults = "";
 
@@ -14,7 +19,10 @@ class userDashboard extends Component {
         jobResults: "",
         loggedIn: true,
         user: {},
-        category: "All"
+        category: "All",
+        messageBody: undefined,
+        posterId: "",
+        jobTitle: "",
     }
 
     componentDidMount() {
@@ -42,7 +50,69 @@ class userDashboard extends Component {
         window.location.href = `mailto:${email}`
     }
 
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    sendMessageToEmployer = (posterId, title) => {
+        
+        console.log(`this ${title}`)
+        console.log(posterId)
+        
+        let newMessage = {
+            senderId: this.state.user.id,
+            recieverId: posterId,
+            jobTitle: title,
+            messageBody: this.state.messageBody
+        }
+         console.log(newMessage);
+        API.saveMessage(newMessage)
+        .then(res => {
+        this.createNotification('success')
+        
+        this.setState({ messageBody: ""});
+       
+        })
+        .catch(err => console.log(err));
+    }
+
+    createNotification = (type) => {
+        
+          switch (type) {
+            case 'info':
+              NotificationManager.info('Info message');
+              break;
+            case 'success':
+                NotificationManager.success('', 'Message Sent');
+           
+              break;
+            case 'warning':
+              NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+              break;
+            case 'error':
+              NotificationManager.error('Error message', 'Click me!', 5000, () => {
+                alert('callback');
+              });
+              break;
+            default: 
+            return;
+          }
+        
+    }
+    getDataForMessage = (id, title) => {
+        this.setState({posterId: id})
+        this.setState({jobTitle: title})
+    }
+
+    dashboardRedirect = () => {
+        window.location.reload();
+    }
+
     render() {
+
         //conditional to handle filtering the job postings by category
         if(this.state.category === "All"){
             results = Array.from(this.state.jobResults)
@@ -53,7 +123,7 @@ class userDashboard extends Component {
         //only show job postings that arent ours
         filteredResults = results.filter(jobs => jobs.posterId !== this.state.user.id);
         
-
+        
         return (
             <div>
                 
@@ -88,12 +158,22 @@ class userDashboard extends Component {
                         </div>
                         {/* Job posts section of page */}
                         <div className="col-md-7"> 
+                        <NotificationContainer/>
                             <div>
                                 <h1 className="text-dark mt-2">Jobs <small className="text-muted">Nationwide</small></h1>
                                 <List>
-                                {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} contactEmployer={this.contactEmployer}/>
+                                {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} contactEmployer={this.contactEmployer} handleInputChange={this.handleInputChange} value={this.state.messageBody} sendMessageToEmployer={this.sendMessageToEmployer} dashboardRedirect={this.dashboardRedirect} getDataForMessage={this.getDataForMessage}/>
                                     ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
                                 </List>
+                                <MessageModal
+                    
+                    mappedModal={filteredResults}
+                    value={this.state.messageBody}
+                    onChange={this.handleInputChange}
+                    name="messageBody"
+                    type="text"> 
+                    
+                    <FormBtn onClick={()=>this.sendMessageToEmployer(this.state.posterId, this.state.jobTitle)} data-dismiss="modal" aria-label="Close">SEND</FormBtn></MessageModal>
                             </div>
                         </div>
                         {/* setting options */}
