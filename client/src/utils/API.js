@@ -33,4 +33,7 @@ export default {
     getJobsByCategory: function(category) {
         return axios.get(`/api/jobs/${category}`);
     },
+    saveMessage: function(messageData) {
+        return axios.post("/api/messages/", messageData);
+    },
   };
