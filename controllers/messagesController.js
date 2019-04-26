@@ -11,8 +11,16 @@ module.exports = {
     },
     findById: function(req, res) {
       db.Message
-        .find({ posterId: req.params.posterId })
-        .sort({ postedDate: -1 })
+        .find({ recieverId: req.params.recieverId })
+        .sort({ date: -1 })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    },
+    findBySenderId: function(req, res) {
+      console.log(req.params)
+      db.Message
+        .find({ senderId: req.params.senderId })
+        .sort({ date: -1 })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
@@ -20,6 +28,7 @@ module.exports = {
       let {
           recieverId,
           senderId,
+          senderName,
           messageBody,
           jobTitle,
           date
@@ -28,6 +37,7 @@ module.exports = {
         .create({
             recieverId: recieverId,
             senderId: senderId,
+            senderName: senderName,
             messageBody: messageBody,
             jobTitle: jobTitle,
             date: date

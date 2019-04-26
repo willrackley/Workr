@@ -6,4 +6,10 @@ router.route("/")
   .get(messagesController.findAll)
   .post(messagesController.create);
 
+router.route("/:recieverId")
+  .get(messagesController.findById);
+
+router.route("/sent/:senderId")
+  .get(messagesController.findBySenderId);
+
 module.exports = router;

@@ -42,7 +42,7 @@ class Card extends React.Component {
                     <div className="card-footer text-muted text-center">
 
                     <FormBtn
-                    onClick={()=>this.props.getDataForMessage(result.posterId, result.title)}
+                    onClick={()=>this.props.getDataForMessage(result)}
                     data-toggle="modal" data-target="#myModal">>Message EMPLOYr</FormBtn>
                      
                     </div>
