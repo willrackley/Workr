@@ -45,9 +45,6 @@ class userDashboard extends Component {
         this.setState({ category: categoryChange})
     }
     
-    contactEmployer = (email) => {
-        window.location.href = `mailto:${email}`
-    }
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -56,28 +53,25 @@ class userDashboard extends Component {
         });
     };
 
-    sendMessageToEmployer = (posterId, title) => {
-        
+    sendMessageToEmployer = (posterId, title, posterName) => {
         let newMessage = {
             senderId: this.state.user.id,
             senderName: this.state.user.firstname,
             recieverId: posterId,
+            recieverName: posterName,
             jobTitle: title,
             messageBody: this.state.messageBody
         }
          console.log(newMessage);
         API.saveMessage(newMessage)
         .then(res => {
-        this.createNotification('success')
-        
-        this.setState({ messageBody: ""});
-       
+            this.createNotification('success')
+            this.setState({ messageBody: ""});
         })
         .catch(err => console.log(err));
     }
 
     createNotification = (type) => {
-        
           switch (type) {
             case 'info':
               NotificationManager.info('Info message');
@@ -99,18 +93,13 @@ class userDashboard extends Component {
           }
         
     }
+
     getDataForMessage = (jobInfo) => {
         this.setState({jobInfoForMessage: jobInfo})
-        
-        console.log(jobInfo)
     }
 
-    dashboardRedirect = () => {
-        window.location.reload();
-    }
 
     render() {
-
         //conditional to handle filtering the job postings by category
         if(this.state.category === "All"){
             results = Array.from(this.state.jobResults)
@@ -120,11 +109,9 @@ class userDashboard extends Component {
 
         //only show job postings that arent ours
         filteredResults = results.filter(jobs => jobs.posterId !== this.state.user.id);
-        
-        
+
         return (
             <div>
-                
                 <Nav>
                     <div className="nav-item dropdown">
                         <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -166,7 +153,7 @@ class userDashboard extends Component {
                         </div>
                         {/* Job posts section of page */}
                         <div className="col-md-9"> 
-                        <NotificationContainer/>
+                            <NotificationContainer/>
                             <div>
                                 <h1 className="text-dark mt-2">Jobs <small className="text-muted">Nationwide</small></h1>
                                 <List>
@@ -174,14 +161,15 @@ class userDashboard extends Component {
                                     ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
                                 </List>
                                 <MessageModal
-                    
-                    mappedModal={filteredResults}
-                    value={this.state.messageBody}
-                    onChange={this.handleInputChange}
-                    name="messageBody"
-                    type="text"> 
-                    
-                    <FormBtn onClick={()=>this.sendMessageToEmployer(this.state.jobInfoForMessage.posterId, this.state.jobInfoForMessage.title)} data-dismiss="modal" aria-label="Close">SEND</FormBtn></MessageModal>
+                                mappedModal={filteredResults}
+                                value={this.state.messageBody}
+                                onChange={this.handleInputChange}
+                                name="messageBody"
+                                type="text"
+                                > 
+                                <FormBtn onClick={()=>this.sendMessageToEmployer(this.state.jobInfoForMessage.posterId, this.state.jobInfoForMessage.title, this.state.jobInfoForMessage.posterName)} data-dismiss="modal" aria-label="Close">SEND
+                                </FormBtn>
+                                </MessageModal>
                             </div>
                         </div>
                         {/* setting options */}

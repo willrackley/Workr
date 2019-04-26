@@ -3,7 +3,7 @@ import { FormBtn } from "../Form";
 import Moment from "react-moment";
 import "./style.css"
 
-export default function InboxMessageCard(props) {
+export default function SentMessageCard(props) {
    
     return (
         <div>
@@ -21,7 +21,7 @@ export default function InboxMessageCard(props) {
                             <div className="row no-gutters">
                                 <div className="col-md-9">
                                     <p>From: {result.senderName}</p>
-                                    <p>Job: {result.jobTitle}</p>
+                                    <p>To: {result.recieverName}</p>
                                 </div>
                                 <div className="col-md-3 text-right">
                                     <p><Moment format="MM/DD/YYYY">{result.date}</Moment></p>

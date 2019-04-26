@@ -17,7 +17,6 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     findBySenderId: function(req, res) {
-      console.log(req.params)
       db.Message
         .find({ senderId: req.params.senderId })
         .sort({ date: -1 })
@@ -29,6 +28,7 @@ module.exports = {
           recieverId,
           senderId,
           senderName,
+          recieverName,
           messageBody,
           jobTitle,
           date
@@ -37,6 +37,7 @@ module.exports = {
         .create({
             recieverId: recieverId,
             senderId: senderId,
+            recieverName: recieverName,
             senderName: senderName,
             messageBody: messageBody,
             jobTitle: jobTitle,
