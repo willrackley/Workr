@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom'
-
+import "./style.css";
 
 class NavItemLogout extends Component  {
     state = {
@@ -14,7 +14,7 @@ class NavItemLogout extends Component  {
 
     render() {
     return (
-        <a className="nav-link" href="/login" onClick={this.logOut}>
+        <a className="nav-link logoutText pl-4" href="/login" onClick={this.logOut}>
             Log out
         </a>
     );

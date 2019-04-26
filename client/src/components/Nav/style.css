@@ -32,3 +32,7 @@ nav .nav-link:hover {
 .navbar-toggler-icon {
     color: #4769d7;
 }
+
+.dashboardText {
+    color:#242424 !important;
+}

@@ -36,4 +36,10 @@ export default {
     saveMessage: function(messageData) {
         return axios.post("/api/messages/", messageData);
     },
+    getMyMessages: function(id) {
+        return axios.get(`/api/messages/${id}`);
+    },
+    getSentMessages: function(id) {
+        return axios.get(`/api/messages/sent/${id}`);
+    }
   };

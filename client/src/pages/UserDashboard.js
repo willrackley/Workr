@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Nav from "../components/Nav";
 import Card from "../components/Card";
 import List from "../components/List";
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
 //import MapContainer  from "../components/MapContainer";
@@ -21,8 +21,7 @@ class userDashboard extends Component {
         user: {},
         category: "All",
         messageBody: undefined,
-        posterId: "",
-        jobTitle: "",
+        jobInfoForMessage: "",
     }
 
     componentDidMount() {
@@ -59,11 +58,9 @@ class userDashboard extends Component {
 
     sendMessageToEmployer = (posterId, title) => {
         
-        console.log(`this ${title}`)
-        console.log(posterId)
-        
         let newMessage = {
             senderId: this.state.user.id,
+            senderName: this.state.user.firstname,
             recieverId: posterId,
             jobTitle: title,
             messageBody: this.state.messageBody
@@ -102,9 +99,10 @@ class userDashboard extends Component {
           }
         
     }
-    getDataForMessage = (id, title) => {
-        this.setState({posterId: id})
-        this.setState({jobTitle: title})
+    getDataForMessage = (jobInfo) => {
+        this.setState({jobInfoForMessage: jobInfo})
+        
+        console.log(jobInfo)
     }
 
     dashboardRedirect = () => {
@@ -128,7 +126,17 @@ class userDashboard extends Component {
             <div>
                 
                 <Nav>
-                    <NavItemLogout/>
+                    <div className="nav-item dropdown">
+                        <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {this.state.user.firstname}
+                        </div>
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a className="dropdown-item" href="/postJob">Post a Job</a>
+                            <a className="dropdown-item" href="/MyJobs">My Jobs</a>
+                            <a className="dropdown-item" href="/messages">My Messages</a>
+                            <NavItemLogout/>
+                        </div>
+                    </div>
                 </Nav>
 
                 <div className="container">
@@ -157,7 +165,7 @@ class userDashboard extends Component {
                            
                         </div>
                         {/* Job posts section of page */}
-                        <div className="col-md-7"> 
+                        <div className="col-md-9"> 
                         <NotificationContainer/>
                             <div>
                                 <h1 className="text-dark mt-2">Jobs <small className="text-muted">Nationwide</small></h1>
@@ -173,13 +181,13 @@ class userDashboard extends Component {
                     name="messageBody"
                     type="text"> 
                     
-                    <FormBtn onClick={()=>this.sendMessageToEmployer(this.state.posterId, this.state.jobTitle)} data-dismiss="modal" aria-label="Close">SEND</FormBtn></MessageModal>
+                    <FormBtn onClick={()=>this.sendMessageToEmployer(this.state.jobInfoForMessage.posterId, this.state.jobInfoForMessage.title)} data-dismiss="modal" aria-label="Close">SEND</FormBtn></MessageModal>
                             </div>
                         </div>
                         {/* setting options */}
-                        <div className="col-md-2 text-right">
+                        {/* <div className="col-md-2 text-right">
                             <div>
-                                <h3 className="">
+                                {/* <h3 className="">
                                 <Link to={"/postJob"} className="text-dark">
                                     Post a job
                                 </Link>
@@ -188,11 +196,11 @@ class userDashboard extends Component {
                                 <Link to={"/MyJobs"} className="text-dark">
                                     My Jobs
                                 </Link>
-                                </h3>       
-                                {/* <MapContainer/>                     */}
+                                </h3>      
+                                { <MapContainer/>                     
 
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                         
