@@ -24,7 +24,7 @@ export default function MyJobsCard(props) {
                             </div>
                             <div className="col-md-4">
                                 <FormBtn onClick={() => props.deleteJob(result._id)}>
-                                    X
+                                &times;
                                 </FormBtn>
                             </div>
                         </div>
