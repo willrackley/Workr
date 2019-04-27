@@ -71,11 +71,4 @@ module.exports = {
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
   },
-  findByCategory: function(req, res) {
-    console.log(req)
-    db.Job
-      .find({ category: req.params.category })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  }
 };

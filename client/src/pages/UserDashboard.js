@@ -68,7 +68,7 @@ class userDashboard extends Component {
             this.createNotification('success')
             this.setState({ messageBody: ""});
         })
-        .catch(err => console.log(err));
+        .catch(err => this.createNotification('error'));
     }
 
     createNotification = (type) => {
@@ -78,15 +78,15 @@ class userDashboard extends Component {
               break;
             case 'success':
                 NotificationManager.success('', 'Message Sent');
-           
               break;
             case 'warning':
               NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
               break;
             case 'error':
-              NotificationManager.error('Error message', 'Click me!', 5000, () => {
-                alert('callback');
-              });
+              NotificationManager.error('', 'something went wrong, please try again');
+            //   NotificationManager.error('Error message', 'Click me!', 5000, () => {
+            //     alert('callback');
+            //   });
               break;
             default: 
             return;

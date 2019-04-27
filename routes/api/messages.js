@@ -7,7 +7,10 @@ router.route("/")
   .post(messagesController.create);
 
 router.route("/:recieverId")
-  .get(messagesController.findById);
+  .get(messagesController.findById)
+
+  router.route("/remove/:id")
+  .delete(messagesController.remove);
 
 router.route("/sent/:senderId")
   .get(messagesController.findBySenderId);
