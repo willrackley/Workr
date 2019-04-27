@@ -28,7 +28,6 @@ class MyJobs extends Component {
         API.getMyJobs(id)
         .then(res => {
             this.setState({ myJobs: res.data })
-            console.log(res)
         })
         .catch(err => console.log(err));
     }

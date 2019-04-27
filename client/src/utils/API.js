@@ -41,5 +41,8 @@ export default {
     },
     getSentMessages: function(id) {
         return axios.get(`/api/messages/sent/${id}`);
-    }
+    },
+    deleteMyMessage: function(id) {
+        return axios.delete(`/api/messages/remove/${id}`);
+    },
   };

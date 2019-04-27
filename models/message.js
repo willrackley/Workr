@@ -7,7 +7,8 @@ const messageSchema = new Schema({
     recieverName: { type: String, required: true },
     senderName: { type: String, required: true },
     jobTitle: { type: String, default: null },
-    messageBody: { type: String, required: true,  },
+    messageBody: { type: String, required: true},
+    inResponseMessage: { type: String, default: null},
     date: { type: Date, default: Date.now }
 });
 
