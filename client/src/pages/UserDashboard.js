@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import Button from 'react-bootstrap/Button'; 
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { faHome, faTree, faCar, faHouseDamage, faTools, faToolbox } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import Nav from "../components/Nav";
 import Card from "../components/Card";
 import List from "../components/List";
@@ -52,7 +57,6 @@ class userDashboard extends Component {
 
         //only show job postings that arent ours
         filteredResults = results.filter(jobs => jobs.posterId !== this.state.user.id);
-        
 
         return (
             <div>
@@ -68,23 +72,48 @@ class userDashboard extends Component {
                         <div className="col-md-3">
                             <h4 className="mt-3">Categories</h4>
 
-                            <button
-                            className="btn d-block"
-                            onClick={()=>this.loadJobsByCategory("All")}>
-                            All Jobs
-                            </button>
-                            
-                            <button
-                            className="btn d-block mt-1"
-                            onClick={()=>this.loadJobsByCategory("Landscaping")}>Landscaping
-                            </button>
+                            <ButtonGroup vertical> 
+                                <Button 
+                                    variant="white"
+                                    className="btn d-block"
+                                    onClick={()=>this.loadJobsByCategory("All")}>
+                                    <FontAwesomeIcon icon={faToolbox} fixedWidth />
+                                    All Jobs
+                                </Button>
+                                <Button
+                                    variant="white"
+                                    className="btn d-block mt-1 fas fa-tree fa-2x"
+                                    onClick={()=>this.loadJobsByCategory("Landscaping")}>
+                                    <FontAwesomeIcon icon={faTree} fixedWidth />
+                                    Landscaping
+                                </Button>
 
-                            <button
-                            className="btn d-block mt-1"
-                            onClick={()=>this.loadJobsByCategory("House Work")}
-                            >House Work
-                            </button>
-                           
+                                <Button
+                                    variant="white"
+                                    className="btn d-block"
+                                    onClick={()=>this.loadJobsByCategory("House Work")}
+                                    > 
+                                    <FontAwesomeIcon icon={faHouseDamage} fixedWidth /> House Work
+                                </Button>
+                                <Button
+                                    variant="white"
+                                    className="btn d-block"
+                                    onClick={()=>this.loadJobsByCategory("Car Cleaning")}
+                                    >
+                                    <FontAwesomeIcon icon={faCar} fixedWidth />
+                                    Car Cleaning
+                                </Button>
+                                <Button
+                                    variant="white"
+                                    className="btn d-block"
+                                    onClick={()=>this.loadJobsByCategory("Miscellaneous")}
+                                    >
+                                    <FontAwesomeIcon icon={faTools} fixedWidth />
+                                    Miscellaneous
+                                </Button>
+
+                            </ButtonGroup>
+
                         </div>
                         {/* Job posts section of page */}
                         <div className="col-md-7"> 

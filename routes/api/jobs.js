@@ -13,9 +13,6 @@ router.route("/:posterId")
 router.route("/:id")
   .delete(jobsController.remove);
 
-router.route("/:category")
-  .get(jobsController.findByCategory)
-
 router.route("/uploadImg")
   .post(jobsController.uploadImg)
   
