@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from 'react-bootstrap/Button'; 
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { faTree, faCar, faHouseDamage, faTools, faToolbox } from '@fortawesome/free-solid-svg-icons';
+import { faTree, faCar, faHouseDamage, faTools, faToolbox, faPray } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Nav from "../components/Nav";
 import Card from "../components/Card";
@@ -9,7 +9,8 @@ import List from "../components/List";
 //import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
-//import MapContainer  from "../components/MapContainer";
+import MapContainer  from "../components/MapContainer";
+import cities from "../components/MapContainer";
 import 'react-notifications/lib/notifications.css';
 import MessageModal from "../components/MessageModal";
 import {FormBtn} from "../components/Form";
@@ -40,7 +41,19 @@ class userDashboard extends Component {
     loadJobs = () => {
         API.getJobs()
         .then(res => {
-            this.setState({ jobResults: res.data })
+            console.log(cities)
+            
+            // for(let i=0; i < res.data.length; i++){
+            //     console.log("Job posting cities: " + res.data[i].city)
+            // if(res.data[i].city === cities ){
+               
+            //     console.log("City of jobs posted: " + res.data.city);
+            //     this.setState({ jobResults: res.data })
+            // }
+            // else{
+            //     console.log("No close cities for work");
+            // }
+            // }
         })
         .catch(err => console.log(err));
     }
@@ -212,10 +225,10 @@ class userDashboard extends Component {
                                 <Link to={"/MyJobs"} className="text-dark">
                                     My Jobs
                                 </Link>
-                                </h3>      
-                                { <MapContainer/>                     
+                                </h3>  */}    
+                                <MapContainer/>                     
 
-                            </div>
+                            {/*</div>
                         </div> */}
                     </div>
                 </div>
