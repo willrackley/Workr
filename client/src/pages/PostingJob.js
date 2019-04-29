@@ -95,7 +95,7 @@ class PostingJob extends Component {
     render() {
         return (
             <div>
-                <Nav>
+                <Nav page="/dashboard">
                     <div className="nav-item dropdown">
                         <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.user.firstname}

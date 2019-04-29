@@ -40,7 +40,9 @@ export default function MyJobsCard(props) {
                         <p>{result.description}</p>
                     </div>
                     <div className="card-footer text-muted text-center">
-                
+                        <FormBtn onClick={() => props.completeJob(result._id)}>
+                            Complete Job
+                        </FormBtn>
                     </div>
                         </div>
                     </div>

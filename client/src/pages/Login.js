@@ -44,13 +44,13 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <Nav>
+                <Nav page="/">
                     <a className="nav-link" href="/login">
-                Log in
-                </a>
-                <a className="nav-link" href="/sign-up">
-                Sign up
-                </a> 
+                        Log in
+                    </a>
+                    <a className="nav-link" href="/sign-up">
+                        Sign up
+                    </a> 
                 </Nav>
                 <div className="container text-center">
                     <h1 className="text-dark text- center mt-5 mb-5">Log in</h1>

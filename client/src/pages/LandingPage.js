@@ -10,7 +10,7 @@ class LandingPage extends Component {
     render() {
         return (//
             <div>
-                <Nav>
+                <Nav page="/">
                     <a className="nav-link" href="/login">
                 Log in
                 </a>
