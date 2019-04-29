@@ -33,6 +33,9 @@ export default {
     completeMyJob: function(id) {
         return axios.put(`/api/jobs/${id}`);
     },
+    reopenMyJob: function(id) {
+        return axios.put(`/api/jobs/incomplete/${id}`);
+    },
     getJobsByCategory: function(category) {
         return axios.get(`/api/jobs/${category}`);
     },

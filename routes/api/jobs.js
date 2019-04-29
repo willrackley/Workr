@@ -12,7 +12,10 @@ router.route("/:posterId")
 
 router.route("/:id")
   .delete(jobsController.remove)
-  .put(jobsController.update);
+  .put(jobsController.updateCompleted);
+  
+router.route("/incomplete/:id")
+.put(jobsController.updateIncomplete);
 
 router.route("/uploadImg")
   .post(jobsController.uploadImg)

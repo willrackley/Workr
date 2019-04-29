@@ -56,13 +56,22 @@ module.exports = {
   remove: function(req, res) {
     db.Job
       .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
+      .then(dbModel => {{
+        res.json(dbModel)
+        dbModel.remove()}})
       // .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  update: function(req, res) {
+  updateCompleted: function(req, res) {
     db.Job
       .findOneAndUpdate({ _id: req.params.id }, {status: "completed"})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  updateIncomplete: function(req, res) {
+    console.log(req.params)
+    db.Job
+      .findOneAndUpdate({ _id: req.params.id }, {status: "incomplete"})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

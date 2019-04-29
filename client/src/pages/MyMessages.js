@@ -167,7 +167,7 @@ class MyMessages extends Component {
                             </div>) : 
                             (<div><h3 className="mb-3">Sent</h3>
                             
-                                {this.state.messageResults.length ? (<List><SentMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date}/>
+                                {this.state.messageResults.length ? (<List><SentMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} deleteMessage={this.deleteMessage}/>
                                 </List>) : (<h3 className="mt-5 text-center text-secondary">Mailbox empty</h3>)} 
                             </div>)
                             }

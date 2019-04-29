@@ -1,6 +1,8 @@
 import React from "react";
 import { FormBtn } from "../Form";
 import "./style.css"
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 export default function MyJobsCard(props) {
    
@@ -23,8 +25,23 @@ export default function MyJobsCard(props) {
                                 <p className="text-right"> ${result.offer}</p>
                             </div>
                             <div className="col-md-4">
-                                <FormBtn onClick={() => props.deleteJob(result._id)}>
-                                &times;
+                                <FormBtn onClick={() => {
+                                    confirmAlert({
+                                    title: 'You are about to delete this job.',
+                                    message: 'Are you sure you want to do this?',
+                                    buttons: [
+                                        {
+                                        label: 'Yes',
+                                        onClick: () => props.deleteJob(result._id)
+                                        },
+                                        {
+                                        label: 'No',
+                                        onClick: () => {}
+                                        }
+                                    ]
+                                    });
+                                }}>
+                                    &times;
                                 </FormBtn>
                             </div>
                         </div>
@@ -40,9 +57,40 @@ export default function MyJobsCard(props) {
                         <p>{result.description}</p>
                     </div>
                     <div className="card-footer text-muted text-center">
-                        <FormBtn onClick={() => props.completeJob(result._id)}>
+                                {result.status === "incomplete" ? (<FormBtn onClick={() => {
+                                    confirmAlert({
+                                    title: 'You are marking this job as complete!',
+                                    message: 'Are you sure you want to do this?',
+                                    buttons: [
+                                        {
+                                        label: 'Yes',
+                                        onClick: () => props.completeJob(result._id)
+                                        },
+                                        {
+                                        label: 'No',
+                                        onClick: () => {}
+                                        }
+                                    ]
+                                    })}}>
                             Complete Job
-                        </FormBtn>
+                        </FormBtn>) : (<FormBtn onClick={() => {
+                                    confirmAlert({
+                                    title: 'You are marking this job as incomplete!',
+                                    message: 'Are you sure you want to do this?',
+                                    buttons: [
+                                        {
+                                        label: 'Yes',
+                                        onClick: () => props.reopenJob(result._id)
+                                        },
+                                        {
+                                        label: 'No',
+                                        onClick: () => {}
+                                        }
+                                    ]
+                                    })}}>
+                            Reopen Job
+                        </FormBtn>)}
+                        
                     </div>
                         </div>
                     </div>

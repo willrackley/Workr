@@ -13,7 +13,7 @@ export default function SentMessageCard(props) {
                         <div className="card-header">
                             <div className="row text-right mb-3">
                                 <div className="col-12">
-                                    <FormBtn>
+                                    <FormBtn onClick={()=>props.deleteMessage(result._id)}>
                                     &times;
                                     </FormBtn>
                                 </div>
