@@ -5,7 +5,7 @@ import List from "../components/List";
 //import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
-//import MapContainer  from "../components/MapContainer";
+// import MapContainer  from "../components/MapContainer";
 import 'react-notifications/lib/notifications.css';
 import MessageModal from "../components/MessageModal";
 import {FormBtn} from "../components/Form";
@@ -184,10 +184,10 @@ class userDashboard extends Component {
                                 <Link to={"/MyJobs"} className="text-dark">
                                     My Jobs
                                 </Link>
-                                </h3>      
-                                { <MapContainer/>                     
+                                </h3>*/}      
+                                {/* <MapContainer/>                      */}
 
-                            </div>
+                            {/*</div>
                         </div> */}
                     </div>
                 </div>
