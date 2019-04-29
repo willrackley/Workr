@@ -70,5 +70,5 @@ module.exports = {
     db.Image.create(newImage)
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
-  }
+  },
 };

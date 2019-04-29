@@ -96,10 +96,17 @@ class PostingJob extends Component {
         return (
             <div>
                 <Nav>
-                    <a className="nav-link" href="/dashboard" >
-                        Dashboard
-                    </a>
-                    <NavItemLogout />
+                    <div className="nav-item dropdown">
+                        <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {this.state.user.firstname}
+                        </div>
+                        <div className="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+                            <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
+                            <a className="dropdown-item" href="/postJob">Post a Job</a>
+                            <a className="dropdown-item" href="/MyJobs">My Jobs</a>
+                            <NavItemLogout/>
+                        </div>
+                    </div>
                 </Nav>
                 <div className="container text-center mb-5">
                     <h1 className="text-dark text- center mt-5 mb-5">Post a New Job</h1>

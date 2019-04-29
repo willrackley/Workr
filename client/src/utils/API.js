@@ -30,4 +30,19 @@ export default {
     deleteMyJob: function(id) {
         return axios.delete(`/api/jobs/${id}`);
     },
+    getJobsByCategory: function(category) {
+        return axios.get(`/api/jobs/${category}`);
+    },
+    saveMessage: function(messageData) {
+        return axios.post("/api/messages/", messageData);
+    },
+    getMyMessages: function(id) {
+        return axios.get(`/api/messages/${id}`);
+    },
+    getSentMessages: function(id) {
+        return axios.get(`/api/messages/sent/${id}`);
+    },
+    deleteMyMessage: function(id) {
+        return axios.delete(`/api/messages/remove/${id}`);
+    },
   };
