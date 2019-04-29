@@ -102,8 +102,8 @@ class PostingJob extends Component {
                         </div>
                         <div className="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
                             <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
-                            <a className="dropdown-item" href="/postJob">Post a Job</a>
                             <a className="dropdown-item" href="/MyJobs">My Jobs</a>
+                            <a className="dropdown-item" href="/messages">My Messages</a>
                             <NavItemLogout/>
                         </div>
                     </div>

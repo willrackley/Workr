@@ -48,6 +48,15 @@ class MyJobs extends Component {
         })
         .catch(err => console.log(err));
     }
+
+    reopenJob = (id) => {
+        console.log(id)
+        API.reopenMyJob(id)
+        .then(res => {
+            this.loadMyJobs(this.state.user.id);
+        })
+        .catch(err => console.log(err));
+    }
     
 
     render() {
@@ -62,7 +71,7 @@ class MyJobs extends Component {
                         <div className="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
                             <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
                             <a className="dropdown-item" href="/postJob">Post a Job</a>
-                            <a className="dropdown-item" href="/MyMessages">My Messages</a>
+                            <a className="dropdown-item" href="/messages">My Messages</a>
                             <NavItemLogout/>
                         </div>
                     </div>
@@ -74,8 +83,8 @@ class MyJobs extends Component {
                             <div>
                                 <h1 className="text-dark mt-5">My Posted Jobs</h1>
                                 <List>
-                                {this.state.myJobs.length ? (<MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob} completeJob={this.completeJob}/>
-                                    ) : (<h3 className="mt-5 text-center text-secondary">You haven't posted any Jobs yet</h3>)} 
+                                {this.state.myJobs.length ? (<MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob} completeJob={this.completeJob} reopenJob={this.reopenJob} />
+                                    ) : (<h3 className="mt-5 text-center text-secondary">You don't have any posted Jobs </h3>)} 
                                 </List>
                             </div>
                         </div>
