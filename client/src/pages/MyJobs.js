@@ -39,17 +39,33 @@ class MyJobs extends Component {
         })
         .catch(err => console.log(err));
     }
+
+    completeJob = (id) => {
+        console.log(id)
+        API.completeMyJob(id)
+        .then(res => {
+            this.loadMyJobs(this.state.user.id);
+        })
+        .catch(err => console.log(err));
+    }
     
 
     render() {
         return (
             <div>
                 
-                <Nav>
-                    <a className="nav-link" href="/dashboard" >
-                        Dashboard
-                    </a>
-                    <NavItemLogout/>
+                <Nav page="/dashboard">
+                    <div className="nav-item dropdown">
+                        <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {this.state.user.firstname}
+                        </div>
+                        <div className="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
+                            <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
+                            <a className="dropdown-item" href="/postJob">Post a Job</a>
+                            <a className="dropdown-item" href="/MyMessages">My Messages</a>
+                            <NavItemLogout/>
+                        </div>
+                    </div>
                 </Nav>
 
                 <div className="container">
@@ -58,7 +74,7 @@ class MyJobs extends Component {
                             <div>
                                 <h1 className="text-dark mt-5">My Posted Jobs</h1>
                                 <List>
-                                {this.state.myJobs.length ? (<MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob}/>
+                                {this.state.myJobs.length ? (<MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob} completeJob={this.completeJob}/>
                                     ) : (<h3 className="mt-5 text-center text-secondary">You haven't posted any Jobs yet</h3>)} 
                                 </List>
                             </div>

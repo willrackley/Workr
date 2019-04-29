@@ -30,6 +30,9 @@ export default {
     deleteMyJob: function(id) {
         return axios.delete(`/api/jobs/${id}`);
     },
+    completeMyJob: function(id) {
+        return axios.put(`/api/jobs/${id}`);
+    },
     getJobsByCategory: function(category) {
         return axios.get(`/api/jobs/${category}`);
     },

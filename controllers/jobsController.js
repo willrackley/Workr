@@ -60,6 +60,12 @@ module.exports = {
       // .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  update: function(req, res) {
+    db.Job
+      .findOneAndUpdate({ _id: req.params.id }, {status: "completed"})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   uploadImg: function(req, res, next) {
     
     let newImage = {

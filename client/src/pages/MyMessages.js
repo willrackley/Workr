@@ -109,7 +109,7 @@ class MyMessages extends Component {
         
         return (
             <div>
-                <Nav>
+                <Nav page="/dashboard">
                     <div className="nav-item dropdown">
                         <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.user.firstname}

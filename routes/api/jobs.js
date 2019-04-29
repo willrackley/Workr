@@ -11,7 +11,8 @@ router.route("/:posterId")
   .get(jobsController.findById)
 
 router.route("/:id")
-  .delete(jobsController.remove);
+  .delete(jobsController.remove)
+  .put(jobsController.update);
 
 router.route("/uploadImg")
   .post(jobsController.uploadImg)

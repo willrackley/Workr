@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Button from 'react-bootstrap/Button'; 
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { faHome, faTree, faCar, faHouseDamage, faTools, faToolbox } from '@fortawesome/free-solid-svg-icons';
+import { faTree, faCar, faHouseDamage, faTools, faToolbox } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import Nav from "../components/Nav";
 import Card from "../components/Card";
 import List from "../components/List";
@@ -103,11 +102,10 @@ class userDashboard extends Component {
         this.setState({jobInfoForMessage: jobInfo})
     }
 
-
     render() {
         //conditional to handle filtering the job postings by category
         if(this.state.category === "All"){
-            results = Array.from(this.state.jobResults)
+            results = Array.from(this.state.jobResults).filter(jobs => jobs.status !== "completed")
         } else {
             results = Array.from(this.state.jobResults).filter(jobs => jobs.category === this.state.category);
         }
@@ -117,7 +115,7 @@ class userDashboard extends Component {
 
         return (
             <div>
-                <Nav>
+                <Nav page="/dashboard">
                     <div className="nav-item dropdown">
                         <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.user.firstname}
@@ -141,14 +139,14 @@ class userDashboard extends Component {
                             <ButtonGroup vertical> 
                                 <Button 
                                     variant="white"
-                                    className="btn d-block"
+                                    className="btn d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("All")}>
                                     <FontAwesomeIcon icon={faToolbox} fixedWidth />
                                     All Jobs
                                 </Button>
                                 <Button
                                     variant="white"
-                                    className="btn d-block mt-1 fas fa-tree fa-2x"
+                                    className="btn d-block mt-1 fas fa-tree fa-2x text-left"
                                     onClick={()=>this.loadJobsByCategory("Landscaping")}>
                                     <FontAwesomeIcon icon={faTree} fixedWidth />
                                     Landscaping
@@ -156,14 +154,14 @@ class userDashboard extends Component {
 
                                 <Button
                                     variant="white"
-                                    className="btn d-block"
+                                    className="btn d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("House Work")}
                                     > 
                                     <FontAwesomeIcon icon={faHouseDamage} fixedWidth /> House Work
                                 </Button>
                                 <Button
                                     variant="white"
-                                    className="btn d-block"
+                                    className="btn d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("Car Cleaning")}
                                     >
                                     <FontAwesomeIcon icon={faCar} fixedWidth />
@@ -171,7 +169,7 @@ class userDashboard extends Component {
                                 </Button>
                                 <Button
                                     variant="white"
-                                    className="btn d-block"
+                                    className="btn d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("Miscellaneous")}
                                     >
                                     <FontAwesomeIcon icon={faTools} fixedWidth />
