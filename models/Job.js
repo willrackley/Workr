@@ -8,6 +8,7 @@ const jobSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   city: { type: String, required: true },
+  state: { type: String, required: true },
   jobImage: { type: String, default: null },
   category: { type: String, required: true },
   offer: { type: String, required: true },

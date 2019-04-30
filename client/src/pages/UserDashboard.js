@@ -34,6 +34,7 @@ class userDashboard extends Component {
         messageBody: undefined,
         jobInfoForMessage: "",
         nearbyCities: "",
+        nearbyStates: "",
         lat: "",
         long: "", 
         zip: "",
@@ -91,13 +92,14 @@ class userDashboard extends Component {
         let loc = {}
         for (var i = 0; i < rad.length; i++) {
             loc = (zipcodes.lookup(rad[i]));
-            cities.push(loc.city.toLowerCase())
+            cities.push({city: loc.city.toLowerCase(), state: loc.state.toLowerCase()})
         }
         this.setState({ nearbyCities: cities });
         this.loadJobs()
     }
 
     loadJobs = () => {
+        console.log()
         this.setState({ loading: true})
         API.getJobs()
         .then(res => {
@@ -107,7 +109,7 @@ class userDashboard extends Component {
             
             for(let j=0; j < res.data.length; j++){
                 for(let i=0; i < this.state.nearbyCities.length; i++){
-                    if(res.data[j].city === this.state.nearbyCities[i]){
+                    if(res.data[j].city === this.state.nearbyCities[i].city && res.data[j].state === this.state.nearbyCities[i].state ){
                         nearbyJobs.push(res.data[j])
                     } 
                 }
