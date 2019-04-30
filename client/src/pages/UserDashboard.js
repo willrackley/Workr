@@ -161,6 +161,7 @@ class userDashboard extends Component {
             senderName: this.state.user.firstname,
             recieverId: posterId,
             recieverName: posterName,
+            jobOwner: posterId,
             jobTitle: title,
             messageBody: this.state.messageBody
         }
@@ -193,7 +194,6 @@ class userDashboard extends Component {
             default: 
             return;
           }
-        
     }
 
     getDataForMessage = (jobInfo) => {
