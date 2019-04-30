@@ -5,6 +5,7 @@ import List from "../components/List";
 //import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
+import Footer from "../components/Footer";
 
 
 
@@ -99,7 +100,7 @@ class MyJobs extends Component {
                         </div>
                     </div>
                 </div>
-                        
+                   <Footer/>     
            </div>
         )
     }
