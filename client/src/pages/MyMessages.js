@@ -9,14 +9,18 @@ import ReplyModal from "../components/ReplyModal";
 import {FormBtn} from "../components/Form";
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
+let sendingOffer = false;
 class MyMessages extends Component {
     state = {
         user: {},
         messageResults: "",
         mailbox: "inbox",
         replyMessageBody: "",
-        messageData: ""
+        messageData: "",
+        jobOwner: "",
+        
     }
 
     componentDidMount() {
@@ -53,26 +57,90 @@ class MyMessages extends Component {
     };
 
     getMessageData = (data) => {
-        this.setState({messageData: data})  
+        sendingOffer = false
+        this.setState({messageData: data}) 
+        API.getJobs()
+        .then(res => {
+            
+            for(let i=0; i < res.data.length; i++){
+                if(res.data[i].posterId === this.state.messageData.senderId){
+                   this.setState({ jobOwner: this.state.messageData.senderId });
+                   
+                } else if(res.data[i].posterId === this.state.messageData.recieverId){
+                    this.setState({ jobOwner: this.state.messageData.recieverId });
+                    this.setState({sendJobOffer: true})
+                }
+            }
+        })
+        .catch(err => console.log(err));
+    }
+
+    getdataforJobOffer = (data) => {
+        this.setState({messageData: data})
+       
+        confirmAlert({
+            title: `You are about to send a job offer.`,
+            message: 'Are you sure you want to do this?',
+            buttons: [
+                {
+                label: 'Yes',
+                onClick: () => this.sendJobOffer(this.state.messageData.senderId, this.state.messageData.jobTitle, this.state.messageData.senderName, this.state.messageData.messageBody)
+                },
+                {
+                label: 'No',
+                onClick: () => {}
+                }
+            ]
+            })
     }
 
     sendReply = (senderId, title, senderName, message) => {
-        let newMessage = {
-            senderId: this.state.user.id,
-            senderName: this.state.user.firstname,
-            recieverId: senderId,
-            recieverName: senderName,
-            jobTitle: title,
-            messageBody: this.state.replyMessageBody,
-            inResponseMessage: message
-        }
-         //console.log(newMessage);
-        API.saveMessage(newMessage)
-        .then(res => {
-            this.createNotification('success')
-            this.setState({ replyMessageBody: ""});
-        })
-        .catch(err => this.createNotification('error'));
+        console.log(sendingOffer)
+        if(!sendingOffer){
+            let newMessage = {
+                senderId: this.state.user.id,
+                senderName: this.state.user.firstname,
+                recieverId: senderId,
+                recieverName: senderName,
+                jobTitle: title,
+                jobOwner: this.state.jobOwner,
+                messageBody: this.state.replyMessageBody,
+                inResponseMessage: message
+            }
+             console.log(newMessage);
+            API.saveMessage(newMessage)
+            .then(res => {
+                this.createNotification('success')
+                this.setState({ replyMessageBody: ""});
+            })
+            .catch(err => this.createNotification('error'));
+        } else {
+            let newOffer = {
+                senderId: this.state.user.id,
+                senderName: this.state.user.firstname,
+                recieverId: senderId,
+                recieverName: senderName,
+                jobTitle: title,
+                inResponseMessage: "",
+                jobOwner: this.state.jobOwner,
+                messageBody: `${this.state.user.firstname} has offered you the Job!\nJob: ${title}\ndo you accept?`
+            }
+            console.log(newOffer)
+            API.saveOfferMessage(newOffer)
+            .then(response => {
+                this.createNotification('success')
+                console.log(response.data)
+            })
+            .catch(err => this.createNotification('error'));
+         }
+        
+    }
+
+
+    sendJobOffer = () => {
+        sendingOffer = true;
+        this.sendReply(this.state.messageData.senderId, this.state.messageData.jobTitle, this.state.messageData.senderName,
+            )
     }
 
     deleteMessage = (id) => {
@@ -149,7 +217,7 @@ class MyMessages extends Component {
                             (<div><h3 className="mb-3">Inbox</h3>
                            
                                 {this.state.messageResults.length ? ( <div><List>
-                                <InboxMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} getMessageData={this.getMessageData} deleteMessage={this.deleteMessage}/></List>
+                                <InboxMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} getMessageData={this.getMessageData} deleteMessage={this.deleteMessage} getdataforJobOffer={this.getdataforJobOffer}/></List>
                                 <ReplyModal
                                 mappedModal={this.state.messageResults}
                                 value={this.state.replyMessageBody}
@@ -161,6 +229,7 @@ class MyMessages extends Component {
                                 <FormBtn onClick={()=>this.sendReply(this.state.messageData.senderId, this.state.messageData.jobTitle, this.state.messageData.senderName,
                                 this.state.messageData.messageBody)} data-dismiss="modal" aria-label="Close">SEND
                                 </FormBtn>
+                                {this.state.messageData.recieverId === this.state.messageData.jobOwner ? (<FormBtn onClick={()=>this.sendJobOffer()} data-dismiss="modal" aria-label="Close">Send Job Offer</FormBtn>):("")}
                                 </ReplyModal></div>
                                 ):(<h3 className="mt-5 text-center text-secondary">Mailbox empty</h3>)} 
 

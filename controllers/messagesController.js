@@ -29,6 +29,7 @@ module.exports = {
           senderId,
           senderName,
           recieverName,
+          jobOwner,
           inResponseMessage,
           messageBody,
           jobTitle,
@@ -39,6 +40,7 @@ module.exports = {
             recieverId: recieverId,
             senderId: senderId,
             recieverName: recieverName,
+            jobOwner: jobOwner,
             senderName: senderName,
             inResponseMessage: inResponseMessage,
             messageBody: messageBody,
@@ -48,6 +50,33 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
         
+    },
+    createOffer: function(req, res) {
+      let {
+          recieverId,
+          senderId,
+          senderName,
+          recieverName,
+          jobOwner,
+          inResponseMessage,
+          messageBody,
+          jobTitle,
+          date
+        } = req.body;
+      db.Message
+        .create({
+            recieverId: recieverId,
+            senderId: senderId,
+            recieverName: recieverName,
+            jobOwner: jobOwner,
+            senderName: senderName,
+            inResponseMessage: inResponseMessage,
+            messageBody: messageBody,
+            jobTitle: jobTitle,
+            date: date
+        })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
     },
     remove: function(req, res) {
       console.log(req.params)

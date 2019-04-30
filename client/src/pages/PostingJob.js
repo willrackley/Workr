@@ -5,7 +5,7 @@ import Nav from "../components/Nav";
 import Popup from "reactjs-popup";
 import API from "../utils/API";
 import Firebase from "../utils/Firebase-config";
-//import storage from "../utils/Firebase-config";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 let uploadTextColor = ""
 
 class PostingJob extends Component {
@@ -31,7 +31,6 @@ class PostingJob extends Component {
         })
     }
 
-
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -52,9 +51,11 @@ class PostingJob extends Component {
             city: this.state.city.toLowerCase(),
             category: this.state.category
         }
-        API.saveJob(newJob)
+
+    API.saveJob(newJob)
         .then(res => {
             console.log(res.data);
+            this.createNotification('success');
             this.setState({offer: ""});
             this.setState({title: ""});
             this.setState({description: ""});
@@ -91,7 +92,27 @@ class PostingJob extends Component {
             })
     }
 
-
+    createNotification = (type) => {
+        switch (type) {
+          case 'info':
+            NotificationManager.info('Info message');
+            break;
+          case 'success':
+              NotificationManager.success('', 'Job Posted');
+            break;
+          case 'warning':
+            NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+            break;
+          case 'error':
+            NotificationManager.error('', 'something went wrong, please try again');
+          //   NotificationManager.error('Error message', 'Click me!', 5000, () => {
+          //     alert('callback');
+          //   });
+            break;
+          default: 
+          return;
+        }
+    }
     render() {
         return (
             <div>
@@ -109,6 +130,7 @@ class PostingJob extends Component {
                     </div>
                 </Nav>
                 <div className="container text-center mb-5">
+                <NotificationContainer/>
                     <h1 className="text-dark text- center mt-5 mb-5">Post a New Job</h1>
                     
                     <div className="row">
@@ -168,23 +190,16 @@ class PostingJob extends Component {
                                 name="category"
                             />
 
-                            <Popup trigger={<FormBtn
+                            <FormBtn
                             disabled={
                                 !(this.state.title) ||
                                 !(this.state.description) ||
                                 !(this.state.city) ||
                                 !(this.state.category) 
                             }
-                            >
+                            onClick={this.handleFormSubmit}>
                             Submit
-                            </FormBtn>} onOpen={this.handleFormSubmit} position="top center" closeOnDocumentClick>
-                            <div>
-                                <div>
-                                Your Job has been posted!
-                                </div>
-                                <FormBtn onClick={this.formRedirect}> Home </FormBtn>
-                            </div>
-                            </Popup>
+                            </FormBtn>
                             
                         </div>
                         <div className="col-md-4">

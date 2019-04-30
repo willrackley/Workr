@@ -8,7 +8,7 @@ export default function InboxMessageCard(props) {
         <div>
             {props.results.map(result => (
                 <li className="list-group-item mb-3 pt-4 rounded" key={result._id}>
-                    <div className="card mb-3">
+                    <div className="card mb-3" >
                         <div className="card-header">
                             <div className="row text-right mb-3">
                                 <div className="col-12">
@@ -33,6 +33,7 @@ export default function InboxMessageCard(props) {
                         </div>
                         <div className="card-footer text-muted text-center">
                             <FormBtn data-toggle="modal" data-target="#replyModal" onClick={()=>props.getMessageData(result)}>Reply</FormBtn>
+                            
                         </div>
                     </div>
                 </li>
