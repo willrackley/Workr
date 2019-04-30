@@ -6,6 +6,9 @@ router.route("/")
   .get(messagesController.findAll)
   .post(messagesController.create);
 
+router.route("/offer")
+  .post(messagesController.createOffer);
+
 router.route("/:recieverId")
   .get(messagesController.findById)
 
