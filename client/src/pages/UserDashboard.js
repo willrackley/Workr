@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Button from 'react-bootstrap/Button'; 
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { faTree, faCar, faHouseDamage, faTools, faToolbox, faPray } from '@fortawesome/free-solid-svg-icons';
@@ -14,8 +15,13 @@ import cities from "../components/MapContainer";
 import 'react-notifications/lib/notifications.css';
 import MessageModal from "../components/MessageModal";
 import {FormBtn} from "../components/Form";
-
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import zipcodes from "zipcodes";
+import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
+import React_App_API_KEY_G from "../components/MapContainer/config_keys"
+const API_KEY = React_App_API_KEY_G;
+
+
 let results = "";
 let filteredResults = "";
 
@@ -27,33 +33,101 @@ class userDashboard extends Component {
         category: "All",
         messageBody: undefined,
         jobInfoForMessage: "",
+        nearbyCities: "",
+        lat: "",
+        long: "", 
+        zip: "",
+        loading: true,
+        jobLocation: "Nearby"
     }
 
     componentDidMount() {
-        this.loadJobs();
+        
         const token = localStorage.getItem('jwt')
         API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
-            this.setState({user: res.data})
+            this.setState({user: res.data});
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                  const { latitude, longitude } = position.coords;
+
+                this.setState({
+                lat: latitude,
+                lng: longitude,
+                loading: false
+                });
+                const updatedLatitude = this.state.lat;
+                const updatedLongitude = this.state.lng;
+        
+                this.handleChange(updatedLatitude, updatedLongitude);
+        },() => {
+                    this.setState({ loading: false });
+        
         })
+       
+    })
+    }
+    
+    handleChange = (updatedLatitude, updatedLongitude) => {
+            const API_URL =
+            "https://us1.locationiq.com/v1/reverse.php?key=69b410ea8cf9cb&lat=" +
+            updatedLatitude +
+            "&lon=" +
+            updatedLongitude +
+            "&format=json";
+            axios.get(API_URL).then(
+            response => {
+                const myZip = response.data.address.postcode;
+                this.setState({ zip: myZip });
+                console.log(this.state.zip);
+                this.raduisLookUp();
+            });
+    }
+    
+    raduisLookUp = () => {
+        const cities = [];
+        const rad = zipcodes.radius(this.state.zip, 50);
+        
+        let loc = {}
+        for (var i = 0; i < rad.length; i++) {
+            loc = (zipcodes.lookup(rad[i]));
+            cities.push(loc.city.toLowerCase())
+        }
+        this.setState({ nearbyCities: cities });
+        this.loadJobs()
     }
 
     loadJobs = () => {
+        this.setState({ loading: true})
         API.getJobs()
         .then(res => {
-            console.log(cities)
             
-            // for(let i=0; i < res.data.length; i++){
-            //     console.log("Job posting cities: " + res.data[i].city)
-            // if(res.data[i].city === cities ){
-               
-            //     console.log("City of jobs posted: " + res.data.city);
-            //     this.setState({ jobResults: res.data })
-            // }
-            // else{
-            //     console.log("No close cities for work");
-            // }
-            // }
+            const nearbyJobs = []
+            console.log(this.state.nearbyCities)
+            
+            for(let j=0; j < res.data.length; j++){
+                for(let i=0; i < this.state.nearbyCities.length; i++){
+                    if(res.data[j].city === this.state.nearbyCities[i]){
+                        nearbyJobs.push(res.data[j])
+                    } 
+                }
+            }
+            //filter out repeated entries
+            const filteredNearbyJobs = (nearbyJobs) => nearbyJobs.filter((k, l) => nearbyJobs.indexOf(k) === l)
+            this.setState({ jobResults:filteredNearbyJobs(nearbyJobs) })
+            this.setState({ jobLocation: "Nearby"})
+            this.setState({ loading: false})
+        })
+        .catch(err => console.log(err));
+    }
+
+    loadJobsNationwide = () => {
+        this.setState({ loading: true})
+        API.getJobs()
+        .then(res => {
+            this.setState ({ jobResults: res.data });
+            this.setState({ jobLocation: "Nationwide"});
+            this.setState({ loading: false});
         })
         .catch(err => console.log(err));
     }
@@ -62,6 +136,15 @@ class userDashboard extends Component {
         this.setState({ category: categoryChange})
     }
     
+    nearbyButton = () => {
+        this.setState({ loading: true })
+        this.loadJobs();
+    }
+
+    nationwideButton = () => {
+        this.setState({ loading: true })
+        this.loadJobsNationwide();
+    }
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -195,8 +278,12 @@ class userDashboard extends Component {
                         {/* Job posts section of page */}
                         <div className="col-md-9"> 
                             <NotificationContainer/>
-                            <div>
-                                <h1 className="text-dark mt-2">Jobs <small className="text-muted">Nationwide</small></h1>
+                            {this.state.loading ? (<div className="spinner-border text-info" role="status">
+                            <span className="sr-only">Loading...</span>
+                            </div>):( <div>
+                                <h1 className="text-dark mt-2">Jobs <small className="text-muted">{this.state.jobLocation}</small></h1>
+                                <Button className="btn formBtn mt-2 mr-2 btn-secondary text-white" onClick={ () => this.nearbyButton()}>Nearby</Button >
+                                <Button  className="btn formBtn mt-2 btn-secondary text-white" onClick={ () => this.nationwideButton()}>Nationwide</Button >
                                 <List>
                                 {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} contactEmployer={this.contactEmployer} handleInputChange={this.handleInputChange} value={this.state.messageBody} sendMessageToEmployer={this.sendMessageToEmployer} dashboardRedirect={this.dashboardRedirect} getDataForMessage={this.getDataForMessage}/>
                                     ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
@@ -211,29 +298,11 @@ class userDashboard extends Component {
                                 <FormBtn onClick={()=>this.sendMessageToEmployer(this.state.jobInfoForMessage.posterId, this.state.jobInfoForMessage.title, this.state.jobInfoForMessage.posterName)} data-dismiss="modal" aria-label="Close">SEND
                                 </FormBtn>
                                 </MessageModal>
-                            </div>
+                            </div>)}
                         </div>
-                        {/* setting options */}
-                        {/* <div className="col-md-2 text-right">
-                            <div>
-                                {/* <h3 className="">
-                                <Link to={"/postJob"} className="text-dark">
-                                    Post a job
-                                </Link>
-                                </h3>  
-                                <h3 className="">
-                                <Link to={"/MyJobs"} className="text-dark">
-                                    My Jobs
-                                </Link>
-                                </h3>  */}    
-                                <MapContainer/>                     
-
-                            {/*</div>
-                        </div> */}
                     </div>
                 </div>
-                        
-           </div>
+            </div> 
         )
     }
 }
