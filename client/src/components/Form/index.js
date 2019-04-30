@@ -65,7 +65,7 @@ export function TextArea(props){
 export function InputState(props){
   return(
     <div className="form-group">
-      <label for="inputState">State</label>
+      <label htmlFor="inputState">State</label>
       <select className="form-control" {...props}>
         <option value="" disabled>Choose...</option>
         <option value="AL">Alabama</option>

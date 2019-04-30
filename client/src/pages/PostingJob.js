@@ -28,7 +28,6 @@ class PostingJob extends Component {
         API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
             this.setState({user: res.data})
-            console.log(this.state.user)
         })
     }
 
