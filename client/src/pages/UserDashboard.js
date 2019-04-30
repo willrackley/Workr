@@ -126,6 +126,7 @@ class userDashboard extends Component {
         API.getJobs()
         .then(res => {
             this.setState ({ jobResults: res.data });
+            
             this.setState({ jobLocation: "Nationwide"});
             this.setState({ loading: false});
         })
@@ -152,7 +153,7 @@ class userDashboard extends Component {
             [name]: value
         });
     };
-
+    
     sendMessageToEmployer = (posterId, title, posterName) => {
         let newMessage = {
             senderId: this.state.user.id,
@@ -285,7 +286,7 @@ class userDashboard extends Component {
                                 <Button className="btn formBtn mt-2 mr-2 btn-secondary text-white" onClick={ () => this.nearbyButton()}>Nearby</Button >
                                 <Button  className="btn formBtn mt-2 btn-secondary text-white" onClick={ () => this.nationwideButton()}>Nationwide</Button >
                                 <List>
-                                {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} contactEmployer={this.contactEmployer} handleInputChange={this.handleInputChange} value={this.state.messageBody} sendMessageToEmployer={this.sendMessageToEmployer} dashboardRedirect={this.dashboardRedirect} getDataForMessage={this.getDataForMessage}/>
+                                {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} city={filteredResults.city} state={filteredResults.state} contactEmployer={this.contactEmployer} handleInputChange={this.handleInputChange} value={this.state.messageBody} sendMessageToEmployer={this.sendMessageToEmployer} dashboardRedirect={this.dashboardRedirect} getDataForMessage={this.getDataForMessage}/>
                                     ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
                                 </List>
                                 <MessageModal
