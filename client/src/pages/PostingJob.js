@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, FormBtn, TextArea, CategoryDropdown, OfferInput } from "../components/Form";
+import { Input, FormBtn, TextArea, CategoryDropdown, OfferInput, InputState } from "../components/Form";
 import NavItemLogout from '../components/NavItemLogout';
 import Nav from "../components/Nav";
 import Popup from "reactjs-popup";
@@ -14,6 +14,7 @@ class PostingJob extends Component {
         title: "",
         description: "",
         city: "",
+        state: "",
         category: "",
         offer: "",
         user: {},
@@ -49,8 +50,9 @@ class PostingJob extends Component {
             title: this.state.title,
             description: this.state.description,
             city: this.state.city.toLowerCase(),
+            state: this.state.state.toLowerCase(),
             category: this.state.category
-        }
+        } 
 
     API.saveJob(newJob)
         .then(res => {
@@ -60,6 +62,7 @@ class PostingJob extends Component {
             this.setState({title: ""});
             this.setState({description: ""});
             this.setState({city: ""});
+            this.setState({state: ""});
         })
         .catch(err => console.log(err)); 
     };
@@ -175,6 +178,11 @@ class PostingJob extends Component {
                                 placeholder="city"
                             />
 
+                            <InputState
+                            value={this.state.state}
+                            onChange={this.handleInputChange}
+                            name="state"
+                            />
                             
                             <OfferInput
                                 value={this.state.offer}
@@ -195,6 +203,7 @@ class PostingJob extends Component {
                                 !(this.state.title) ||
                                 !(this.state.description) ||
                                 !(this.state.city) ||
+                                !(this.state.state) ||
                                 !(this.state.category) 
                             }
                             onClick={this.handleFormSubmit}>
