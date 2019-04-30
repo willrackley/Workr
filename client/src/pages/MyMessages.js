@@ -3,7 +3,6 @@ import Nav from "../components/Nav";
 import NavItemLogout from '../components/NavItemLogout';
 import InboxMessageCard from "../components/InboxMessageCard";
 import SentMessageCard from "../components/SentMessageCard";
-import Footer from "../components/Footer";
 import API from "../utils/API";
 import List from "../components/List";
 import ReplyModal from "../components/ReplyModal";
@@ -246,7 +245,6 @@ class MyMessages extends Component {
                     </div>
                 </div>
                 </div>
-                <Footer/>
             </div>
         )
     }
