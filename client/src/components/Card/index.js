@@ -40,10 +40,10 @@ class Card extends React.Component {
                     </div>
                         
                     <div className="card-footer text-muted text-center">
-                    
-                    <FormBtn
-                    onClick={()=>this.props.getDataForMessage(result)}
-                    data-toggle="modal" data-target="#myModal">>Message EMPLOYr</FormBtn>
+                      <p>{result.city}, {result.state}</p>
+                      <FormBtn
+                      onClick={()=>this.props.getDataForMessage(result)}
+                      data-toggle="modal" data-target="#myModal">>Message EMPLOYr</FormBtn>
                      
                     </div>
                 </div>
