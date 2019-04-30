@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Nav from "../components/Nav";
 import Card from "../components/Card";
 import List from "../components/List";
+import Footer from "../components/Footer";
 //import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
@@ -302,6 +303,7 @@ class userDashboard extends Component {
                         </div>
                     </div>
                 </div>
+                <Footer/>
             </div> 
         )
     }
