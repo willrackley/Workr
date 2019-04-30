@@ -49,7 +49,7 @@ class PostingJob extends Component {
             offer: this.state.offer,
             title: this.state.title,
             description: this.state.description,
-            city: this.state.city,
+            city: this.state.city.toLowerCase(),
             category: this.state.category
         }
         API.saveJob(newJob)
