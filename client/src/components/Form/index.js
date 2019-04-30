@@ -56,7 +56,7 @@ export function RadioBtn(props) {
 export function TextArea(props){
   return(
     <div className="form-group">
-    {/* <label for="exampleFormControlTextarea1"{...props}/> */}
+    
     <textarea className="form-control text-center" rows="4" {...props}/>
   </div>
   );
