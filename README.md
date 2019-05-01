@@ -1,6 +1,6 @@
 # Workr
 ## Project 3 Assignment
-![Landing Page](client/src/public/images/workr_landingPage.jpg) 
+![Landing Page](client/src/images/workr_landingPage.jpg) 
 
 ## Goal:
 Workr is an application that can be used for any peron 18 years old or older to either make fast cash by completing a task that someone is looking to complete or look for someone to get a job done. 
