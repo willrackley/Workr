@@ -77,6 +77,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  updateAcceptJob: function(req, res) {
+    console.log(req.body.user)
+    db.Job
+      .findOneAndUpdate({ _id: req.params.id }, {acceptedBy: req.body.user})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   uploadImg: function(req, res, next) {
     
     let newImage = {

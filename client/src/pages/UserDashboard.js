@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Button from 'react-bootstrap/Button'; 
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { faTree, faCar, faHouseDamage, faTools, faToolbox, faPray } from '@fortawesome/free-solid-svg-icons';
+import { faTree, faCar, faHouseDamage, faTools, faToolbox } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Nav from "../components/Nav";
 import Card from "../components/Card";
@@ -10,16 +10,17 @@ import List from "../components/List";
 //import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
-import MapContainer  from "../components/MapContainer";
-import cities from "../components/MapContainer";
+//import MapContainer  from "../components/MapContainer";
+//import cities from "../components/MapContainer";
 import 'react-notifications/lib/notifications.css';
 import MessageModal from "../components/MessageModal";
 import {FormBtn} from "../components/Form";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import zipcodes from "zipcodes";
-import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
-//import React_App_API_KEY_G from "../components/MapContainer/config_keys"
-//const API_KEY = React_App_API_KEY_G;
+// import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
+// import React_App_API_KEY_G from "../components/MapContainer/config_keys"
+// const API_KEY = React_App_API_KEY_G;
+
 
 
 let results = "";
@@ -105,7 +106,6 @@ class userDashboard extends Component {
         .then(res => {
             
             const nearbyJobs = []
-            console.log(this.state.nearbyCities)
             
             for(let j=0; j < res.data.length; j++){
                 for(let i=0; i < this.state.nearbyCities.length; i++){
@@ -289,7 +289,7 @@ class userDashboard extends Component {
                                 <Button  className="btn formBtn mt-2 btn-secondary text-white" onClick={ () => this.nationwideButton()}>Nationwide</Button >
                                 <List>
                                 {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} city={filteredResults.city} state={filteredResults.state} contactEmployer={this.contactEmployer} handleInputChange={this.handleInputChange} value={this.state.messageBody} sendMessageToEmployer={this.sendMessageToEmployer} dashboardRedirect={this.dashboardRedirect} getDataForMessage={this.getDataForMessage}/>
-                                    ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
+                                ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
                                 </List>
                                 <MessageModal
                                 mappedModal={filteredResults}

@@ -14,6 +14,7 @@ const jobSchema = new Schema({
   offer: { type: String, required: true },
   status: {type: String, default: "incomplete", required: true},
   seekerId: {type: String, default: null },
+  acceptedBy: {type: String, default: null },
   seekerName: {type: String, default: null },
   postedDate: { type: Date, default: Date.now},
   completionDate: { type: Date, default: null }

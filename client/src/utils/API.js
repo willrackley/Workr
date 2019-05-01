@@ -36,9 +36,6 @@ export default {
     reopenMyJob: function(id) {
         return axios.put(`/api/jobs/incomplete/${id}`);
     },
-    getJobsByCategory: function(category) {
-        return axios.get(`/api/jobs/${category}`);
-    },
     saveMessage: function(messageData) {
         return axios.post("/api/messages/", messageData);
     },
@@ -53,5 +50,8 @@ export default {
     },
     deleteMyMessage: function(id) {
         return axios.delete(`/api/messages/remove/${id}`);
+    },
+    acceptJob: function(id, acceptingUser) {
+        return axios.put(`/api/jobs/accept/${id}`, acceptingUser);
     },
   };

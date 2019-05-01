@@ -21,7 +21,15 @@ export function OfferInput(props) {
 }
 export function FormBtn(props) {
   return (
-    <button {...props} className="btn formBtn mt-2 btn-secondary text-white">
+    <button {...props} className=" btn formBtn mt-2 btn-secondary text-white">
+      {props.children}
+    </button>
+  );
+}
+
+export function UploadBtn(props) {
+  return (
+    <button {...props} className=" upload btn formBtn mt-2 btn-secondary text-white">
       {props.children}
     </button>
   );
