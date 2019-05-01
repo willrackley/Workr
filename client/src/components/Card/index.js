@@ -25,6 +25,9 @@ class Card extends React.Component {
     <div className="card-columns py-3">
         {this.props.results.map(result => (
                 <div className="card mb-3" key={result._id}>
+                <div className="card-header">
+                  <p className="text-left">{result.posterName}</p>
+                </div>
                 <img src={result.jobImage} className="card-img-top img-fluid" alt={result.title}></img>
                     <div className="card-body text-center">
                         <div className="row">
@@ -40,11 +43,11 @@ class Card extends React.Component {
                     </div>
                         
                     <div className="card-footer text-muted text-center">
+                      
                       <p>{result.city}, {result.state}</p>
                       <FormBtn
                       onClick={()=>this.props.getDataForMessage(result)}
                       data-toggle="modal" data-target="#myModal">>Message EMPLOYr</FormBtn>
-                     
                     </div>
                 </div>
            
