@@ -26,6 +26,10 @@ Workr allows the user to post or search for active jobs in the area.
    - Login if account has already been created
 2. After login in the first time, the `Dashboard` should be empty with the legend `Sorry, there are no available jobs in your area` 
    - Dashboard will show available jobs if database is not empty
+   - `Dashboard` display explanation:
+
+![Dashboard](client/src/images/workr_dashboard.jpg) 
+
 3. Go to your `Name` at the upper right corner, click and select `Post a job`, fill up the form and `Submit`
    - Submit as many jobs as you want
    - You can see the posted jobs by selecting `My jobs` option from the main menu (upper right corner)
