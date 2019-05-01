@@ -4,8 +4,10 @@ import Moment from "react-moment";
 import "./style.css"
 
 export default function InboxMessageCard(props) {
+   
     return (
         <div>
+           
             {props.results.map(result => (
                 <li className="list-group-item mb-3 pt-4 rounded" key={result._id}>
                     <div className="card mb-3" >
@@ -30,7 +32,8 @@ export default function InboxMessageCard(props) {
                         <div className="card-body text-left">
                             <p>{result.messageBody}</p>
                             {result.inResponseMessage !== null ? (<div className="mt-2 text-muted font-italic font-weight-bold">In Response To: <p>{result.inResponseMessage}</p></div>):("")}
-                            {result.inResponseMessage === null && result.messageBody === `${result.senderName} has offered you the Job!` ? (<div><button className="btn " onClick={()=>props.acceptJob(result)}>Accept</button> <button className="btn">No, I'm ok</button></div>): ("")}
+
+                            {result.inResponseMessage === null && result.messageBody === `${result.senderName} has offered you the Job!` ? (<div><button className="btn " onClick={()=>props.acceptJob(result)}>Accept</button> <button className="btn" onClick={()=>props.declineOffer(result)}>No, I'm ok</button></div>): ("")}
                         </div>
                         <div className="card-footer text-muted text-center">
                             <FormBtn data-toggle="modal" data-target="#replyModal" onClick={()=>props.getMessageData(result)}>Reply</FormBtn>

@@ -12,6 +12,8 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 let sendingOffer = false;
+let acceptingOffer = true;
+let decliningOffer = true;
 
 class MyMessages extends Component {
     state = {
@@ -59,23 +61,11 @@ class MyMessages extends Component {
 
     getMessageData = (data) => {
         console.log(data)
-        sendingOffer = false
+        sendingOffer = false;
+        acceptingOffer = false;
+        decliningOffer = false;
         this.setState({messageData: data})
         this.setState({ jobOwner: data.jobOwner}) 
-        // API.getJobs()
-        // .then(res => {
-            
-        //     for(let i=0; i < res.data.length; i++){
-        //         if(res.data[i].posterId === this.state.messageData.senderId ){
-        //            this.setState({ jobOwner: this.state.messageData.senderId  });
-                   
-        //         } else if(res.data[i].posterId === this.state.messageData.recieverId){
-        //             this.setState({ jobOwner: this.state.messageData.recieverId });
-                   
-        //         }
-        //     }
-        // })
-        // .catch(err => console.log(err));
     }
 
     getdataforJobOffer = (data) => {
@@ -98,8 +88,10 @@ class MyMessages extends Component {
     }
 
     sendReply = (senderId, title, senderName, message) => {
-        console.log(sendingOffer)
-        if(!sendingOffer){
+        console.log(`acceptingOffer: ${acceptingOffer}`)
+        console.log(`sendingOffer ${sendingOffer}`)
+        console.log(`decliningOffer ${decliningOffer}`)
+        if(!sendingOffer && !acceptingOffer && !decliningOffer){
             let newMessage = {
                 senderId: this.state.user.id,
                 senderName: this.state.user.firstname,
@@ -117,7 +109,7 @@ class MyMessages extends Component {
                 this.setState({ replyMessageBody: ""});
             })
             .catch(err => this.createNotification('error'));
-        } else {
+        } if(sendingOffer && !acceptingOffer  && !decliningOffer)  {
             let newOffer = {
                 senderId: this.state.user.id,
                 senderName: this.state.user.firstname,
@@ -135,17 +127,57 @@ class MyMessages extends Component {
             })
             .catch(err => this.createNotification('error'));
         }
+
+        if(!sendingOffer && acceptingOffer  && !decliningOffer){
+            let acceptOffer = {
+                senderId: this.state.user.id,
+                senderName: this.state.user.firstname,
+                recieverId: senderId,
+                recieverName: senderName,
+                jobTitle: title,
+                jobOwner: this.state.jobOwner,
+                messageBody: `${this.state.user.firstname} has accepted your offer!`
+            }
+            console.log(acceptOffer)
+            API.saveOfferMessage(acceptOffer)
+            .then(response => {
+                this.createNotification('success')
+                console.log(response.data)
+            })
+            .catch(err => this.createNotification('error'));
+        }
+        if(decliningOffer){
+            let newDeclinedOffer = {
+                senderId: this.state.user.id,
+                senderName: this.state.user.firstname,
+                recieverId: senderId,
+                recieverName: senderName,
+                jobTitle: title,
+                jobOwner: senderId,
+                messageBody: `${this.state.user.firstname} has declined your offer!`
+            }
+            console.log(newDeclinedOffer)
+            API.saveOfferMessage(newDeclinedOffer)
+            .then(response => {
+                this.createNotification('success')
+                console.log(response.data)
+            })
+            .catch(err => this.createNotification('error'));
+        }
+        
         
     }
 
-
     sendJobOffer = () => {
+        acceptingOffer = false;
         sendingOffer = true;
+        decliningOffer = false;
         this.sendReply(this.state.messageData.senderId, this.state.messageData.jobTitle, this.state.messageData.senderName)
     }
 
     acceptJob = (data) => {
         console.log(data)
+        this.setState({ jobOwner: data.jobOwner}) 
         API.getJobs()
         .then(res => {
             
@@ -157,12 +189,19 @@ class MyMessages extends Component {
             
             let acceptingUser = {user: data.recieverId};
             API.acceptJob(this.state.jobId, acceptingUser)
+            .then(res => {
+                acceptingOffer = true;
+                this.sendReply(data.senderId, data.jobTitle, data.senderName)
+            })
         })
         .catch(err => console.log(err));
     }
 
+    declineOffer = (data) => {
+        this.sendReply(data.senderId, data.jobTitle, data.senderName)
+    }
+
     deleteMessage = (id) => {
-        
         API.deleteMyMessage(id)
         .then(res => {
             console.log('deletd')
@@ -191,8 +230,7 @@ class MyMessages extends Component {
     }
 
 
-    render() {
-        
+    render() {   
         return (
             <div>
                 <Nav page="/dashboard">
@@ -235,7 +273,7 @@ class MyMessages extends Component {
                             (<div><h3 className="mb-3">Inbox</h3>
                            
                                 {this.state.messageResults.length ? ( <div><List>
-                                <InboxMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} getMessageData={this.getMessageData} deleteMessage={this.deleteMessage} getdataforJobOffer={this.getdataforJobOffer} acceptJob={this.acceptJob}/></List>
+                                <InboxMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} getMessageData={this.getMessageData} deleteMessage={this.deleteMessage} getdataforJobOffer={this.getdataforJobOffer} acceptJob={this.acceptJob} declineOffer={this.declineOffer}/></List>
                                 <ReplyModal
                                 mappedModal={this.state.messageResults}
                                 value={this.state.replyMessageBody}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Input, FormBtn, TextArea, CategoryDropdown, OfferInput, InputState, UploadBtn } from "../components/Form";
 import NavItemLogout from '../components/NavItemLogout';
 import Nav from "../components/Nav";
-import Popup from "reactjs-popup";
+//import Popup from "reactjs-popup";
 import API from "../utils/API";
 import Firebase from "../utils/Firebase-config";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
