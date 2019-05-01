@@ -105,7 +105,6 @@ class userDashboard extends Component {
         .then(res => {
             
             const nearbyJobs = []
-            console.log(this.state.nearbyCities)
             
             for(let j=0; j < res.data.length; j++){
                 for(let i=0; i < this.state.nearbyCities.length; i++){
@@ -289,7 +288,7 @@ class userDashboard extends Component {
                                 <Button  className="btn formBtn mt-2 btn-secondary text-white" onClick={ () => this.nationwideButton()}>Nationwide</Button >
                                 <List>
                                 {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} city={filteredResults.city} state={filteredResults.state} contactEmployer={this.contactEmployer} handleInputChange={this.handleInputChange} value={this.state.messageBody} sendMessageToEmployer={this.sendMessageToEmployer} dashboardRedirect={this.dashboardRedirect} getDataForMessage={this.getDataForMessage}/>
-                                    ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
+                                ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
                                 </List>
                                 <MessageModal
                                 mappedModal={filteredResults}

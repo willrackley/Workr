@@ -30,6 +30,7 @@ export default function InboxMessageCard(props) {
                         <div className="card-body text-left">
                             <p>{result.messageBody}</p>
                             {result.inResponseMessage !== null ? (<div className="mt-2 text-muted font-italic font-weight-bold">In Response To: <p>{result.inResponseMessage}</p></div>):("")}
+                            {result.inResponseMessage === null && result.messageBody === `${result.senderName} has offered you the Job!` ? (<div><button className="btn " onClick={()=>props.acceptJob(result)}>Accept</button> <button className="btn">No, I'm ok</button></div>): ("")}
                         </div>
                         <div className="card-footer text-muted text-center">
                             <FormBtn data-toggle="modal" data-target="#replyModal" onClick={()=>props.getMessageData(result)}>Reply</FormBtn>

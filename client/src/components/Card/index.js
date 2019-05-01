@@ -36,9 +36,7 @@ class Card extends React.Component {
                             </div>
                         </div>
                         <h3>{result.title}</h3>
-                        <p>{result.description}</p>
-                        <p>{result.city}, {result.state}</p>
-                        
+                        <p>{result.description}</p>   
                     </div>
                         
                     <div className="card-footer text-muted text-center">
