@@ -18,8 +18,8 @@ import {FormBtn} from "../components/Form";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import zipcodes from "zipcodes";
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
-import React_App_API_KEY_G from "../components/MapContainer/config_keys"
-const API_KEY = React_App_API_KEY_G;
+//import React_App_API_KEY_G from "../components/MapContainer/config_keys"
+//const API_KEY = React_App_API_KEY_G;
 
 
 let results = "";
@@ -240,14 +240,14 @@ class userDashboard extends Component {
                                     variant="white"
                                     className="btn d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("All")}>
-                                    <FontAwesomeIcon icon={faToolbox} fixedWidth />
+                                    <span className='CategoryMenu' style={{width:10}}><FontAwesomeIcon icon={faToolbox} fixedWidth /></span>
                                     All Jobs
                                 </Button>
                                 <Button
                                     variant="white"
                                     className="btn d-block mt-1 fas fa-tree fa-2x text-left"
                                     onClick={()=>this.loadJobsByCategory("Landscaping")}>
-                                    <FontAwesomeIcon icon={faTree} fixedWidth />
+                                    <span className='CategoryMenu' style={{width:10}}> <FontAwesomeIcon icon={faTree} fixedWidth /> </span>
                                     Landscaping
                                 </Button>
 
