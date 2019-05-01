@@ -12,6 +12,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 let sendingOffer = false;
+
 class MyMessages extends Component {
     state = {
         user: {},
@@ -20,7 +21,7 @@ class MyMessages extends Component {
         replyMessageBody: "",
         messageData: "",
         jobOwner: "",
-        
+        jobId: ""
     }
 
     componentDidMount() {
@@ -57,22 +58,24 @@ class MyMessages extends Component {
     };
 
     getMessageData = (data) => {
+        console.log(data)
         sendingOffer = false
-        this.setState({messageData: data}) 
-        API.getJobs()
-        .then(res => {
+        this.setState({messageData: data})
+        this.setState({ jobOwner: data.jobOwner}) 
+        // API.getJobs()
+        // .then(res => {
             
-            for(let i=0; i < res.data.length; i++){
-                if(res.data[i].posterId === this.state.messageData.senderId){
-                   this.setState({ jobOwner: this.state.messageData.senderId });
+        //     for(let i=0; i < res.data.length; i++){
+        //         if(res.data[i].posterId === this.state.messageData.senderId ){
+        //            this.setState({ jobOwner: this.state.messageData.senderId  });
                    
-                } else if(res.data[i].posterId === this.state.messageData.recieverId){
-                    this.setState({ jobOwner: this.state.messageData.recieverId });
-                    this.setState({sendJobOffer: true})
-                }
-            }
-        })
-        .catch(err => console.log(err));
+        //         } else if(res.data[i].posterId === this.state.messageData.recieverId){
+        //             this.setState({ jobOwner: this.state.messageData.recieverId });
+                   
+        //         }
+        //     }
+        // })
+        // .catch(err => console.log(err));
     }
 
     getdataforJobOffer = (data) => {
@@ -121,9 +124,8 @@ class MyMessages extends Component {
                 recieverId: senderId,
                 recieverName: senderName,
                 jobTitle: title,
-                inResponseMessage: "",
                 jobOwner: this.state.jobOwner,
-                messageBody: `${this.state.user.firstname} has offered you the Job!\nJob: ${title}\ndo you accept?`
+                messageBody: `${this.state.user.firstname} has offered you the Job!`
             }
             console.log(newOffer)
             API.saveOfferMessage(newOffer)
@@ -132,15 +134,31 @@ class MyMessages extends Component {
                 console.log(response.data)
             })
             .catch(err => this.createNotification('error'));
-         }
+        }
         
     }
 
 
     sendJobOffer = () => {
         sendingOffer = true;
-        this.sendReply(this.state.messageData.senderId, this.state.messageData.jobTitle, this.state.messageData.senderName,
-            )
+        this.sendReply(this.state.messageData.senderId, this.state.messageData.jobTitle, this.state.messageData.senderName)
+    }
+
+    acceptJob = (data) => {
+        console.log(data)
+        API.getJobs()
+        .then(res => {
+            
+            for(let i=0; i < res.data.length; i++){
+                if(res.data[i].posterId === data.jobOwner && res.data[i].title === data.jobTitle){ 
+                   this.setState({ jobId: res.data[i]._id  });
+                } 
+            }
+            
+            let acceptingUser = {user: data.recieverId};
+            API.acceptJob(this.state.jobId, acceptingUser)
+        })
+        .catch(err => console.log(err));
     }
 
     deleteMessage = (id) => {
@@ -217,7 +235,7 @@ class MyMessages extends Component {
                             (<div><h3 className="mb-3">Inbox</h3>
                            
                                 {this.state.messageResults.length ? ( <div><List>
-                                <InboxMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} getMessageData={this.getMessageData} deleteMessage={this.deleteMessage} getdataforJobOffer={this.getdataforJobOffer}/></List>
+                                <InboxMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} getMessageData={this.getMessageData} deleteMessage={this.deleteMessage} getdataforJobOffer={this.getdataforJobOffer} acceptJob={this.acceptJob}/></List>
                                 <ReplyModal
                                 mappedModal={this.state.messageResults}
                                 value={this.state.replyMessageBody}

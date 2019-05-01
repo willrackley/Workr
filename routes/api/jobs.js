@@ -17,6 +17,9 @@ router.route("/:id")
 router.route("/incomplete/:id")
 .put(jobsController.updateIncomplete);
 
+router.route("/accept/:id")
+.put(jobsController.updateAcceptJob);
+
 router.route("/uploadImg")
   .post(jobsController.uploadImg)
   
