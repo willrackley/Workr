@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Input, FormBtn, TextArea, CategoryDropdown, OfferInput, InputState } from "../components/Form";
+import { Input, FormBtn, TextArea, CategoryDropdown, OfferInput, InputState, UploadBtn } from "../components/Form";
 import NavItemLogout from '../components/NavItemLogout';
 import Nav from "../components/Nav";
 import Popup from "reactjs-popup";
 import API from "../utils/API";
 import Firebase from "../utils/Firebase-config";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+// import { threadId } from "worker_threads";
+import $ from 'jquery';
 let uploadTextColor = ""
 
 class PostingJob extends Component {
@@ -19,7 +21,7 @@ class PostingJob extends Component {
         offer: "",
         user: {},
         selectedFile: null,
-        imageUrl: "image",
+        imageUrl: "",
         loading: null
     }
 
@@ -73,6 +75,8 @@ class PostingJob extends Component {
     selectImgFile = event => {
         this.setState({selectedFile: event.target.files[0]})
         //console.log(event.target.files[0])
+        console.log("A picture has been added");
+        this.changeColor();
     }
 
     uploadImgFile = () => {
@@ -90,9 +94,20 @@ class PostingJob extends Component {
                     uploadTextColor = "border border-success"
                     this.setState({ imageUrl: res })
                     console.log(this.state.imageUrl)
+                   
+                    
+                   
+                    
                 })
             })
     }
+    
+    changeColor=()=>{
+        $('.upload').css({'background-color':' #28a6af', "border":"3px solid green", "font-size":"22px"});
+        console.log("button border should turn red");
+    }
+        
+   
 
     createNotification = (type) => {
         switch (type) {
@@ -115,7 +130,13 @@ class PostingJob extends Component {
           return;
         }
     }
+
+
+   
     render() {
+        
+        
+        
         return (
             <div>
                 <Nav page="/dashboard">
@@ -142,19 +163,20 @@ class PostingJob extends Component {
                             <h3>Upload an image</h3>
                             <Input 
                             className={`form-control ${uploadTextColor}`}
+                            
                             type="file"
                             onChange={this.selectImgFile}
                             accept="image/png, image/jpeg, image/jpg"
                             />
 
-                            <FormBtn 
+                            <UploadBtn 
                             disabled={!this.state.selectedFile}
                             onClick={this.uploadImgFile}>
-                            {this.state.loading ? (<div className="spinner-border text-info" role="status">
+                            {this.state.loading ? (<div className="spinner-border text-info" role="status" id='upload'>
                             <span className="sr-only">Loading...</span>
                             </div>): ("upload")}
                             
-                            </FormBtn>
+                            </UploadBtn>
 
                             <Input
                             value={this.state.title}
@@ -199,6 +221,7 @@ class PostingJob extends Component {
 
                             <FormBtn
                             disabled={
+                                !(this.state.imageUrl) ||
                                 !(this.state.title) ||
                                 !(this.state.description) ||
                                 !(this.state.city) ||
