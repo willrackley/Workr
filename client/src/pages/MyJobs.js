@@ -4,6 +4,7 @@ import MyJobsCard from "../components/MyJobsCard";
 import MyWorkedJobsCard from "../components/MyWorkedJobsCard";
 import List from "../components/List";
 //import { Link } from 'react-router-dom';
+import MyJobsModal from "../components/MyJobsModal";
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
 import { FormBtn } from "../components/Form";
@@ -104,14 +105,20 @@ class MyJobs extends Component {
                         </div>
                         <div className="col-md-8">
                             <div>
-                                {this.state.jobChoice === "employer" ? (<div><h1 className="text-dark mt-5">Posted Jobs</h1><List>
-                                {this.state.myJobs.length ? (<MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob} completeJob={this.completeJob} reopenJob={this.reopenJob} />
-                                    ) : (<h3 className="mt-5 text-center text-secondary">You don't have any posted Jobs </h3>)} 
-                                </List></div>) : (<div><h1 className="text-dark mt-5">Worked Jobs</h1><List>
-                                {this.state.workedJobs.length ? (<MyWorkedJobsCard key={this.state.workedJobs._id} results={this.state.workedJobs} title={this.state.workedJobs.title} description={this.state.workedJobs.description}/>
-                                    ) : (<h3 className="mt-5 text-center text-secondary">You don't have any worked Jobs </h3>)} 
-                                </List></div>)}
+                                {this.state.jobChoice === "employer" ? 
+                                (<div><h1 className="text-dark mt-5">Posted Jobs</h1>
+                                {this.state.myJobs.length ? (<div><List><MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob} completeJob={this.completeJob} reopenJob={this.reopenJob} /></List>
+                                <MyJobsModal
+                                mappedModal={this.state.myJobs}
+                                >
+                                </MyJobsModal></div>) : (<h3 className="mt-5 text-center text-secondary">You don't have any posted Jobs </h3>)} 
+                                </div>) : (<div><h1 className="text-dark mt-5">Worked Jobs</h1>
+                                {this.state.workedJobs.length ? (<div><List><MyWorkedJobsCard key={this.state.workedJobs._id} results={this.state.workedJobs} title={this.state.workedJobs.title} description={this.state.workedJobs.description}/>
+                                    </List></div>) : (<h3 className="mt-5 text-center text-secondary">You don't have any worked Jobs </h3>)} 
+                                </div>)}
+                                
                             </div>
+                           
                         </div>
                         
                     </div>

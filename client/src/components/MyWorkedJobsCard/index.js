@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FormBtn } from "../Form";
 import "./style.css"
 
 
@@ -39,7 +39,7 @@ export default function MyWorkedJobsCard(props) {
                         <p>{result.description}</p>
                     </div>
                     <div className="card-footer text-muted text-center">
-                                
+                        {result.status !== "incomplete" ? (<FormBtn className="ml-2">Rate Your EMPLOYr</FormBtn>) : ("")}        
                     </div>
                         </div>
                     </div>
