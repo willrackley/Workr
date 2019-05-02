@@ -107,10 +107,12 @@ class SignUp extends Component {
                             }
                             >
                             Submit
-                            </FormBtn>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick>
-                            <div>
+                            </FormBtn>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick modal>
+                            <div className="text-center"> 
                             {this.state.submitMessage}
-                            <FormBtn onClick={this.loginRedirect}>Login</FormBtn>
+                            
+                            <FormBtn id="signupRedirect" onClick={this.loginRedirect}>Login</FormBtn>
+                           
                             </div>
                             </Popup>) : (<Popup trigger={<FormBtn 
                             disabled={
@@ -121,7 +123,7 @@ class SignUp extends Component {
                             }
                             >
                             Submit
-                            </FormBtn>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick>
+                            </FormBtn>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick modal>
                             {this.state.submitMessage}
                             </Popup>)
                             }

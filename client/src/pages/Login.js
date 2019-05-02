@@ -3,6 +3,7 @@ import { Input, FormBtn } from "../components/Form";
 import { Redirect } from 'react-router-dom';
 import Nav from "../components/Nav";
 import API from "../utils/API";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 class Login extends Component {
@@ -32,13 +33,30 @@ class Login extends Component {
         .then(res => {
             if(res.data) {
             localStorage.setItem('jwt', res.data.token)
+            this.createNotification('success');
             this.props.history.push('/dashboard')
-            } else {
-                //show an error
             }
-            
         })
-        .catch(err => console.log(err)); 
+        .catch(err => this.createNotification('error')); 
+    }
+
+    createNotification = (type) => {
+        switch (type) {
+          case 'info':
+            NotificationManager.info('Info message');
+            break;
+          case 'success':
+              NotificationManager.success('', 'Job Posted');
+            break;
+          case 'warning':
+            NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+            break;
+          case 'error':
+            NotificationManager.error('', 'something went wrong, please check your email and password.');
+            break;
+          default: 
+          return;
+        }
     }
 
     render() {
@@ -52,7 +70,9 @@ class Login extends Component {
                         Sign up
                     </a> 
                 </Nav>
+
                 <div className="container text-center">
+                <NotificationContainer/>
                     <h1 className="text-dark text- center mt-5 mb-5">Log in</h1>
                     {this.state.loggedIn ? (<Redirect to='/dashboard' />) : (
                     <div className="row">

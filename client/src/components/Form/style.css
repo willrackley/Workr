@@ -1,3 +1,9 @@
 #contactBtn {
   background: #28a6af;
 }
+
+#signupRedirect {
+  background: #28a6af !important;
+  display: block;
+  margin: 0 auto;
+}

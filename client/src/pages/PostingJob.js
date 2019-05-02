@@ -118,9 +118,6 @@ class PostingJob extends Component {
             break;
           case 'error':
             NotificationManager.error('', 'something went wrong, please try again');
-          //   NotificationManager.error('Error message', 'Click me!', 5000, () => {
-          //     alert('callback');
-          //   });
             break;
           default: 
           return;
