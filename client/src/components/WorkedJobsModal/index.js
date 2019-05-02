@@ -3,7 +3,7 @@ import React from "react";
 import StarRatings from 'react-star-ratings';
 import API from "../../utils/API";
 
-class MyJobsModal extends React.Component {
+class WorkedJobsModal extends React.Component {
     constructor(props) {
         super(props)
         this.state = { rating: 0}
@@ -11,15 +11,15 @@ class MyJobsModal extends React.Component {
             this.setState({rating: newRating });
         }  
         this.myRating = (data) =>{
-            console.log(data._id)
+            console.log(data)
             const userRating = {rating: this.state.rating}
-            API.updateRating(data.acceptedBy, userRating)
+            API.updateRating(data.posterId, userRating)
             .then(res => {
                 console.log(res.data)
             })
             .catch(err => console.log(err))
 
-            API.updateJobRatingBool(data._id)
+            API.updateWorkrJobRatingBool(data._id)
             .then(res => {
                 this.props.loadMyJobs()
             })
@@ -31,11 +31,11 @@ class MyJobsModal extends React.Component {
     return (
         <div>
         {this.props.mappedModal.map(newModal => (
-        <div key={newModal._id} className="modal fade" id="myJobsModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div key={newModal._id} className="modal fade" id="workedJobsModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                 <div className="modal-header">
-                    <h5 className="modal-title text-center" id="exampleModalLabel">How did {newModal.seekerName} do?</h5>
+                    <h5 className="modal-title text-center" id="exampleModalLabel">How was {newModal.posterName}?</h5>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -62,4 +62,4 @@ class MyJobsModal extends React.Component {
     }
 }
 
-export default MyJobsModal;
+export default WorkedJobsModal;

@@ -38,6 +38,7 @@ module.exports = {
         offer,
         status,
         seekerRated,
+        posterRated,
         postedDate,
         completionDate
       } = req.body;
@@ -46,6 +47,7 @@ module.exports = {
         posterId: posterId,
         posterName: posterName,
         posterEmail: posterEmail,
+        posterRated: posterRated,
         title: title,
         description: description,
         city: city,
@@ -94,6 +96,12 @@ module.exports = {
   updateRatingBool: function(req, res) {
     db.Job
       .findOneAndUpdate({ _id: req.params.id }, {seekerRated: true})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  updateWorkrRatingBool: function(req, res) {
+    db.Job
+      .findOneAndUpdate({ _id: req.params.id }, {posterRated: true})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

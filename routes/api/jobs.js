@@ -26,6 +26,9 @@ router.route("/accept/:id")
 router.route("/ratingBool/:id")
   .put(jobsController.updateRatingBool);
 
+router.route("/workrRatingBool/:id")
+  .put(jobsController.updateWorkrRatingBool);
+
 router.route("/uploadImg")
   .post(jobsController.uploadImg)
   

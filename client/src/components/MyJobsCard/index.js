@@ -91,9 +91,7 @@ export default function MyJobsCard(props) {
                                     ]
                                     })}}>
                             Reopen Job
-                        </FormBtn>{result.seekerRated ? ("") : (<div> <FormBtn data-toggle="modal" data-target="#myJobsModal"className="ml-2">Rate your WORKr {result.seekerName}</FormBtn></div>)}</div>)}
-                        
-                        
+                        </FormBtn>{result.seekerRated ? ("") : (<div> <FormBtn data-toggle="modal" data-target="#myJobsModal" className="ml-2">Rate your WORKr</FormBtn></div>)}</div>)}            
                     </div>
                         </div>
                     </div>
