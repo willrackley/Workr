@@ -3,6 +3,7 @@ import { FormBtn } from "../Form";
 import "./style.css"
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import Moment from "react-moment";
 
 export default function MyJobsCard(props) {
    
@@ -19,7 +20,8 @@ export default function MyJobsCard(props) {
                         <div className="card-header">
                         <div className="row text-right mb-2">
                             <div className="col-md-4 text-center">
-                                <p>{result.status}</p>
+                            {result.status === "completed" ? (<div><p>{result.status} <Moment format="MM/DD/YYYY">{result.date}</Moment></p></div>): (<p>{result.status}</p>)}
+                                
                             </div>
                             <div className="col-md-4">
                                 <p className="text-right"> ${result.offer}</p>
@@ -89,7 +91,8 @@ export default function MyJobsCard(props) {
                                     ]
                                     })}}>
                             Reopen Job
-                        </FormBtn> <FormBtn data-toggle="modal" data-target="#myJobsModal"className="ml-2">Rate Your WORKr</FormBtn></div>)}
+                        </FormBtn>{result.seekerRated ? ("") : (<div> <FormBtn data-toggle="modal" data-target="#myJobsModal"className="ml-2">Rate your WORKr {result.seekerName}</FormBtn></div>)}</div>)}
+                        
                         
                     </div>
                         </div>

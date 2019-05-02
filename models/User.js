@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
   },
   bio: { type: String, default: "null"},
-  rating: { type: String, default: "null" },
+  rating: { type: Number, default: null },
   profileImage: { type: String, default: "null" },
   signupDate: { type: Date, default: Date.now },
 });

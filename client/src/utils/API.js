@@ -57,4 +57,10 @@ export default {
     acceptJob: function(id, acceptingUser) {
         return axios.put(`/api/jobs/accept/${id}`, acceptingUser);
     },
+    updateRating: function(id, rating) {
+        return axios.put(`/api/users/rating/${id}`, rating);
+    },
+    updateJobRatingBool: function(id) {
+        return axios.put(`/api/jobs/ratingBool/${id}`);
+    },
   };

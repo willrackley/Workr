@@ -14,7 +14,10 @@ router.route("/:id")
   .delete(usersController.remove);
 
 router.route("/sign-up")
-.post(usersController.create);
+  .post(usersController.create);
+
+router.route("/rating/:id")
+  .put(usersController.updateRating);
 
 router.route("/login")
 .post(

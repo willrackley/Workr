@@ -176,6 +176,7 @@ class MyMessages extends Component {
     }
 
     acceptJob = (data) => {
+        decliningOffer = false;
         console.log(data)
         this.setState({ jobOwner: data.jobOwner}) 
         API.getJobs()
@@ -187,7 +188,7 @@ class MyMessages extends Component {
                 } 
             }
             
-            let acceptingUser = {user: data.recieverId};
+            let acceptingUser = {user: data.recieverId, name: data.recieverName};
             API.acceptJob(this.state.jobId, acceptingUser)
             .then(res => {
                 acceptingOffer = true;
