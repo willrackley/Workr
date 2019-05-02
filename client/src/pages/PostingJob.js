@@ -93,11 +93,7 @@ class PostingJob extends Component {
                     this.setState({ loading: false })
                     uploadTextColor = "border border-success"
                     this.setState({ imageUrl: res })
-                    console.log(this.state.imageUrl)
-                   
-                    
-                   
-                    
+                    console.log(this.state.imageUrl) 
                 })
             })
     }

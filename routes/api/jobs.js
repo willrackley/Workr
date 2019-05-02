@@ -10,6 +10,9 @@ router.route("/")
 router.route("/:posterId")
   .get(jobsController.findById)
 
+router.route("/workedJobs/:acceptedBy")
+  .get(jobsController.findWorkedJobs)
+
 router.route("/:id")
   .delete(jobsController.remove)
   .put(jobsController.updateCompleted);

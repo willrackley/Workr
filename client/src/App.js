@@ -8,23 +8,25 @@ import MyJobs from './pages/MyJobs';
 import PostingJob from './pages/PostingJob';
 import MyMessages from './pages/MyMessages';
 import Authorize from './components/Authorize'
+import LandingRedirect from './components/LandingRedirect'
 import "./App.css"
 function App() {
  
   return (
     <Router>
         <Switch>
-          
+       
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={SignUp} />
+          
           <Authorize>
             <Route exact path="/dashboard" component={userDashboard} />
             <Route exact path="/postJob" component={PostingJob}/>
             <Route exact path="/myJobs" component={MyJobs}/>
             <Route exact path="/messages" component={MyMessages}/>
           </Authorize>
-          
+         
         </Switch>
     </Router>
   );

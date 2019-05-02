@@ -1,0 +1,20 @@
+.card {
+    overflow: scroll;
+}
+
+.card img {
+    max-width: 50%;
+}
+
+.card-img-top {
+    min-width: 100%;
+}
+
+.list-group-item {
+    background: #eaffe3;
+}
+
+.searchResultsHeader {
+    color: #6c6c6c;
+}
+
