@@ -27,6 +27,9 @@ export default {
     getMyJobs: function(id) {
         return axios.get(`/api/jobs/${id}`);
     },
+    getMyWorkedJobs: function(id) {
+        return axios.get(`/api/jobs/workedJobs/${id}`);
+    },
     deleteMyJob: function(id) {
         return axios.delete(`/api/jobs/${id}`);
     },

@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import Nav from "../components/Nav";
 import MyJobsCard from "../components/MyJobsCard";
+import MyWorkedJobsCard from "../components/MyWorkedJobsCard";
 import List from "../components/List";
 //import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
+import { FormBtn } from "../components/Form";
 
 
 
 class MyJobs extends Component {
     state = {
         myJobs: "",
-        user: {}
+        user: {},
+        jobChoice: "employer",
+        workedJobs: ""
     }
 
     componentDidMount() {
@@ -58,6 +62,19 @@ class MyJobs extends Component {
         .catch(err => console.log(err));
     }
     
+    employerJobs = () => {
+        this.setState({ jobChoice: "employer" });
+        console.log('employer')
+    }
+
+    workerJobs = () => {
+        this.setState({ jobChoice: "worker" });
+        API.getMyWorkedJobs(this.state.user.id)
+        .then(res => {
+            this.setState({ workedJobs: res.data })
+            console.log(res.data)
+        })
+    }
 
     render() {
         return (
@@ -79,24 +96,24 @@ class MyJobs extends Component {
 
                 <div className="container">
                     <div className="row">
+                        <div className="col-md-4 mt-5 text-left">
+                            
+                            <button onClick={()=>this.employerJobs()} className="btn d-block"><h3>EMPLOYr</h3></button>
+                            <button onClick={()=>this.workerJobs()} className="btn d-block"><h3>WORKr</h3></button>                          
+                            
+                        </div>
                         <div className="col-md-8">
                             <div>
-                                <h1 className="text-dark mt-5">My Posted Jobs</h1>
-                                <List>
+                                {this.state.jobChoice === "employer" ? (<div><h1 className="text-dark mt-5">Posted Jobs</h1><List>
                                 {this.state.myJobs.length ? (<MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob} completeJob={this.completeJob} reopenJob={this.reopenJob} />
                                     ) : (<h3 className="mt-5 text-center text-secondary">You don't have any posted Jobs </h3>)} 
-                                </List>
+                                </List></div>) : (<div><h1 className="text-dark mt-5">Worked Jobs</h1><List>
+                                {this.state.workedJobs.length ? (<MyWorkedJobsCard key={this.state.workedJobs._id} results={this.state.workedJobs} title={this.state.workedJobs.title} description={this.state.workedJobs.description}/>
+                                    ) : (<h3 className="mt-5 text-center text-secondary">You don't have any worked Jobs </h3>)} 
+                                </List></div>)}
                             </div>
                         </div>
-                        <div className="col-md-4 text-right">
-                            <div>
-                            
-                                <h3 className="">
-                            
-                                </h3>      
-                                                    
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                         

@@ -22,6 +22,7 @@ class Card extends React.Component {
       
       render(){
   return (
+ 
     <div className="card-columns py-3">
         {this.props.results.map(result => (
                 <div className="card mb-3" key={result._id}>
@@ -53,6 +54,7 @@ class Card extends React.Component {
            
         ))}
     </div>
+  
   );
 }}
 

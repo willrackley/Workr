@@ -17,6 +17,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findWorkedJobs: function(req, res) {
+    db.Job
+      .find({ acceptedBy: req.params.acceptedBy })
+      .sort({ postedDate: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   create: function(req, res) {
     let {
         posterId,
