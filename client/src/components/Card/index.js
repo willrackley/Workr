@@ -21,7 +21,7 @@ class Card extends React.Component {
 
       
       render(){
-  return (
+    return (
  
     <div className="card-columns py-3">
         {this.props.results.map(result => (

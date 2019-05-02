@@ -73,7 +73,7 @@ export default function MyJobsCard(props) {
                                     ]
                                     })}}>
                             Complete Job
-                        </FormBtn>) : (<FormBtn onClick={() => {
+                        </FormBtn>) : (<div><FormBtn onClick={() => {
                                     confirmAlert({
                                     title: 'You are marking this job as incomplete!',
                                     message: 'Are you sure you want to do this?',
@@ -89,7 +89,7 @@ export default function MyJobsCard(props) {
                                     ]
                                     })}}>
                             Reopen Job
-                        </FormBtn>)}
+                        </FormBtn> <FormBtn data-toggle="modal" data-target="#myJobsModal"className="ml-2">Rate Your WORKr</FormBtn></div>)}
                         
                     </div>
                         </div>
