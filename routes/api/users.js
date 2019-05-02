@@ -21,12 +21,6 @@ router.route("/login")
   function (req, res, next) {
   // call passport authentication passing the "local" strategy name and a callback function
   passport.authenticate('local', {session: false}, function (error, user, info) {
-    // this will execute in any case, even if a passport strategy will find an error
-    // log everything to console
-    // console.log(error);
-    // console.log(user);
-    // console.log(info);
-
     if (error) {
       res.status(401).send(error);
     } else if (!user) {
