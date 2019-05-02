@@ -37,7 +37,7 @@ module.exports = {
         category,
         offer,
         status,
-        seekerId,
+        seekerRated,
         postedDate,
         completionDate
       } = req.body;
@@ -54,7 +54,7 @@ module.exports = {
         category: category,
         offer: offer,
         status: status,
-        seekerId: seekerId,
+        seekerRated: seekerRated,
         postedDate: postedDate,
         completionDate: completionDate
       })
@@ -73,21 +73,27 @@ module.exports = {
   },
   updateCompleted: function(req, res) {
     db.Job
-      .findOneAndUpdate({ _id: req.params.id }, {status: "completed"})
+      .findOneAndUpdate({ _id: req.params.id }, {$set: {status: "completed", completionDate: Date.now()}})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   updateIncomplete: function(req, res) {
     console.log(req.params)
     db.Job
-      .findOneAndUpdate({ _id: req.params.id }, {status: "incomplete"})
+      .findOneAndUpdate({ _id: req.params.id }, {$set: {status: "incomplete", completionDate: null}, seekerRated: false})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   updateAcceptJob: function(req, res) {
-    console.log(req.body.user)
+    console.log(req.body)
     db.Job
-      .findOneAndUpdate({ _id: req.params.id }, {acceptedBy: req.body.user})
+      .findOneAndUpdate({ _id: req.params.id }, {$set: {acceptedBy: req.body.user, seekerName: req.body.name}})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  updateRatingBool: function(req, res) {
+    db.Job
+      .findOneAndUpdate({ _id: req.params.id }, {seekerRated: true})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

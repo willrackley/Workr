@@ -18,10 +18,13 @@ router.route("/:id")
   .put(jobsController.updateCompleted);
   
 router.route("/incomplete/:id")
-.put(jobsController.updateIncomplete);
+  .put(jobsController.updateIncomplete);
 
 router.route("/accept/:id")
-.put(jobsController.updateAcceptJob);
+  .put(jobsController.updateAcceptJob);
+
+router.route("/ratingBool/:id")
+  .put(jobsController.updateRatingBool);
 
 router.route("/uploadImg")
   .post(jobsController.uploadImg)

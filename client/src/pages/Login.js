@@ -3,6 +3,7 @@ import { Input, FormBtn } from "../components/Form";
 import { Redirect } from 'react-router-dom';
 import Nav from "../components/Nav";
 import API from "../utils/API";
+import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 

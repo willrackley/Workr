@@ -93,4 +93,11 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }, 
+  updateRating: function(req, res) {
+    console.log(req.body)
+    db.User
+      .findOneAndUpdate({ _id: req.params.id }, {rating: req.body.rating})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 };

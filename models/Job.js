@@ -13,7 +13,7 @@ const jobSchema = new Schema({
   category: { type: String, required: true },
   offer: { type: String, required: true },
   status: {type: String, default: "incomplete", required: true},
-  seekerId: {type: String, default: null },
+  seekerRated: {type: Boolean, default: false },
   acceptedBy: {type: String, default: null },
   seekerName: {type: String, default: null },
   postedDate: { type: Date, default: Date.now},
