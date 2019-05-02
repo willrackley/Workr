@@ -5,6 +5,7 @@ import MyWorkedJobsCard from "../components/MyWorkedJobsCard";
 import List from "../components/List";
 //import { Link } from 'react-router-dom';
 import MyJobsModal from "../components/MyJobsModal";
+import WorkedJobsModal from "../components/WorkedJobsModal";
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
 import { FormBtn } from "../components/Form";
@@ -110,12 +111,16 @@ class MyJobs extends Component {
                                 {this.state.myJobs.length ? (<div><List><MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob} completeJob={this.completeJob} reopenJob={this.reopenJob} /></List>
                                 <MyJobsModal
                                 mappedModal={this.state.myJobs}
-                                loadMyJobs={ this.loadMyJobs(this.state.user.id)}
+                                loadMyJobs={ () => this.loadMyJobs(this.state.user.id)}
                                 >
                                 </MyJobsModal></div>) : (<h3 className="mt-5 text-center text-secondary">You don't have any posted Jobs </h3>)} 
                                 </div>) : (<div><h1 className="text-dark mt-5">Worked Jobs</h1>
                                 {this.state.workedJobs.length ? (<div><List><MyWorkedJobsCard key={this.state.workedJobs._id} results={this.state.workedJobs} title={this.state.workedJobs.title} description={this.state.workedJobs.description}/>
-                                    </List></div>) : (<h3 className="mt-5 text-center text-secondary">You don't have any worked Jobs </h3>)} 
+                                    </List><WorkedJobsModal
+                                mappedModal={this.state.workedJobs}
+                                loadMyJobs={ ()=>this.workerJobs()}
+                                >
+                                </WorkedJobsModal></div>) : (<h3 className="mt-5 text-center text-secondary">You don't have any worked Jobs </h3>)} 
                                 </div>)}
                                 
                             </div>

@@ -63,4 +63,7 @@ export default {
     updateJobRatingBool: function(id) {
         return axios.put(`/api/jobs/ratingBool/${id}`);
     },
+    updateWorkrJobRatingBool: function(id) {
+        return axios.put(`/api/jobs/workrRatingBool/${id}`);
+    },
   };
