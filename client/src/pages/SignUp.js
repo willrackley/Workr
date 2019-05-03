@@ -3,7 +3,7 @@ import { Input, FormBtn } from "../components/Form";
 import Nav from "../components/Nav";
 import API from "../utils/API";
 import Popup from "reactjs-popup";
-
+import Footer from "../components/Footer";
 
 
 class SignUp extends Component {
@@ -133,6 +133,7 @@ class SignUp extends Component {
                         </div>
                     </div>
             </div>
+            <Footer style={{top: 60}}/>
            </div>
         )
     }

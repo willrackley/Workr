@@ -11,7 +11,10 @@ router.route("/")
 
 // Matches with "/api/users/:id"
 router.route("/:id")
-  .delete(usersController.remove);
+  .delete(usersController.remove)
+  
+router.route("/findone/:id")
+  .get(usersController.findOneUser)
 
 router.route("/sign-up")
   .post(usersController.create);

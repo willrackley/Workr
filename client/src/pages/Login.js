@@ -5,6 +5,7 @@ import Nav from "../components/Nav";
 import API from "../utils/API";
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Footer from "../components/Footer";
 
 
 class Login extends Component {
@@ -110,6 +111,7 @@ class Login extends Component {
                         </div>
                     </div>)}
             </div>
+            <Footer style={{top: 160}}/>
            </div>
         )
     }

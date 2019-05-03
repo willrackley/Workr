@@ -14,9 +14,12 @@ import API from "../utils/API";
 //import cities from "../components/MapContainer";
 import 'react-notifications/lib/notifications.css';
 import MessageModal from "../components/MessageModal";
+import Footer from "../components/Footer"
 import {FormBtn} from "../components/Form";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import zipcodes from "zipcodes";
+import "./style.css"
+
 // import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 // import React_App_API_KEY_G from "../components/MapContainer/config_keys"
 // const API_KEY = React_App_API_KEY_G;
@@ -115,9 +118,10 @@ class userDashboard extends Component {
                     } 
                 }
             }
+            
             //filter out repeated entries
             const filteredNearbyJobs = (nearbyJobs) => nearbyJobs.filter((k, l) => nearbyJobs.indexOf(k) === l)
-            this.setState({ jobResults:filteredNearbyJobs(nearbyJobs) })
+            this.setState({ jobResults: filteredNearbyJobs(nearbyJobs) })
             this.setState({ jobLocation: "Nearby"})
             this.setState({ loading: false})
         })
@@ -176,6 +180,8 @@ class userDashboard extends Component {
         .catch(err => this.createNotification('error'));
     }
 
+ 
+
     createNotification = (type) => {
           switch (type) {
             case 'info':
@@ -230,50 +236,46 @@ class userDashboard extends Component {
                 </Nav>
 
                 <div className="container">
-                    <h4 className="mt-3"> Welcome, {this.state.user.firstname}</h4>
+                    <h4 className="my-3"> Welcome, {this.state.user.firstname}</h4>
                     <div className="row">
                         {/* category section of page */}
-                        <div className="col-md-3">
+                        <div className="col-md-3 categoryCol">
                             <h4 className="mt-3">Categories</h4>
 
                             <ButtonGroup vertical> 
                                 <Button 
                                     variant="white"
-                                    className="btn d-block text-left"
+                                    className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("All")}>
-                                    <span className='CategoryMenu' style={{width:10}}><FontAwesomeIcon icon={faToolbox} fixedWidth /></span>
-                                    All Jobs
+                                   <i class="fas fa-toolbox"></i> All Jobs
                                 </Button>
                                 <Button
                                     variant="white"
-                                    className="btn d-block mt-1 fas fa-tree fa-2x text-left"
+                                    className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("Landscaping")}>
-                                    <span className='CategoryMenu' style={{width:10}}> <FontAwesomeIcon icon={faTree} fixedWidth /> </span>
-                                    Landscaping
+                                    <i class="fas fa-tree"></i> Landscaping
                                 </Button>
 
                                 <Button
                                     variant="white"
-                                    className="btn d-block text-left"
+                                    className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("House Work")}
                                     > 
-                                    <FontAwesomeIcon icon={faHouseDamage} fixedWidth /> House Work
+                                    <i class="fas fa-house-damage"></i> House Work
                                 </Button>
                                 <Button
                                     variant="white"
-                                    className="btn d-block text-left"
+                                    className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("Car Cleaning")}
                                     >
-                                    <FontAwesomeIcon icon={faCar} fixedWidth />
-                                    Car Cleaning
+                                    <i class="fas fa-car-alt"></i> Car Cleaning
                                 </Button>
                                 <Button
                                     variant="white"
-                                    className="btn d-block text-left"
+                                    className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("Miscellaneous")}
                                     >
-                                    <FontAwesomeIcon icon={faTools} fixedWidth />
-                                    Miscellaneous
+                                    <i class="fas fa-tools"></i> Miscellaneous
                                 </Button>
 
                             </ButtonGroup>
@@ -286,8 +288,8 @@ class userDashboard extends Component {
                             <span className="sr-only">Loading...</span>
                             </div>):( <div>
                                 <h1 className="text-dark mt-2">Jobs <small className="text-muted">{this.state.jobLocation}</small></h1>
-                                <Button className="btn formBtn mt-2 mr-2 btn-secondary text-white" onClick={ () => this.nearbyButton()}>Nearby</Button >
-                                <Button  className="btn formBtn mt-2 btn-secondary text-white" onClick={ () => this.nationwideButton()}>Nationwide</Button >
+                                <button className="btn formBtn mt-2 mr-2 locationBtn" onClick={ () => this.nearbyButton()}>Nearby</button >
+                                <button  className="btn formBtn mt-2 locationBtn" onClick={ () => this.nationwideButton()}>Nationwide</button >
                                 <List>
                                 {filteredResults.length ? (<Card key={filteredResults._id} results={filteredResults} title={filteredResults.title} description={filteredResults.description} city={filteredResults.city} state={filteredResults.state} contactEmployer={this.contactEmployer} handleInputChange={this.handleInputChange} value={this.state.messageBody} sendMessageToEmployer={this.sendMessageToEmployer} dashboardRedirect={this.dashboardRedirect} getDataForMessage={this.getDataForMessage}/>
                                 ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
@@ -306,6 +308,8 @@ class userDashboard extends Component {
                         </div>
                     </div>
                 </div>
+               <Footer style={{top: 160}}/>
+                
             </div> 
         )
     }

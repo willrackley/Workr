@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Nav from "../components/Nav";
-import Jumbotron from "../components/Jumbotron"
+import Jumbotron from "../components/Jumbotron";
+import Footer from "../components/Footer";
 
 class LandingPage extends Component {
 
@@ -26,7 +27,7 @@ class LandingPage extends Component {
                             <button className="btn registerButton text-white" onClick={this.signupRedirect}>REGISTER</button>
                         </div>
                     </Jumbotron>
-               
+               <Footer/>
            </div>
         )
     }

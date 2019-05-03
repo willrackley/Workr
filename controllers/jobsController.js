@@ -82,7 +82,7 @@ module.exports = {
   updateIncomplete: function(req, res) {
     console.log(req.params)
     db.Job
-      .findOneAndUpdate({ _id: req.params.id }, {$set: {status: "incomplete", completionDate: null}, seekerRated: false})
+      .findOneAndUpdate({ _id: req.params.id }, {$set: {status: "incomplete", completionDate: null}, seekerRated: false, posterRated: false})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
