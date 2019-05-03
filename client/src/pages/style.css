@@ -7,6 +7,65 @@
     padding: 10px;
 }
 
+.myJobsCatCol {
+    background: #ebebeb;
+    padding: 10px;
+}
+
+.myMessagesCatCol {
+    background: #ebebeb;
+    padding: 10px; 
+}
+
 .catBtns:hover {
+    color: #28a6af;
+}
+
+.myJobsBtn:hover {
+    color: #28a6af;
+}
+
+.mailboxBtn:hover {
+    color: #28a6af;
+}
+
+.fas {
+    color: #28a6af; 
+}
+
+.aboutText {
+    line-height: 1.5;
+    font-size: 18px;
+}
+
+.landingRow {
+    min-height: 300px;
+}
+
+.landingText{
+    margin-top: 100px;
+}
+.employrPic {
+    background-image: url("../images/girlBoss.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.moneyPic {
+    background-image: url("../images/moneyGirl.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.aboutTitle {
+    font-size: 36px;
+    margin-top: 100px !important;
+}
+
+.aboutContainer {
+    margin-bottom: 100px;
+}
+
+.titleHighlight {
     color: #28a6af;
 }

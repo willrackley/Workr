@@ -153,7 +153,7 @@ class PostingJob extends Component {
                         <div className="col-md-4">
                         </div>
                         <div className="col-md-4">
-                            <h3>Upload an image</h3>
+                            <h3 className="text-muted">Upload an image</h3>
                             <Input 
                             className={`form-control ${uploadTextColor}`}
                             
@@ -212,7 +212,7 @@ class PostingJob extends Component {
                                 name="category"
                             />
 
-                            <FormBtn
+                            <button className="btn cardSubmitButton"
                             disabled={
                                 !(this.state.imageUrl) ||
                                 !(this.state.title) ||
@@ -223,7 +223,7 @@ class PostingJob extends Component {
                             }
                             onClick={this.handleFormSubmit}>
                             Submit
-                            </FormBtn>
+                            </button>
                             
                         </div>
                         <div className="col-md-4">

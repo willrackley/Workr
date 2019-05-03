@@ -1,5 +1,9 @@
 .card {
     overflow: scroll;
+
+}
+.list-group-item {
+   background: #85c1c7a1 !important;
 }
 
 .card img {
@@ -10,11 +14,27 @@
     min-width: 100%;
 }
 
-.list-group-item {
-    background: #eaffe3;
+.deleteBtn {
+    font-size: 30px;
+    color: #d37c7c;
 }
 
-.searchResultsHeader {
-    color: #6c6c6c;
+.statusCompleted {
+    font-size: 24px;
+    color: #649852;
+}
+
+.statusIncomplete {
+    font-size: 24px;
+    color: #d37c7c;
+}
+
+.offer {
+    font-size: 24px;
+}
+
+.cardSubmitButton {
+    background: #28a6af;
+    color: #ffffff;
 }
 

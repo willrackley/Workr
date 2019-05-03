@@ -13,26 +13,21 @@ export default function SentMessageCard(props) {
                         <div className="card-header">
                             <div className="row text-right mb-3">
                                 <div className="col-12">
-                                    <FormBtn onClick={()=>props.deleteMessage(result._id)}>
-                                    &times;
-                                    </FormBtn>
+                                    <button className="deleteBtn btn" onClick={()=>props.deleteMessage(result._id)}>
+                                    <i class="far fa-trash-alt"></i>
+                                    </button>
                                 </div>
                             </div>
                             <div className="row no-gutters">
-                                <div className="col-md-9">
-                                    <p>From: {result.senderName}</p>
-                                    <p>To: {result.recieverName}</p>
-                                </div>
-                                <div className="col-md-3 text-right">
+                                <div className="col-12">
+                                    <p>From: <span className="font-weight-bold">{result.senderName}</span></p>
+                                    <p>To: <span className="font-weight-bold">{result.recieverName}</span></p>
                                     <p><Moment format="MM/DD/YYYY">{result.date}</Moment></p>
                                 </div>
                             </div>
                         </div>
                         <div className="card-body text-left">
                             <p>{result.messageBody}</p>
-                        </div>
-                        <div className="card-footer text-muted text-center">
-                    
                         </div>
                 </div>
             </li>

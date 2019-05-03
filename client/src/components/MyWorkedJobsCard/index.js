@@ -11,17 +11,18 @@ export default function MyWorkedJobsCard(props) {
             <li className="list-group-item mb-3 pt-4 rounded" key={result._id}>
                 <div className="card mb-3">
                     <div className="row no-gutters">
-                        <div className="col-md-4">
+                        <div className="col-md-4 border-right">
                         <img src={result.jobImage} className="card-img-top p-3 mt-4" alt={result.title}></img>
                         </div>
                         <div className="col-md-8">
                         <div className="card-header">
                         <div className="row text-right mb-2">
                             <div className="col-md-4 text-center">
-                                <p>{result.status}</p>
+                                {result.status = "completed" ? (<p className="font-weight-bold statusCompleted text-capitalize">{result.status}</p>) : (<p className="font-weight-bold statusIncomplete  text-capitalize">{result.status}</p>)}
+                                
                             </div>
                             <div className="col-md-4">
-                                <p className="text-right"> ${result.offer}</p>
+                                <p className="text-right offer"> ${result.offer}</p>
                             </div>
                             <div className="col-md-4">
                                
@@ -33,7 +34,7 @@ export default function MyWorkedJobsCard(props) {
                             </div>
                             
                         </div>
-                        <h3 className="text-center">{result.title}</h3>
+                        <h3 className="text-center text-capitalize">{result.title}</h3>
                     </div>
                     <div className="card-body text-center">
                         <p>{result.description}</p>

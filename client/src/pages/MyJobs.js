@@ -100,23 +100,23 @@ class MyJobs extends Component {
 
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-3 mt-5 text-left px-3">
+                        <div className="col-md-3 mt-5 text-left px-3 myJobsCatCol">
                             <h1>Jobs</h1>
-                            <button onClick={()=>this.employerJobs()} className="btn d-block"><h3><small>As an </small>EMPLOYr</h3></button>
-                            <button onClick={()=>this.workerJobs()} className="btn d-block"><h3><small>As a </small>WORKr</h3></button>                          
+                            <button onClick={()=>this.employerJobs()} className="btn d-block"><h3><small>As an </small><span className="myJobsBtn"> EMPLOYr</span></h3></button>
+                            <button onClick={()=>this.workerJobs()} className="btn d-block"><h3><small>As a</small><span className="myJobsBtn"> WORKr</span></h3></button>                          
                             
                         </div>
                         <div className="col-md-9">
                             <div>
                                 {this.state.jobChoice === "employer" ? 
-                                (<div><h2 className="text-dark mt-5">Posted Jobs</h2>
+                                (<div><h2 className="text-muted mt-5 mb-2">POSTED JOBS</h2>
                                 {this.state.myJobs.length ? (<div><List><MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob} completeJob={this.completeJob} reopenJob={this.reopenJob} /></List>
                                 <MyJobsModal
                                 mappedModal={this.state.myJobs}
                                 loadMyJobs={ () => this.loadMyJobs(this.state.user.id)}
                                 >
                                 </MyJobsModal></div>) : (<h3 className="mt-5 text-center text-secondary">You don't have any posted Jobs </h3>)} 
-                                </div>) : (<div><h2 className="text-dark mt-5">Worked Jobs</h2>
+                                </div>) : (<div><h2 className="text-muted mt-5 mb-2">WORKED JOBS</h2>
                                 {this.state.workedJobs.length ? (<div><List><MyWorkedJobsCard key={this.state.workedJobs._id} results={this.state.workedJobs} title={this.state.workedJobs.title} description={this.state.workedJobs.description}/>
                                     </List><WorkedJobsModal
                                 mappedModal={this.state.workedJobs}

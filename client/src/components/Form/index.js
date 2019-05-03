@@ -29,7 +29,7 @@ export function FormBtn(props) {
 
 export function UploadBtn(props) {
   return (
-    <button {...props} className=" upload btn formBtn mt-2 btn-secondary text-white">
+    <button {...props} className=" upload btn formBtn mt-2  text-white">
       {props.children}
     </button>
   );
