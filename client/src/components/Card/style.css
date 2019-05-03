@@ -6,6 +6,18 @@
     max-width: 50%;
 }
 
+.card-header {
+ border: none !important
+}
+
+.titleBtn {
+    border: 2px solid #28a6af;
+}
+
+#messageEmployr {
+    background: #28a6af !important;
+}
+
 .card-img-top {
     min-width: 100%;
 }
@@ -21,4 +33,14 @@
 .modal {
     z-index: 20000;
 }
+
+.popupNameBtn {
+    margin-left: -10px;
+  }
+  
+  #offer {
+    font-size: 24px !important;
+    font-weight: bold !important;
+    color: #28a6af !important;
+  }
 

@@ -5,6 +5,7 @@ import InboxMessageCard from "../components/InboxMessageCard";
 import SentMessageCard from "../components/SentMessageCard";
 import API from "../utils/API";
 import List from "../components/List";
+import Footer from "../components/Footer";
 import ReplyModal from "../components/ReplyModal";
 import {FormBtn} from "../components/Form";
 import 'react-notifications/lib/notifications.css';
@@ -302,6 +303,7 @@ class MyMessages extends Component {
                     </div>
                 </div>
                 </div>
+                <Footer style={{top: 100}}></Footer> 
             </div>
         )
     }

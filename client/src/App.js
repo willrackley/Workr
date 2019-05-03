@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import userDashboard from './pages/UserDashboard';
 import MyJobs from './pages/MyJobs';
+import Profile from './pages/Profile';
 import PostingJob from './pages/PostingJob';
 import MyMessages from './pages/MyMessages';
 import Authorize from './components/Authorize'
@@ -25,6 +26,7 @@ function App() {
             <Route exact path="/postJob" component={PostingJob}/>
             <Route exact path="/myJobs" component={MyJobs}/>
             <Route exact path="/messages" component={MyMessages}/>
+            <Route exact path="/profile" component={Profile}/>
           </Authorize>
          
         </Switch>

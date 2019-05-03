@@ -9,6 +9,7 @@ import WorkedJobsModal from "../components/WorkedJobsModal";
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
 import { FormBtn } from "../components/Form";
+import Footer from "../components/Footer"
 
 
 
@@ -91,6 +92,7 @@ class MyJobs extends Component {
                             <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
                             <a className="dropdown-item" href="/postJob">Post a Job</a>
                             <a className="dropdown-item" href="/messages">My Messages</a>
+                            <a className="dropdown-item" href="/profile">Edit Profile</a>
                             <NavItemLogout/>
                         </div>
                     </div>
@@ -98,23 +100,23 @@ class MyJobs extends Component {
 
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-2 mt-5 text-left">
-                            
-                            <button onClick={()=>this.employerJobs()} className="btn d-block"><h3>EMPLOYr</h3></button>
-                            <button onClick={()=>this.workerJobs()} className="btn d-block"><h3>WORKr</h3></button>                          
+                        <div className="col-md-3 mt-5 text-left px-3">
+                            <h1>Jobs</h1>
+                            <button onClick={()=>this.employerJobs()} className="btn d-block"><h3><small>As an </small>EMPLOYr</h3></button>
+                            <button onClick={()=>this.workerJobs()} className="btn d-block"><h3><small>As a </small>WORKr</h3></button>                          
                             
                         </div>
-                        <div className="col-md-10">
+                        <div className="col-md-9">
                             <div>
                                 {this.state.jobChoice === "employer" ? 
-                                (<div><h1 className="text-dark mt-5">Posted Jobs</h1>
+                                (<div><h2 className="text-dark mt-5">Posted Jobs</h2>
                                 {this.state.myJobs.length ? (<div><List><MyJobsCard key={this.state.myJobs._id} results={this.state.myJobs} title={this.state.myJobs.title} description={this.state.myJobs.description} deleteJob={this.deleteJob} completeJob={this.completeJob} reopenJob={this.reopenJob} /></List>
                                 <MyJobsModal
                                 mappedModal={this.state.myJobs}
                                 loadMyJobs={ () => this.loadMyJobs(this.state.user.id)}
                                 >
                                 </MyJobsModal></div>) : (<h3 className="mt-5 text-center text-secondary">You don't have any posted Jobs </h3>)} 
-                                </div>) : (<div><h1 className="text-dark mt-5">Worked Jobs</h1>
+                                </div>) : (<div><h2 className="text-dark mt-5">Worked Jobs</h2>
                                 {this.state.workedJobs.length ? (<div><List><MyWorkedJobsCard key={this.state.workedJobs._id} results={this.state.workedJobs} title={this.state.workedJobs.title} description={this.state.workedJobs.description}/>
                                     </List><WorkedJobsModal
                                 mappedModal={this.state.workedJobs}
@@ -129,7 +131,7 @@ class MyJobs extends Component {
                         
                     </div>
                 </div>
-                        
+                <Footer style={{top: 100}}></Footer>        
            </div>
         )
     }
