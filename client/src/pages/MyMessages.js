@@ -60,6 +60,7 @@ class MyMessages extends Component {
         });
     };
 
+    //grab data from messages
     getMessageData = (data) => {
         console.log(data)
         sendingOffer = false;
