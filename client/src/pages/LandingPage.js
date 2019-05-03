@@ -27,6 +27,8 @@ class LandingPage extends Component {
                             <button className="btn registerButton text-white" onClick={this.signupRedirect}>REGISTER</button>
                         </div>
                     </Jumbotron>
+
+                    {/* info section */}
                     <div className="container aboutContainer">
                         <div className="text-center my-5 text-muted"><h2 className="mt-5 display-4 aboutTitle">Everyone's an <span className="titleHighlight"> EMPLOYr</span> and a <span className="titleHighlight"> WORKr</span></h2></div>
                         <div className="row">
