@@ -251,21 +251,21 @@ class MyMessages extends Component {
                 </Nav>
                 <div className="container mt-5">
                     <div className="row">
-                        <div className="col-md-2">
+                        <div className="col-md-2 myMessagesCatCol">
                             <h4>Messages</h4>
 
                             <button
-                            className="btn d-block"
+                            className="btn d-block mailboxBtn"
                             onClick={()=>this.loadMyMessages(this.state.user.id)}
                             >
-                            Inbox
+                            <h4><i class="fas fa-inbox"></i> Inbox</h4>
                             </button>
 
                             <button
-                            className="btn d-block"
+                            className="btn d-block mailboxBtn"
                             onClick={()=>this.loadSentMessages(this.state.user.id)}
                             >
-                            Sent
+                            <h4> <i class="fas fa-paper-plane"></i> Sent</h4>
                             </button>
                         </div>
                     
@@ -273,7 +273,7 @@ class MyMessages extends Component {
                         <NotificationContainer/>
                         <div>
                             {this.state.mailbox === "inbox" ? 
-                            (<div><h3 className="mb-3">Inbox</h3>
+                            (<div><h2 className="mb-3 text-muted">Inbox</h2>
                            
                                 {this.state.messageResults.length ? ( <div><List>
                                 <InboxMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} getMessageData={this.getMessageData} deleteMessage={this.deleteMessage} getdataforJobOffer={this.getdataforJobOffer} acceptJob={this.acceptJob} declineOffer={this.declineOffer}/></List>
@@ -293,7 +293,7 @@ class MyMessages extends Component {
                                 ):(<h3 className="mt-5 text-center text-secondary">Mailbox empty</h3>)} 
 
                             </div>) : 
-                            (<div><h3 className="mb-3">Sent</h3>
+                            (<div><h2 className="mb-3 text-muted">Sent</h2>
                             
                                 {this.state.messageResults.length ? (<List><SentMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} deleteMessage={this.deleteMessage}/>
                                 </List>) : (<h3 className="mt-5 text-center text-secondary">Mailbox empty</h3>)} 

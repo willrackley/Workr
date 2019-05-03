@@ -8,26 +8,26 @@ import Moment from "react-moment";
 export default function MyJobsCard(props) {
    
   return (
-    <div>
+    <div className="">
         {props.results.map(result => (
             <li className="list-group-item mb-3 pt-4 rounded" key={result._id}>
                 <div className="card mb-3">
                     <div className="row no-gutters">
-                        <div className="col-md-4">
+                        <div className="col-md-4 border-right">
                         <img src={result.jobImage} className="card-img-top p-3 mt-4" alt={result.title}></img>
                         </div>
                         <div className="col-md-8">
                         <div className="card-header">
                         <div className="row text-right mb-2">
                             <div className="col-md-4 text-center">
-                            {result.status === "completed" ? (<div><p>{result.status} <Moment format="MM/DD/YYYY">{result.date}</Moment></p></div>): (<p>{result.status}</p>)}
+                            {result.status === "completed" ? (<div><p><span className="font-weight-bold statusCompleted text-capitalize">{result.status}</span> <Moment format="MM/DD/YYYY">{result.date}</Moment></p></div>): (<p className="font-weight-bold statusIncomplete text-capitalize">{result.status}</p>)}
                                 
                             </div>
                             <div className="col-md-4">
-                                <p className="text-right"> ${result.offer}</p>
+                                <p className="text-center offer"> ${result.offer}</p>
                             </div>
                             <div className="col-md-4">
-                                <FormBtn onClick={() => {
+                                <button className="btn deleteBtn" onClick={() => {
                                     confirmAlert({
                                     title: 'You are about to delete this job.',
                                     message: 'Are you sure you want to do this?',
@@ -43,23 +43,18 @@ export default function MyJobsCard(props) {
                                     ]
                                     });
                                 }}>
-                                    &times;
-                                </FormBtn>
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-md-4">
-                            
-                            </div>
-                            
-                        </div>
-                        <h3 className="text-center">{result.title}</h3>
+                        
+                        <h3 className="text-center text-capitalize">{result.title}</h3>
                     </div>
                     <div className="card-body text-center">
                         <p>{result.description}</p>
                     </div>
                     <div className="card-footer text-muted text-center">
-                                {result.status === "incomplete" ? (<FormBtn onClick={() => {
+                                {result.status === "incomplete" ? (<button className="btn cardSubmitButton" onClick={() => {
                                     confirmAlert({
                                     title: 'You are marking this job as complete!',
                                     message: 'Are you sure you want to do this?',
@@ -75,7 +70,7 @@ export default function MyJobsCard(props) {
                                     ]
                                     })}}>
                             Complete Job
-                        </FormBtn>) : (<div><FormBtn onClick={() => {
+                        </button>) : (<div><button className="btn cardSubmitButton" onClick={() => {
                                     confirmAlert({
                                     title: 'You are marking this job as incomplete!',
                                     message: 'Are you sure you want to do this?',
@@ -91,7 +86,7 @@ export default function MyJobsCard(props) {
                                     ]
                                     })}}>
                             Reopen Job
-                        </FormBtn>{result.seekerRated ? ("") : (<div> <FormBtn data-toggle="modal" data-target="#myJobsModal" className="ml-2">Rate your WORKr</FormBtn></div>)}</div>)}            
+                        </button>{result.seekerRated ? ("") : (<div> <FormBtn data-toggle="modal" data-target="#myJobsModal" className="ml-2">Rate your WORKr</FormBtn></div>)}</div>)}            
                     </div>
                         </div>
                     </div>
