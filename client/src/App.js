@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
@@ -8,19 +8,28 @@ import MyJobs from './pages/MyJobs';
 import PostingJob from './pages/PostingJob';
 import MyMessages from './pages/MyMessages';
 import Authorize from './components/Authorize'
-import LandingRedirect from './components/LandingRedirect'
+//import LandingRedirect from './components/LandingRedirect'
+
 import "./App.css"
+
+function requireAuthentication (nextState, replace) {
+  if (!loggedIn()) {
+    replace({
+      pathname: '/login'
+    })
+  }
+}
+
 function App() {
  
   return (
     <Router>
         <Switch>
-       
-          <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={LandingPage} />
           <Route exact path="/sign-up" component={SignUp} />
           
-          <Authorize>
+          <Authorize>            
             <Route exact path="/dashboard" component={userDashboard} />
             <Route exact path="/postJob" component={PostingJob}/>
             <Route exact path="/myJobs" component={MyJobs}/>

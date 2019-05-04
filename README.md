@@ -3,7 +3,7 @@
 ![Landing Page](client/src/images/workr_landingPage.jpg) 
 
 ## Goal:
-Workr is an application that can be used for any peron 18 years old or older to either make fast cash by completing a task that someone is looking to complete or look for someone to get a job done. 
+Workr is an application that can be used for any person 18 years old or older to either make fast cash by completing a task that someone is looking to complete or look for someone to get a job done. 
 
 ## How it works
 Workr allows the user to post or search for active jobs in the area.
@@ -22,7 +22,7 @@ Workr allows the user to post or search for active jobs in the area.
 6. Job poster and user doing the job then have the option to rate each other
 
 ## Usage
-1. On the landing page, create an account by using the 'Sign Up' option 
+1. On the landing page, create an account by using the `Sign Up` or `Register` option 
    - Login if account has already been created
 2. After login in the first time, the `Dashboard` should be empty with the legend `Sorry, there are no available jobs in your area` 
    - Dashboard will show available jobs if database is not empty
