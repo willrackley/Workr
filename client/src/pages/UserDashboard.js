@@ -18,6 +18,7 @@ import "./style.css"
 
 let results = "";
 let filteredResults = "";
+;
 
 class userDashboard extends Component {
     state = {
@@ -77,13 +78,6 @@ class userDashboard extends Component {
                 this.raduisLookUp();
             });
     }
-
-    matchUsersWithjob = () => {
-        API.getAllUsers()
-        .then(res => {
-            console.log(res.data)
-        })
-    }
     
     raduisLookUp = () => {
         const cities = [];
@@ -130,7 +124,6 @@ class userDashboard extends Component {
                 this.setState({ jobResults: filteredNearbyJobs(nearbyJobs) })
                 this.setState({ jobLocation: "Nearby"})
                 this.setState({ loading: false})
-                console.log(filteredNearbyJobs(nearbyJobs));
             })
             
             
@@ -140,12 +133,32 @@ class userDashboard extends Component {
 
     loadJobsNationwide = () => {
         this.setState({ loading: true})
+
         API.getJobs()
         .then(res => {
-            this.setState ({ jobResults: res.data });
+            // this.setState ({ jobResults: res.data });
+            const nationwideJobs = [];
+            for(let n=0; n < res.data.length; n++){
+                nationwideJobs.push(res.data[n]);
+            }
             
-            this.setState({ jobLocation: "Nationwide"});
-            this.setState({ loading: false});
+            API.getAllUsers()
+            .then(res => {
+                for(let l=0; l < nationwideJobs.length; l++){
+                    
+                    for(let m=0; m < res.data.length; m++){
+                        if(nationwideJobs[l].posterId === res.data[m]._id){
+                            nationwideJobs[l].profileImage = res.data[m].profileImage;
+                            nationwideJobs[l].username = res.data[m].username;
+                            
+                        }
+                    }
+                }
+                
+                this.setState({ jobResults: nationwideJobs })
+                this.setState({ jobLocation: "Nationwide"});
+                this.setState({ loading: false});
+            })
         })
         .catch(err => console.log(err));
     }
@@ -205,9 +218,6 @@ class userDashboard extends Component {
               break;
             case 'error':
               NotificationManager.error('', 'something went wrong, please try again');
-            //   NotificationManager.error('Error message', 'Click me!', 5000, () => {
-            //     alert('callback');
-            //   });
               break;
             default: 
             return;
