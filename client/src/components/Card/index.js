@@ -2,7 +2,7 @@ import React from "react";
 import { FormBtn } from "../Form";
 import "./style.css";
 
-
+//Card for the dashboard jobs
 class Card extends React.Component {
     constructor(props) {
         super(props)
