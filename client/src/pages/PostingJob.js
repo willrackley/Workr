@@ -10,7 +10,7 @@ import Footer from "../components/Footer"
 
 let uploadTextColor = ""
 
-class PostingJob extends Component {
+class Profile extends Component {
 
     state = {
         title: "",
@@ -205,4 +205,4 @@ class PostingJob extends Component {
 
 }
 
-export default PostingJob;
+export default Profile;
