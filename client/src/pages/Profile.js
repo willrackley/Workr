@@ -68,6 +68,7 @@ class Profile extends Component {
         .catch(err => console.log("error"))
     }
 
+    //storing image in firebase
     uploadImgFile = () => {
         this.setState({ loading: true })
         let storageRef = Firebase.storage.ref(`images/${this.state.selectedRawFile.name}${uuid.v4()}`);
