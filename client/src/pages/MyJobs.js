@@ -23,7 +23,6 @@ class MyJobs extends Component {
         .then(res => {
             this.setState({user: res.data})
             this.loadMyJobs(this.state.user.id);
-            //console.log(this.state.user)
         })
     }
 
@@ -44,7 +43,6 @@ class MyJobs extends Component {
     }
 
     completeJob = (id) => {
-        console.log(id)
         API.completeMyJob(id)
         .then(res => {
             this.loadMyJobs(this.state.user.id);
@@ -53,7 +51,6 @@ class MyJobs extends Component {
     }
 
     reopenJob = (id) => {
-        console.log(id)
         API.reopenMyJob(id)
         .then(res => {
             this.loadMyJobs(this.state.user.id);
@@ -63,15 +60,13 @@ class MyJobs extends Component {
     
     employerJobs = () => {
         this.setState({ jobChoice: "employer" });
-        console.log('employer')
     }
 
     workerJobs = () => {
         this.setState({ jobChoice: "worker" });
         API.getMyWorkedJobs(this.state.user.id)
         .then(res => {
-            this.setState({ workedJobs: res.data })
-            console.log(res.data)
+            this.setState({ workedJobs: res.data });
         })
     }
 
