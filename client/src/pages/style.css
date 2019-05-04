@@ -136,7 +136,7 @@
     #savedProfileMessage {
         position:fixed;
         background: #28a6af7b;
-        top: 20;
+        top: 5;
         right: 25%;
         z-index:100;
         padding: 20px;
