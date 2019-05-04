@@ -138,7 +138,6 @@ class Profile extends Component {
                     <button 
                     className="btn profileUploadBtn d-block text-white mt-5"
                     onClick={this.updateUser}
-                    disabled={this.state.selectedFile === "http://www.racemph.com/wp-content/uploads/2016/09/profile-image-placeholder.png" || !this.state.username}
                     >
                     Save Changes
                     </button>
