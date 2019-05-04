@@ -194,6 +194,7 @@ class userDashboard extends Component {
         }
         API.saveMessage(newMessage)
         .then(res => {
+            //message displays sent message
             this.createNotification('success')
             this.setState({ messageBody: ""});
         })
