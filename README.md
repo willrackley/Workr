@@ -3,14 +3,13 @@
 ![Landing Page](client/src/images/workr_landingPage.jpg) 
 
 ## Goal:
-Workr is an application that can be used for any peron 18 years old or older to either make fast cash by completing a task that someone is looking to complete or look for someone to get a job done. 
+Workr is an application that can be used for any person 18 years old or older to either make fast cash by completing a task that someone is looking to complete or look for someone to get a job done. 
 
 ## How it works
 Workr allows the user to post or search for active jobs in the area.
 
 1. User comes to landing page where they sign up/log in
 2. Upon logging in, they are shown the current jobs that are available based on location
-   - Can have it set to X miles within their current location with option to select a city.
 3. In this same page, there is a link where a user can post a job
    - Inside the post a job page, there is aform where user inputs a description, including:
       - Amount to be paid
@@ -44,20 +43,16 @@ Workr allows the user to post or search for active jobs in the area.
 
 ## Technologies used for the project
 
-### Client
-- [x] Google Maps React
-- [x] FontAwesome - REACT
-- [x] REACT Bootstrap
-- [x] REACT Moment
-
-
-### Server
-- [x] Passport.js - user validation
-- [x] MongoDb - User can GET & POST
+- [x] Google Maps React - Get user location information to filter jobs based on location
+- [x] Passport.js - user validation. Middleware used to authenticate requests in node applications
+- [x] Express - Framework for Node.js that will listen on the server side for input request from clientes
+- [x] MongoDb - Database to store jobs, messages, user information (GET & POST)
 - [x] Firebase - Store images
-- [x] Express
-- [x] Connect Flash
-
-
-
-
+- [x] REACT Bootstrap & FontAwesome - front end design
+- [x] jQuery - Javascript front-end manipulation
+- [x] Zip codes npm - for location radius
+- [x] LocationIQ - for reverse geocoding
+- [x] Axios for attaining (get) json from LocationIQ api
+- [x] Moment-React - Formatting the date that is in the database
+- [x] React-confirm-alert: Present confirmation dialog to the user
+- [x] UUID - to generate random id's for storing images in firebase
