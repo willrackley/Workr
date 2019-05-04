@@ -108,9 +108,30 @@ module.exports = {
   },
   updateUserInfo: function(req, res) {
     console.log(req.body)
-    db.User
+    if(req.body.profileImage ===  'no image' && req.body.username ==='no name'){
+      console.log('empty')
+      db.User
+      .findOne({ _id: req.params.id })
+      .then(dbModel => res.end())
+      .catch(err => res.status(422).json(err));
+    }
+    if(req.body.profileImage !==  'no image' && req.body.username ==='no name'){
+      db.User
+      .findOneAndUpdate({ _id: req.params.id }, {profileImage: req.body.profileImage})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+    }
+    if(req.body.profileImage ===  'no image' && req.body.username !=='no name'){
+      db.User
+      .findOneAndUpdate({ _id: req.params.id }, {username: req.body.username})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+    }
+    if(req.body.profileImage !==  'no image' && req.body.username !=='no name'){
+      db.User
       .findOneAndUpdate({ _id: req.params.id }, {$set: {profileImage: req.body.profileImage, username: req.body.username}})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+    }
   },
 };
