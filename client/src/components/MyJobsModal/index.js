@@ -1,5 +1,4 @@
 import React from "react";
-//import { TextArea } from "../Form";
 import StarRatings from 'react-star-ratings';
 import API from "../../utils/API";
 

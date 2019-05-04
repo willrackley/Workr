@@ -106,4 +106,11 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  updateUserInfo: function(req, res) {
+    console.log(req.body)
+    db.User
+      .findOneAndUpdate({ _id: req.params.id }, {$set: {profileImage: req.body.profileImage, username: req.body.username}})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 };

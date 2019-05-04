@@ -7,7 +7,6 @@ import API from "../utils/API";
 import List from "../components/List";
 import Footer from "../components/Footer";
 import ReplyModal from "../components/ReplyModal";
-import {FormBtn} from "../components/Form";
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import $ from 'jquery';
@@ -227,13 +226,14 @@ class MyMessages extends Component {
             <div>
                 <Nav page="/dashboard">
                     <div className="nav-item dropdown">
-                        <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.user.firstname}
-                        </div>
+                        </a>
                         <div className="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
                             <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
                             <a className="dropdown-item" href="/postJob">Post a Job</a>
                             <a className="dropdown-item" href="/MyJobs">My Jobs</a>
+                            <a className="dropdown-item" href="/profile">Edit Profile</a>
                             <NavItemLogout/>
                         </div>
                     </div>

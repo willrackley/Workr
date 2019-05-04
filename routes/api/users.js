@@ -22,6 +22,9 @@ router.route("/sign-up")
 router.route("/rating/:id")
   .put(usersController.updateRating);
 
+router.route("/update/:id")
+  .put(usersController.updateUserInfo);
+  
 router.route("/login")
 .post(
   function (req, res, next) {

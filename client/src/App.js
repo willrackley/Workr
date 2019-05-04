@@ -9,7 +9,6 @@ import Profile from './pages/Profile';
 import PostingJob from './pages/PostingJob';
 import MyMessages from './pages/MyMessages';
 import Authorize from './components/Authorize'
-import LandingRedirect from './components/LandingRedirect'
 import "./App.css"
 function App() {
  

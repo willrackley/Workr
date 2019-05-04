@@ -2,28 +2,17 @@ import React, { Component } from "react";
 import axios from "axios";
 import Button from 'react-bootstrap/Button'; 
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { faTree, faCar, faHouseDamage, faTools, faToolbox } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Nav from "../components/Nav";
 import Card from "../components/Card";
 import List from "../components/List";
-//import { Link } from 'react-router-dom';
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
-//import MapContainer  from "../components/MapContainer";
-//import cities from "../components/MapContainer";
 import 'react-notifications/lib/notifications.css';
 import MessageModal from "../components/MessageModal";
 import Footer from "../components/Footer"
-import {FormBtn} from "../components/Form";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import zipcodes from "zipcodes";
 import "./style.css"
-
-// import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
-// import React_App_API_KEY_G from "../components/MapContainer/config_keys"
-// const API_KEY = React_App_API_KEY_G;
-//delete comments later
 
 
 
@@ -48,7 +37,6 @@ class userDashboard extends Component {
     }
 
     componentDidMount() {
-        
         const token = localStorage.getItem('jwt')
         API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
@@ -89,6 +77,13 @@ class userDashboard extends Component {
                 this.raduisLookUp();
             });
     }
+
+    matchUsersWithjob = () => {
+        API.getAllUsers()
+        .then(res => {
+            console.log(res.data)
+        })
+    }
     
     raduisLookUp = () => {
         const cities = [];
@@ -111,6 +106,7 @@ class userDashboard extends Component {
             
             const nearbyJobs = []
             
+            
             for(let j=0; j < res.data.length; j++){
                 for(let i=0; i < this.state.nearbyCities.length; i++){
                     if(res.data[j].city === this.state.nearbyCities[i].city && res.data[j].state === this.state.nearbyCities[i].state ){
@@ -118,12 +114,26 @@ class userDashboard extends Component {
                     } 
                 }
             }
+
+            API.getAllUsers()
+            .then(res => {
+                for(let k=0; k < nearbyJobs.length; k++){
+                    for(let h=0; h < res.data.length; h++){
+                        if(nearbyJobs[k].posterId === res.data[h]._id){
+                            nearbyJobs[k].profileImage = res.data[h].profileImage;
+                            nearbyJobs[k].username = res.data[h].username;
+                        }
+                    }
+                }
+                //filter out repeated entries
+                const filteredNearbyJobs = (nearbyJobs) => nearbyJobs.filter((k, l) => nearbyJobs.indexOf(k) === l)
+                this.setState({ jobResults: filteredNearbyJobs(nearbyJobs) })
+                this.setState({ jobLocation: "Nearby"})
+                this.setState({ loading: false})
+                console.log(filteredNearbyJobs(nearbyJobs));
+            })
             
-            //filter out repeated entries
-            const filteredNearbyJobs = (nearbyJobs) => nearbyJobs.filter((k, l) => nearbyJobs.indexOf(k) === l)
-            this.setState({ jobResults: filteredNearbyJobs(nearbyJobs) })
-            this.setState({ jobLocation: "Nearby"})
-            this.setState({ loading: false})
+            
         })
         .catch(err => console.log(err));
     }
@@ -223,13 +233,14 @@ class userDashboard extends Component {
             <div>
                 <Nav page="/dashboard">
                     <div className="nav-item dropdown">
-                        <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.user.firstname}
-                        </div>
+                        </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a className="dropdown-item" href="/postJob">Post a Job</a>
                             <a className="dropdown-item" href="/MyJobs">My Jobs</a>
                             <a className="dropdown-item" href="/messages">My Messages</a>
+                            <a className="dropdown-item" href="/profile">Edit Profile</a>
                             <NavItemLogout/>
                         </div>
                     </div>

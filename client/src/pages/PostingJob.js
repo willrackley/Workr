@@ -6,6 +6,7 @@ import API from "../utils/API";
 import Firebase from "../utils/Firebase-config";
 import $ from 'jquery';
 import uuid from "uuid";
+import Footer from "../components/Footer"
 
 let uploadTextColor = ""
 
@@ -101,13 +102,14 @@ class PostingJob extends Component {
             <div>
                 <Nav page="/dashboard">
                     <div className="nav-item dropdown">
-                        <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.user.firstname}
-                        </div>
+                        </a>
                         <div className="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
                             <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
                             <a className="dropdown-item" href="/MyJobs">My Jobs</a>
                             <a className="dropdown-item" href="/messages">My Messages</a>
+                            <a className="dropdown-item" href="/profile">Edit Profile</a>
                             <NavItemLogout/>
                         </div>
                     </div>
@@ -196,6 +198,7 @@ class PostingJob extends Component {
                     </div>
                     
             </div>
+            <Footer style={{top: 100}}/>
            </div>
         )
     }

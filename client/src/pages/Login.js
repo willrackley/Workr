@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, FormBtn } from "../components/Form";
+import { Input } from "../components/Form";
 import { Redirect } from 'react-router-dom';
 import Nav from "../components/Nav";
 import API from "../utils/API";

@@ -42,4 +42,22 @@
     border-bottom: 2px solid #28a6af;
 }
 
+.imageCropperDash {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #28a6af;
+}
+
+.profilePicDash {
+    display: inline;
+    margin: 0 auto;
+    margin-left: 0px;
+    border-radius: 50%;
+    height: auto;
+    width: 50%;
+}
+
 

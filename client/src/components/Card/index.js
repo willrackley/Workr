@@ -2,7 +2,6 @@ import React from "react";
 import { FormBtn } from "../Form";
 import API from "../../utils/API";
 import "./style.css";
-import Popup from "reactjs-popup";
 let grabbedRating = 0
 
 class Card extends React.Component {
@@ -20,9 +19,6 @@ class Card extends React.Component {
           
         }
       }
-
-     
-      
       
       render(){
         
@@ -32,10 +28,14 @@ class Card extends React.Component {
         {this.props.results.map(result => (
           
                 <div className="card mb-3 rounded" key={result._id}>
-                <div className="card-header bg-white">
-                  <button className="titleBtn btn rounded-circle">
+                <div className="card-header bg-white text-right">
+                  {result.username === "null" ? (<span className="text-capitalize mr-2 font-weight-bold">
                   {result.posterName}
-                  </button>
+                  </span>) : (<span className="text-capitalize mr-2 font-weight-bold">
+                  {result.username}
+                  </span>)}
+                  
+                  {result.profileImage === "null" ? (<img className="profilePicDash" src="http://www.racemph.com/wp-content/uploads/2016/09/profile-image-placeholder.png" alt={`${result.posterName} profile `} />) : (<img className="profilePicDash" src={result.profileImage} alt={`${result.posterName} profile `} />)} 
                 </div>
                 <img src={result.jobImage} className="card-img-top img-fluid" alt={result.title}></img>
                     <div className="card-body text-center">
