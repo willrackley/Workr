@@ -107,7 +107,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   updateUserInfo: function(req, res) {
-    console.log(req.body)
     if(req.body.profileImage ===  'no image' && req.body.username ==='no name'){
       console.log('empty')
       db.User
