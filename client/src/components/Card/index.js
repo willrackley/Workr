@@ -33,7 +33,7 @@ class Card extends React.Component {
                   {result.username}
                   </span>)}
                   
-                  {result.profileImage === "null" || " " ? (<img className="profilePicDash" src="http://www.racemph.com/wp-content/uploads/2016/09/profile-image-placeholder.png" alt={`${result.posterName} profile `} />) : (<img className="profilePicDash" src={result.profileImage} alt={`${result.posterName} profile `} />)} 
+                  {result.profileImage === "null" || "" ? (<img className="profilePicDash" src="http://www.racemph.com/wp-content/uploads/2016/09/profile-image-placeholder.png" alt={`${result.posterName} profile `} />) : (<img className="profilePicDash" src={result.profileImage} alt={`${result.posterName} profile `} />)} 
                 </div>
                 <img src={result.jobImage} className="card-img-top img-fluid" alt={result.title}></img>
                     <div className="card-body text-center">
