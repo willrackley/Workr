@@ -54,7 +54,6 @@ class Profile extends Component {
     
         API.updateUser(this.state.user.id, newUserInfo)
         .then(res => {
-            //console.log(res.data)
             this.setState({ username: "" })
             $("#savedProfileMessage").fadeIn();
             setTimeout(this.hideProfileMessage, 2000);
