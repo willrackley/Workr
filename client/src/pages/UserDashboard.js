@@ -202,7 +202,7 @@ class userDashboard extends Component {
     }
 
  
-
+    //function to display messages
     createNotification = (type) => {
           switch (type) {
             case 'info':
