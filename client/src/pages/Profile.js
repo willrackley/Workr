@@ -109,7 +109,7 @@ class Profile extends Component {
                 <div className="col-md-6 mt-5">
                     <h2 className="text-muted text-center mb-4">Edit Profile</h2>
                     <div className="imageCropper">
-                        {this.state.imageUploaded ? (<img className="profilePic" src={this.state.selectedFile} alt="profile image" />) : (<span>{this.state.user.profileImage === "null" ? (<img className="profilePic" src={this.state.selectedFile} alt="profile image" />) : (<img className="profilePic" src={this.state.user.profileImage} alt="profile image" />)}</span>)}
+                        {this.state.imageUploaded ? (<img className="profilePic" src={this.state.selectedFile} alt="profile image" />) : (<span>{this.state.user.profileImage === "null" || this.state.user.profileImage === "no image" ? (<img className="profilePic" src={this.state.selectedFile} alt="profile image" />) : (<img className="profilePic" src={this.state.user.profileImage} alt="profile image" />)}</span>)}
  
                     </div>
 
