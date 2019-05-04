@@ -73,6 +73,7 @@ class PostingJob extends Component {
         this.changeColor();
     }
 
+    //storing in firebase
     uploadImgFile = () => {
         this.setState({ loading: true })
         let storageRef = Firebase.storage.ref(`images/${this.state.selectedFile.name}${uuid.v4()}`);
