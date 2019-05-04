@@ -74,7 +74,6 @@ class userDashboard extends Component {
             response => {
                 const myZip = response.data.address.postcode;
                 this.setState({ zip: myZip });
-                console.log(this.state.zip);
                 this.raduisLookUp();
             });
     }
@@ -93,7 +92,6 @@ class userDashboard extends Component {
     }
 
     loadJobs = () => {
-        console.log()
         this.setState({ loading: true})
         API.getJobs()
         .then(res => {
@@ -194,9 +192,9 @@ class userDashboard extends Component {
             jobTitle: title,
             messageBody: this.state.messageBody
         }
-         console.log(newMessage);
         API.saveMessage(newMessage)
         .then(res => {
+            //message displays sent message
             this.createNotification('success')
             this.setState({ messageBody: ""});
         })

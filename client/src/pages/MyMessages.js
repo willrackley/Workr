@@ -61,7 +61,6 @@ class MyMessages extends Component {
 
     //grab data from messages
     getMessageData = (data) => {
-        console.log(data)
         sendingOffer = false;
         acceptingOffer = false;
         decliningOffer = false;
@@ -93,9 +92,6 @@ class MyMessages extends Component {
     }
 
     sendReply = (senderId, title, senderName, message) => {
-        console.log(`acceptingOffer: ${acceptingOffer}`)
-        console.log(`sendingOffer ${sendingOffer}`)
-        console.log(`decliningOffer ${decliningOffer}`)
         if(!sendingOffer && !acceptingOffer && !decliningOffer){
             let newMessage = {
                 senderId: this.state.user.id,
@@ -107,7 +103,6 @@ class MyMessages extends Component {
                 messageBody: this.state.replyMessageBody,
                 inResponseMessage: message
             }
-             console.log(newMessage);
             API.saveMessage(newMessage)
             .then(res => {
                 $("#sentMessage").fadeIn()
@@ -125,12 +120,10 @@ class MyMessages extends Component {
                 jobOwner: this.state.jobOwner,
                 messageBody: `${this.state.user.firstname} has offered you the Job!`
             }
-            console.log(newOffer)
             API.saveOfferMessage(newOffer)
             .then(response => {
                 $("#sentMessage").fadeIn()
-                setTimeout(this.hideSentMessage, 2000)
-                console.log(response.data)
+                setTimeout(this.hideSentMessage, 2000);
             })
             .catch(err => console.log('error'));
         }
@@ -145,12 +138,10 @@ class MyMessages extends Component {
                 jobOwner: this.state.jobOwner,
                 messageBody: `${this.state.user.firstname} has accepted your offer!`
             }
-            console.log(acceptOffer)
             API.saveOfferMessage(acceptOffer)
             .then(response => {
                 $("#sentMessage").fadeIn()
-                setTimeout(this.hideSentMessage, 2000)
-                console.log(response.data)
+                setTimeout(this.hideSentMessage, 2000);
             })
             .catch(err => console.log('error'));
         }
@@ -164,11 +155,8 @@ class MyMessages extends Component {
                 jobOwner: senderId,
                 messageBody: `${this.state.user.firstname} has declined your offer!`
             }
-            console.log(newDeclinedOffer)
             API.saveOfferMessage(newDeclinedOffer)
             .then(response => {
-                
-                console.log(response.data)
             })
             .catch(err => console.log('error'));
         }
@@ -185,7 +173,6 @@ class MyMessages extends Component {
 
     acceptJob = (data) => {
         decliningOffer = false;
-        console.log(data)
         this.setState({ jobOwner: data.jobOwner}) 
         API.getJobs()
         .then(res => {
@@ -213,7 +200,6 @@ class MyMessages extends Component {
     deleteMessage = (id) => {
         API.deleteMyMessage(id)
         .then(res => {
-            console.log('deletd')
             this.loadMyMessages(this.state.user.id);
         })
         .catch(err => console.log(err));

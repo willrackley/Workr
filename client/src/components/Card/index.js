@@ -27,7 +27,7 @@ class Card extends React.Component {
         {this.props.results.map(result => (
                 <div className="card mb-3 rounded" key={result._id}>
                 <div className="card-header bg-white text-right">
-                  {result.username === "null" || "" ? (<span className="text-capitalize mr-2 font-weight-bold">
+                  {result.username === "null" || " " ? (<span className="text-capitalize mr-2 font-weight-bold">
                   {result.posterName}
                   </span>) : (<span className="text-capitalize mr-2 font-weight-bold">
                   {result.username}
@@ -48,7 +48,7 @@ class Card extends React.Component {
                         </div>
                         <h3>{result.title}</h3>
                         <p>{result.description}</p>  
-                        <p>{result.city}, {result.state}</p> 
+                        <p className="text-capitalize">{result.city}, {result.state}</p> 
                         <FormBtn id="messageEmployr"
                         onClick={()=>this.props.getDataForMessage(result)}
                         data-toggle="modal" data-target="#myModal">>Message EMPLOYr</FormBtn>

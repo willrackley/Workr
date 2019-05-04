@@ -27,8 +27,7 @@ class Profile extends Component {
         const token = localStorage.getItem('jwt')
         API.getUser({ headers: {Authorization: `JWT ${token}` } })
         .then(res => {
-            this.setState({user: res.data})
-            console.log(this.state.user)
+            this.setState({user: res.data});
         })
     }
 
@@ -73,9 +72,8 @@ class Profile extends Component {
             },() => {
                 storageRef.getDownloadURL()
                 .then(res => {
-                    this.setState({ loading: false })
-                    this.setState({ imageUrl: res })
-                    console.log(this.state.imageUrl) 
+                    this.setState({ loading: false });
+                    this.setState({ imageUrl: res }); 
                 })
             })
     }
