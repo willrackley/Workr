@@ -1,6 +1,5 @@
 import React from "react";
 import { FormBtn } from "../Form";
-import StarRatings from 'react-star-ratings';
 import API from "../../utils/API";
 import "./style.css";
 import Popup from "reactjs-popup";
@@ -33,18 +32,11 @@ class Card extends React.Component {
         {this.props.results.map(result => (
           
                 <div className="card mb-3 rounded" key={result._id}>
-                <div className="card-header bg-white"><Popup className="popupNameBtn" trigger={<button className="titleBtn btn rounded-circle">{result.posterName}</button>} closeOnDocumentClick position="bottom left" onOpen={()=>this.getStarRating(result)}>
-                              <div>
-                              <p>{result.posterName}</p>
-                              <StarRatings
-                                rating={this.state.user}
-                                numberOfStars={5}
-                                starDimension="15px"
-                                starSpacing="1px"
-                                starRatedColor="#28a6af"
-                              />
-                              </div>
-                              </Popup></div>
+                <div className="card-header bg-white">
+                  <button className="titleBtn btn rounded-circle">
+                  {result.posterName}
+                  </button>
+                </div>
                 <img src={result.jobImage} className="card-img-top img-fluid" alt={result.title}></img>
                     <div className="card-body text-center">
                         <div className="row">

@@ -43,7 +43,7 @@ export default function MyJobsCard(props) {
                                     ]
                                     });
                                 }}>
-                                    <i class="far fa-trash-alt"></i>
+                                    <i className="far fa-trash-alt"></i>
                                 </button>
                             </div>
                         </div>
@@ -54,7 +54,7 @@ export default function MyJobsCard(props) {
                         <p>{result.description}</p>
                     </div>
                     <div className="card-footer text-muted text-center">
-                                {result.status === "incomplete" ? (<button className="btn cardSubmitButton" onClick={() => {
+                                {result.acceptedBy !== null ? (<div>{result.status === "incomplete" ? (<button className="btn cardSubmitButton" onClick={() => {
                                     confirmAlert({
                                     title: 'You are marking this job as complete!',
                                     message: 'Are you sure you want to do this?',
@@ -86,7 +86,8 @@ export default function MyJobsCard(props) {
                                     ]
                                     })}}>
                             Reopen Job
-                        </button>{result.seekerRated ? ("") : (<div> <FormBtn data-toggle="modal" data-target="#myJobsModal" className="ml-2">Rate your WORKr</FormBtn></div>)}</div>)}            
+                        </button>{result.seekerRated ? ("") : ("")}</div>)}</div>) : ("")}
+                        {/* <div> <FormBtn data-toggle="modal" data-target="#myJobsModal" className="ml-2">Rate your WORKr</FormBtn></div>            */}
                     </div>
                         </div>
                     </div>

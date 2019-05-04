@@ -247,13 +247,13 @@ class userDashboard extends Component {
                                     variant="white"
                                     className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("All")}>
-                                   <i class="fas fa-toolbox"></i> All Jobs
+                                   <i className="fas fa-toolbox"></i> All Jobs
                                 </Button>
                                 <Button
                                     variant="white"
                                     className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("Landscaping")}>
-                                    <i class="fas fa-tree"></i> Landscaping
+                                    <i className="fas fa-tree"></i> Landscaping
                                 </Button>
 
                                 <Button
@@ -261,21 +261,21 @@ class userDashboard extends Component {
                                     className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("House Work")}
                                     > 
-                                    <i class="fas fa-house-damage"></i> House Work
+                                    <i className="fas fa-house-damage"></i> House Work
                                 </Button>
                                 <Button
                                     variant="white"
                                     className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("Car Cleaning")}
                                     >
-                                    <i class="fas fa-car-alt"></i> Car Cleaning
+                                    <i className="fas fa-car-alt"></i> Car Cleaning
                                 </Button>
                                 <Button
                                     variant="white"
                                     className="btn catBtns d-block text-left"
                                     onClick={()=>this.loadJobsByCategory("Miscellaneous")}
                                     >
-                                    <i class="fas fa-tools"></i> Miscellaneous
+                                    <i className="fas fa-tools"></i> Miscellaneous
                                 </Button>
 
                             </ButtonGroup>
@@ -301,8 +301,8 @@ class userDashboard extends Component {
                                 name="messageBody"
                                 type="text"
                                 > 
-                                <FormBtn onClick={()=>this.sendMessageToEmployer(this.state.jobInfoForMessage.posterId, this.state.jobInfoForMessage.title, this.state.jobInfoForMessage.posterName)} data-dismiss="modal" aria-label="Close">SEND
-                                </FormBtn>
+                                <button className="btn signUPBtn text-white" onClick={()=>this.sendMessageToEmployer(this.state.jobInfoForMessage.posterId, this.state.jobInfoForMessage.title, this.state.jobInfoForMessage.posterName)} data-dismiss="modal" aria-label="Close">SEND
+                                </button>
                                 </MessageModal>
                             </div>)}
                         </div>

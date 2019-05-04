@@ -23,10 +23,11 @@ class LandingPage extends Component {
                     <Jumbotron>
                         <div className="jumbotronInfo text-center">
                             <h1 className="text-white"><span>EARN</span> CASH & <span>FINISH</span> TASKS</h1>
-                            <p className="text-white">The easiest way to earn some quick cash or finish that job you've been putting off</p>
                             <button className="btn registerButton text-white" onClick={this.signupRedirect}>REGISTER</button>
                         </div>
                     </Jumbotron>
+
+                    {/* info section */}
                     <div className="container aboutContainer">
                         <div className="text-center my-5 text-muted"><h2 className="mt-5 display-4 aboutTitle">Everyone's an <span className="titleHighlight"> EMPLOYr</span> and a <span className="titleHighlight"> WORKr</span></h2></div>
                         <div className="row">
