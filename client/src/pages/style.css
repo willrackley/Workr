@@ -131,7 +131,7 @@
 }
 
 /* ========== Media Query =========== */
-
+/* smart phone width */
 @media screen and (max-width: 425px){
     #savedProfileMessage {
         position:fixed;
