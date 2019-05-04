@@ -7,10 +7,7 @@ import MyJobsModal from "../components/MyJobsModal";
 import WorkedJobsModal from "../components/WorkedJobsModal";
 import NavItemLogout from '../components/NavItemLogout';
 import API from "../utils/API";
-import { FormBtn } from "../components/Form";
 import Footer from "../components/Footer"
-
-
 
 class MyJobs extends Component {
     state = {
@@ -84,14 +81,14 @@ class MyJobs extends Component {
                 
                 <Nav page="/dashboard">
                     <div className="nav-item dropdown">
-                        <div className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.user.firstname}
-                        </div>
+                        </a>
                         <div className="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
                             <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
                             <a className="dropdown-item" href="/postJob">Post a Job</a>
                             <a className="dropdown-item" href="/messages">My Messages</a>
-                            {/* <a className="dropdown-item" href="/profile">Edit Profile</a> */}
+                            <a className="dropdown-item" href="/profile">Edit Profile</a>
                             <NavItemLogout/>
                         </div>
                     </div>

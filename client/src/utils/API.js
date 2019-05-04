@@ -23,7 +23,13 @@ export default {
     },
     getUser: function(tokenInfo) {
         return axios.get("/api/users/find", tokenInfo);
-    }, 
+    },
+    getAllUsers: function() {
+        return axios.get("/api/users/");
+    },
+    updateUser: function(id, userInfo) {
+        return axios.put(`/api/users/update/${id}`, userInfo);
+    },  
     getMyJobs: function(id) {
         return axios.get(`/api/jobs/${id}`);
     },

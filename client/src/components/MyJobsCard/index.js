@@ -1,5 +1,4 @@
 import React from "react";
-import { FormBtn } from "../Form";
 import "./style.css"
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
@@ -87,7 +86,6 @@ export default function MyJobsCard(props) {
                                     })}}>
                             Reopen Job
                         </button>{result.seekerRated ? ("") : ("")}</div>)}</div>) : ("")}
-                        {/* <div> <FormBtn data-toggle="modal" data-target="#myJobsModal" className="ml-2">Rate your WORKr</FormBtn></div>            */}
                     </div>
                         </div>
                     </div>

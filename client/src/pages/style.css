@@ -90,6 +90,15 @@
     padding: 20px;
 }
 
+#savedProfileMessage {
+    position:fixed;
+    background: #28a6af7b;
+    top: 100;
+    right: 25%;
+    z-index:100;
+    padding: 20px;
+}
+
 .glowBorder {
     border: 2px solid #d2ca5e;
 }
