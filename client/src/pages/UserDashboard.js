@@ -234,7 +234,7 @@ class userDashboard extends Component {
             results = Array.from(this.state.jobResults).filter(jobs => jobs.category === this.state.category);
         }
 
-        //only show job postings that arent ours
+        //only show job postings that arent from the user
         filteredResults = results.filter(jobs => jobs.posterId !== this.state.user.id);
 
         return (
