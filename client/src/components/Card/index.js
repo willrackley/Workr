@@ -1,22 +1,12 @@
 import React from "react";
 import { FormBtn } from "../Form";
-import API from "../../utils/API";
 import "./style.css";
-let grabbedRating = 0
+
 
 class Card extends React.Component {
     constructor(props) {
         super(props)
         this.state = { user: 0 }
-        this.getStarRating = (data) => {
-          
-          API.findOneUser(data.posterId)
-          .then(res => {
-            grabbedRating = res.data[0].rating
-            this.setState({ user: grabbedRating})
-            return grabbedRating;
-          })
-        }
       }
       
       render(){
