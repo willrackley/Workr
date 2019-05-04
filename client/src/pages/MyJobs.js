@@ -76,9 +76,9 @@ class MyJobs extends Component {
                 {/* Nav Component */}
                 <Nav page="/dashboard">
                     <div className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button className="btn nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.user.firstname}
-                        </a>
+                        </button>
                         <div className="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
                             <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
                             <a className="dropdown-item" href="/postJob">Post a Job</a>
