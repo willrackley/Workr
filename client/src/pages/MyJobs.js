@@ -73,7 +73,7 @@ class MyJobs extends Component {
     render() {
         return (
             <div>
-                
+                {/* Nav Component */}
                 <Nav page="/dashboard">
                     <div className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
