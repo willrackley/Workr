@@ -49,7 +49,14 @@ class Profile extends Component {
     }
 
     updateUser = () => {
+        
         const newUserInfo = {profileImage: this.state.imageUrl, username: this.state.username};
+        if(this.state.username === ""){
+            newUserInfo.username = "no name";
+        }
+        if(this.state.imageUrl === ""){
+            newUserInfo.profileImage = "no image";
+        }
     
         API.updateUser(this.state.user.id, newUserInfo)
         .then(res => {
