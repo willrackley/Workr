@@ -15,7 +15,6 @@ function App() {
   return (
     <Router>
         <Switch>
-       
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={SignUp} />
@@ -27,7 +26,6 @@ function App() {
             <Route exact path="/messages" component={MyMessages}/>
             <Route exact path="/profile" component={Profile}/>
           </Authorize>
-         
         </Switch>
     </Router>
   );
