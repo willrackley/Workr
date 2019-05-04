@@ -241,9 +241,9 @@ class userDashboard extends Component {
             <div>
                 <Nav page="/dashboard">
                     <div className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.user.firstname}
-                        </a>
+                        </button>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a className="dropdown-item" href="/postJob">Post a Job</a>
                             <a className="dropdown-item" href="/MyJobs">My Jobs</a>
