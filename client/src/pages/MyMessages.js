@@ -8,10 +8,9 @@ import List from "../components/List";
 import Footer from "../components/Footer";
 import ReplyModal from "../components/ReplyModal";
 import {FormBtn} from "../components/Form";
-import 'react-notifications/lib/notifications.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import $ from 'jquery';
 let sendingOffer = false;
 let acceptingOffer = true;
 let decliningOffer = true;
@@ -33,6 +32,7 @@ class MyMessages extends Component {
         .then(res => {
             this.setState({user: res.data})
             this.loadMyMessages(this.state.user.id)
+            $("#sentMessage").hide()
         })
     }
 
@@ -89,6 +89,10 @@ class MyMessages extends Component {
             })
     }
 
+    hideSentMessage = () => {
+       return $("#sentMessage").fadeOut();
+    }
+
     sendReply = (senderId, title, senderName, message) => {
         console.log(`acceptingOffer: ${acceptingOffer}`)
         console.log(`sendingOffer ${sendingOffer}`)
@@ -107,7 +111,8 @@ class MyMessages extends Component {
              console.log(newMessage);
             API.saveMessage(newMessage)
             .then(res => {
-                this.createNotification('success')
+                $("#sentMessage").fadeIn()
+                setTimeout(this.hideSentMessage, 2000)
                 this.setState({ replyMessageBody: ""});
             })
             .catch(err => this.createNotification('error'));
@@ -124,10 +129,11 @@ class MyMessages extends Component {
             console.log(newOffer)
             API.saveOfferMessage(newOffer)
             .then(response => {
-                this.createNotification('success')
+                $("#sentMessage").fadeIn()
+                setTimeout(this.hideSentMessage, 2000)
                 console.log(response.data)
             })
-            .catch(err => this.createNotification('error'));
+            .catch(err => console.log('error'));
         }
 
         if(!sendingOffer && acceptingOffer  && !decliningOffer){
@@ -143,10 +149,11 @@ class MyMessages extends Component {
             console.log(acceptOffer)
             API.saveOfferMessage(acceptOffer)
             .then(response => {
-                this.createNotification('success')
+                $("#sentMessage").fadeIn()
+                setTimeout(this.hideSentMessage, 2000)
                 console.log(response.data)
             })
-            .catch(err => this.createNotification('error'));
+            .catch(err => console.log('error'));
         }
         if(decliningOffer){
             let newDeclinedOffer = {
@@ -161,10 +168,10 @@ class MyMessages extends Component {
             console.log(newDeclinedOffer)
             API.saveOfferMessage(newDeclinedOffer)
             .then(response => {
-                this.createNotification('success')
+                
                 console.log(response.data)
             })
-            .catch(err => this.createNotification('error'));
+            .catch(err => console.log('error'));
         }
         
         
@@ -213,24 +220,6 @@ class MyMessages extends Component {
         .catch(err => console.log(err));
     }
 
-    createNotification = (type) => {
-        switch (type) {
-          case 'info':
-            NotificationManager.info('Info message');
-            break;
-          case 'success':
-              NotificationManager.success('', 'Message Sent');
-            break;
-          case 'warning':
-            NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
-            break;
-          case 'error':
-            NotificationManager.error('', 'something went wrong, please try again');
-            break;
-          default: 
-          return;
-        }
-    }
 
 
     render() {   
@@ -258,23 +247,23 @@ class MyMessages extends Component {
                             className="btn d-block mailboxBtn"
                             onClick={()=>this.loadMyMessages(this.state.user.id)}
                             >
-                            <h4><i class="fas fa-inbox"></i> Inbox</h4>
+                            <h4><i className="fas fa-inbox"></i> Inbox</h4>
                             </button>
 
                             <button
                             className="btn d-block mailboxBtn"
                             onClick={()=>this.loadSentMessages(this.state.user.id)}
                             >
-                            <h4> <i class="fas fa-paper-plane"></i> Sent</h4>
+                            <h4> <i className="fas fa-paper-plane"></i> Sent</h4>
                             </button>
                         </div>
                     
                     <div className="col-md-10">
-                        <NotificationContainer/>
+                       
                         <div>
                             {this.state.mailbox === "inbox" ? 
                             (<div><h2 className="mb-3 text-muted">Inbox</h2>
-                           
+                           <h1 id="sentMessage" className="text-right text-white">Message Sent</h1>
                                 {this.state.messageResults.length ? ( <div><List>
                                 <InboxMessageCard key={this.state.messageResults._id} results={this.state.messageResults} senderName={this.state.messageResults.senderName} messageBody={this.state.messageResults.messageBody} jobTitle={this.state.messageResults.jobTitle} date={this.state.messageResults.date} getMessageData={this.getMessageData} deleteMessage={this.deleteMessage} getdataforJobOffer={this.getdataforJobOffer} acceptJob={this.acceptJob} declineOffer={this.declineOffer}/></List>
                                 <ReplyModal
@@ -285,10 +274,10 @@ class MyMessages extends Component {
                                 type="text"
                                 toName={this.state.messageData.senderName}
                                 > 
-                                <FormBtn onClick={()=>this.sendReply(this.state.messageData.senderId, this.state.messageData.jobTitle, this.state.messageData.senderName,
+                                <button className="btn signUPBtn text-white" onClick={()=>this.sendReply(this.state.messageData.senderId, this.state.messageData.jobTitle, this.state.messageData.senderName,
                                 this.state.messageData.messageBody)} data-dismiss="modal" aria-label="Close">SEND
-                                </FormBtn>
-                                {this.state.messageData.recieverId === this.state.messageData.jobOwner ? (<FormBtn onClick={()=>this.sendJobOffer()} data-dismiss="modal" aria-label="Close">Send Job Offer</FormBtn>):("")}
+                                </button>
+                                {this.state.messageData.recieverId === this.state.messageData.jobOwner ? (<button className="btn signUPBtn glowBorder text-white" onClick={()=>this.sendJobOffer()} data-dismiss="modal" aria-label="Close">Send Job Offer</button>):("")}
                                 </ReplyModal></div>
                                 ):(<h3 className="mt-5 text-center text-secondary">Mailbox empty</h3>)} 
 
@@ -304,7 +293,7 @@ class MyMessages extends Component {
                     </div>
                 </div>
                 </div>
-                <Footer style={{top: 100}}></Footer> 
+                <Footer style={{top: 300}}></Footer> 
             </div>
         )
     }

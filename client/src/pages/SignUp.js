@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 import API from "../utils/API";
 import Popup from "reactjs-popup";
 import Footer from "../components/Footer";
-
+import "./style.css"
 
 class SignUp extends Component {
 
@@ -26,15 +26,13 @@ class SignUp extends Component {
     handleFormSubmit = event => {
         //event.preventDefault();
         const newUser = {
-            firstname: this.state.firstname,
-            email: this.state.email,
-            password: this.state.password,
-            password2: this.state.confirmPassword
+            firstname: this.state.firstname.trim(),
+            email: this.state.email.trim(),
+            password: this.state.password.trim(),
+            password2: this.state.confirmPassword.trim()
         }
         API.saveUser(newUser)
         .then(res => {
-            
-
             if(res.data[0].type === "warning"){
                 this.setState({submitMessage: res.data[0].msg})
               
@@ -98,7 +96,7 @@ class SignUp extends Component {
                             />
 
                             {/* this section uses a tooltip to let user know of error messages or lets them redirect to login */}
-                            {this.state.submitMessage === "Account successfully created, you may login." ? ( <Popup trigger={<FormBtn 
+                            {this.state.submitMessage === "Account successfully created, you may login." ? ( <Popup trigger={<button className=" btn signUPBtn text-white"
                             disabled={
                                 !(this.state.firstname) ||
                                 !(this.state.email) ||
@@ -107,14 +105,14 @@ class SignUp extends Component {
                             }
                             >
                             Submit
-                            </FormBtn>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick modal>
+                            </button>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick modal>
                             <div className="text-center"> 
                             {this.state.submitMessage}
                             
                             <FormBtn id="signupRedirect" onClick={this.loginRedirect}>Login</FormBtn>
                            
                             </div>
-                            </Popup>) : (<Popup trigger={<FormBtn 
+                            </Popup>) : (<Popup trigger={<button className=" btn signUPBtn text-white" 
                             disabled={
                                 !(this.state.firstname) ||
                                 !(this.state.email) ||
@@ -123,7 +121,7 @@ class SignUp extends Component {
                             }
                             >
                             Submit
-                            </FormBtn>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick modal>
+                            </button>} onOpen={this.handleFormSubmit}  position="top center" closeOnDocumentClick modal>
                             {this.state.submitMessage}
                             </Popup>)
                             }

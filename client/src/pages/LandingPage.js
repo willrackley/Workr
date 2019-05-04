@@ -23,7 +23,6 @@ class LandingPage extends Component {
                     <Jumbotron>
                         <div className="jumbotronInfo text-center">
                             <h1 className="text-white"><span>EARN</span> CASH & <span>FINISH</span> TASKS</h1>
-                            <p className="text-white">The easiest way to earn some quick cash or finish that job you've been putting off</p>
                             <button className="btn registerButton text-white" onClick={this.signupRedirect}>REGISTER</button>
                         </div>
                     </Jumbotron>

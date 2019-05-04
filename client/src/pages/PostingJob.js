@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import { Input, FormBtn, TextArea, CategoryDropdown, OfferInput, InputState, UploadBtn } from "../components/Form";
+import { Input, TextArea, CategoryDropdown, OfferInput, InputState, UploadBtn } from "../components/Form";
 import NavItemLogout from '../components/NavItemLogout';
 import Nav from "../components/Nav";
-//import Popup from "reactjs-popup";
 import API from "../utils/API";
 import Firebase from "../utils/Firebase-config";
-import {NotificationContainer, NotificationManager} from 'react-notifications';
-// import { threadId } from "worker_threads";
 import $ from 'jquery';
+import uuid from "uuid";
+
 let uploadTextColor = ""
 
 class PostingJob extends Component {
@@ -47,18 +46,17 @@ class PostingJob extends Component {
             posterName: this.state.user.firstname,
             posterEmail: this.state.user.email,
             jobImage: this.state.imageUrl,
-            offer: this.state.offer,
-            title: this.state.title,
-            description: this.state.description,
-            city: this.state.city.toLowerCase(),
-            state: this.state.state.toLowerCase(),
+            offer: this.state.offer.trim(),
+            title: this.state.title.trim(),
+            description: this.state.description.trim(),
+            city: this.state.city.trim().toLowerCase(),
+            state: this.state.state.trim().toLowerCase(),
             category: this.state.category
         } 
 
     API.saveJob(newJob)
         .then(res => {
-            console.log(res.data);
-            this.createNotification('success');
+            this.props.history.push('/myJobs')
             this.setState({offer: ""});
             this.setState({title: ""});
             this.setState({description: ""});
@@ -68,20 +66,15 @@ class PostingJob extends Component {
         .catch(err => console.log(err)); 
     };
 
-    formRedirect = () => {
-        this.props.history.push('/dashboard')
-    }
 
     selectImgFile = event => {
         this.setState({selectedFile: event.target.files[0]})
-        //console.log(event.target.files[0])
-        console.log("A picture has been added");
         this.changeColor();
     }
 
     uploadImgFile = () => {
         this.setState({ loading: true })
-        let storageRef = Firebase.storage.ref(`images/${this.state.selectedFile.name}`);
+        let storageRef = Firebase.storage.ref(`images/${this.state.selectedFile.name}${uuid.v4()}`);
         let addingImg = storageRef.put(this.state.selectedFile);
         addingImg.on('state_changed',
             function progress(snapshot) {
@@ -100,36 +93,10 @@ class PostingJob extends Component {
     
     changeColor=()=>{
         $('.upload').css({'background-color':' #28a6af', "border":"3px solid green", "font-size":"22px"});
-        console.log("button border should turn red");
     }
-        
-   
-
-    createNotification = (type) => {
-        switch (type) {
-          case 'info':
-            NotificationManager.info('Info message');
-            break;
-          case 'success':
-              NotificationManager.success('', 'Job Posted');
-            break;
-          case 'warning':
-            NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
-            break;
-          case 'error':
-            NotificationManager.error('', 'something went wrong, please try again');
-            break;
-          default: 
-          return;
-        }
-    }
-
-
    
     render() {
-        
-        
-        
+           
         return (
             <div>
                 <Nav page="/dashboard">
@@ -146,7 +113,6 @@ class PostingJob extends Component {
                     </div>
                 </Nav>
                 <div className="container text-center mb-5">
-                <NotificationContainer/>
                     <h1 className="text-dark text- center mt-5 mb-5">Post a New Job</h1>
                     
                     <div className="row">
@@ -156,7 +122,6 @@ class PostingJob extends Component {
                             <h3 className="text-muted">Upload an image</h3>
                             <Input 
                             className={`form-control ${uploadTextColor}`}
-                            
                             type="file"
                             onChange={this.selectImgFile}
                             accept="image/png, image/jpeg, image/jpg"

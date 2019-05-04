@@ -3,7 +3,6 @@ import Nav from "../components/Nav";
 import MyJobsCard from "../components/MyJobsCard";
 import MyWorkedJobsCard from "../components/MyWorkedJobsCard";
 import List from "../components/List";
-//import { Link } from 'react-router-dom';
 import MyJobsModal from "../components/MyJobsModal";
 import WorkedJobsModal from "../components/WorkedJobsModal";
 import NavItemLogout from '../components/NavItemLogout';
@@ -92,7 +91,7 @@ class MyJobs extends Component {
                             <a className="nav-link dashboardText pl-4" href="/dashboard">Dashboard</a>
                             <a className="dropdown-item" href="/postJob">Post a Job</a>
                             <a className="dropdown-item" href="/messages">My Messages</a>
-                            <a className="dropdown-item" href="/profile">Edit Profile</a>
+                            {/* <a className="dropdown-item" href="/profile">Edit Profile</a> */}
                             <NavItemLogout/>
                         </div>
                     </div>

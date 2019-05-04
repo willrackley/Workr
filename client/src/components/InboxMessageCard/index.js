@@ -1,5 +1,4 @@
 import React from "react";
-import { FormBtn } from "../Form";
 import Moment from "react-moment";
 import "./style.css"
 
@@ -7,7 +6,6 @@ export default function InboxMessageCard(props) {
    
     return (
         <div>
-           
             {props.results.map(result => (
                 <li className="list-group-item mb-3 pt-4 rounded" key={result._id}>
                     <div className="card mb-3" >
@@ -15,7 +13,7 @@ export default function InboxMessageCard(props) {
                             <div className="row">
                                 <div className="col-12 text-right">
                                     <button className="deleteBtn btn" onClick={()=>props.deleteMessage(result._id)}>
-                                    <i class="far fa-trash-alt"></i>
+                                    <i className="far fa-trash-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -34,7 +32,7 @@ export default function InboxMessageCard(props) {
                             {result.inResponseMessage === null && result.messageBody === `${result.senderName} has offered you the Job!` ? (<div><button className="btn " onClick={()=>props.acceptJob(result)}>Accept</button> <button className="btn" onClick={()=>props.declineOffer(result)}>No, I'm ok</button></div>): ("")}
                         </div>
                         <div className="card-footer text-muted text-center">
-                            <button className=" btn cardSubmitButton" data-toggle="modal" data-target="#replyModal" onClick={()=>props.getMessageData(result)}><i class="fas fa-reply text-white"></i> Reply</button>
+                            <button className=" btn cardSubmitButton" data-toggle="modal" data-target="#replyModal" onClick={()=>props.getMessageData(result)}><i className="fas fa-reply text-white"></i> Reply</button>
                             
                         </div>
                     </div>
