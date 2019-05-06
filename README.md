@@ -61,5 +61,5 @@ Workr allows the user to post or search for active jobs in the area.
 https://tranquil-journey-10841.herokuapp.com/
 
 If you want to login without having to sign up then use these credentials
-email: tester1@gmail.com
-password: password
+- email: tester1@gmail.com
+- password: password
