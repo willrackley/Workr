@@ -223,6 +223,7 @@ class userDashboard extends Component {
     }
 
     getDataForMessage = (jobInfo) => {
+        console.log(jobInfo)
         this.setState({jobInfoForMessage: jobInfo})
     }
 
@@ -314,6 +315,7 @@ class userDashboard extends Component {
                                 ) : (<h3 className="mt-5 text-center text-secondary">Sorry, there are no available jobs in your area.</h3>)} 
                                 </List>
                                 <MessageModal
+                                key={filteredResults._id}
                                 mappedModal={filteredResults}
                                 value={this.state.messageBody}
                                 onChange={this.handleInputChange}

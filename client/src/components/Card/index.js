@@ -41,7 +41,7 @@ class Card extends React.Component {
                         <p className="text-capitalize">{result.city}, {result.state}</p> 
                         <FormBtn id="messageEmployr"
                         onClick={()=>this.props.getDataForMessage(result)}
-                        data-toggle="modal" data-target="#myModal">>Message EMPLOYr</FormBtn>
+                        data-toggle="modal" data-target={`#myModal${result._id}`}>>Message EMPLOYr</FormBtn>
                     </div>
                         
                 </div>

@@ -6,7 +6,7 @@ export default function MessageModal(props) {
     return (
         <div>
         {props.mappedModal.map(newModal => (
-        <div key={newModal._id} className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div key={newModal._id} className="modal fade" id={`myModal${newModal._id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
