@@ -29,8 +29,6 @@ class Card extends React.Component {
                     <div className="card-body text-center">
                         <div className="row">
                             <div className="col-md-6 mb-2">
-                              
-                            
                             </div>
                             <div className="col-md-6">
                                 <p className="text-right"  id="offer"> ${result.offer}</p>
@@ -42,8 +40,7 @@ class Card extends React.Component {
                         <FormBtn id="messageEmployr"
                         onClick={()=>this.props.getDataForMessage(result)}
                         data-toggle="modal" data-target={`#myModal${result._id}`}>>Message EMPLOYr</FormBtn>
-                    </div>
-                        
+                    </div>  
                 </div>
            
         ))}
