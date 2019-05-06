@@ -27,7 +27,7 @@ Workr allows the user to post or search for active jobs in the area.
    - Dashboard will show available jobs if database is not empty
    - `Dashboard` display explanation:
 
-![Dashboard](client/src/images/workr_dashboard.jpg) 
+![Dashboard](client/src/images/dashboard.png) 
 
 3. Go to your `Name` at the upper right corner, click and select `Post a job`, fill up the form and `Submit`
    - Submit as many jobs as you want
@@ -56,3 +56,10 @@ Workr allows the user to post or search for active jobs in the area.
 - [x] Moment-React - Formatting the date that is in the database
 - [x] React-confirm-alert: Present confirmation dialog to the user
 - [x] UUID - to generate random id's for storing images in firebase
+
+### View the app here
+https://tranquil-journey-10841.herokuapp.com/
+
+If you want to login without having to sign up then use these credentials
+email: tester1@gmail.com
+password: password
