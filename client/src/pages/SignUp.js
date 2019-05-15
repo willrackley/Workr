@@ -26,10 +26,10 @@ class SignUp extends Component {
     handleFormSubmit = event => {
         //event.preventDefault();
         const newUser = {
-            firstname: this.state.firstname.trim(),
-            email: this.state.email.trim(),
-            password: this.state.password.trim(),
-            password2: this.state.confirmPassword.trim()
+            firstname: this.state.firstname.trim().toLowerCase(),
+            email: this.state.email.trim().toLowerCase(),
+            password: this.state.password.trim().toLowerCase(),
+            password2: this.state.confirmPassword.trim().toLowerCase()
         }
         API.saveUser(newUser)
         .then(res => {

@@ -28,8 +28,8 @@ class Login extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         const user = {
-            email: this.state.email.trim(),
-            password: this.state.password.trim()
+            email: this.state.email.trim().toLowerCase(),
+            password: this.state.password.trim().toLowerCase()
         }
 
         API.authenticateUser(user)

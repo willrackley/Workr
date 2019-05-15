@@ -40,7 +40,7 @@ export default function MyWorkedJobsCard(props) {
                         <p>{result.description}</p>
                     </div>
                     <div className="card-footer text-muted text-center">
-                        {result.status !== "incomplete" ? (<div>{result.posterRated ? ("") : (<FormBtn data-toggle="modal" data-target="#workedJobsModal" className="ml-2">Rate Your EMPLOYr</FormBtn>)}</div>): ("")}    
+                    
                     </div>
                         </div>
                     </div>
